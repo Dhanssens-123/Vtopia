@@ -18,12 +18,16 @@ class Damier @JvmOverloads constructor (context: Context, weigth: Float, n: Int)
 
     fun setDamier(n: Int) {
 
+        // Dévoile un damier hexagonal circulaire
+
         var mid = n/2
+        // Partie supérieure du damier
         for (i in -mid..0) {
             for (j in (-mid + Math.round((-i-1 + mid%2) / 2.0)).toInt()..(mid - Math.round((-i + mid%2)/ 2.0)).toInt()) {
                 cases[mid + i][mid + j].state = true
             }
         }
+        // Partie inférieure
         for (i in 1..mid) {
             for (j in (-mid + Math.round((i-1 + mid%2) / 2.0)).toInt()..(mid - Math.round((i + mid%2) / 2.0)).toInt()) {
                 cases[mid + i][mid + j].state = true

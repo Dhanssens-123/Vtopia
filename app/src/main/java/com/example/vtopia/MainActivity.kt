@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.widget.ZoomControls
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +19,17 @@ class MainActivity : AppCompatActivity() {
         drawingView = findViewById<DrawingView>(R.id.vMain)
     }
 
+    fun onOff(v: View) {
+        // Met l'activité drawingView en pause
+        if (drawingView.drawing) {
+            drawingView.pause()
+            play_pause.setImageResource(R.drawable.pause)
+        }
+        else {
+            drawingView.resume()
+            play_pause.setImageResource(R.drawable.play)
+        }
+    }
 
     override fun onPause() {
         super.onPause()
@@ -28,5 +40,4 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         drawingView.resume()
     }
-
 }

@@ -17,6 +17,7 @@ class Case (_x: Float, _y: Float, _cote: Float, _sprite1: Bitmap,_sprite2: Bitma
     var state = _state
 
     fun draw(canvas: Canvas?) {
+        // Dessine la case
         paint2.color = color
         if (state) {
             canvas?.drawBitmap(sprite1, null, r, paint)
@@ -26,6 +27,7 @@ class Case (_x: Float, _y: Float, _cote: Float, _sprite1: Bitmap,_sprite2: Bitma
     }
 
     fun changeState() {
+        // Cache ou non la case
         state = !state
     }
 }

@@ -16,6 +16,7 @@ class Icone (_x: Float, _y: Float, _w: Float, _h: Float, _sprite1: Bitmap, _spri
     var sprite2 = _sprite2
 
     fun draw(canvas: Canvas?) {
+        // Dessine l'icone
         paint2.color = color
         canvas?.drawBitmap(sprite1, null, r, paint)
         if (sprite2 != null) canvas?.drawBitmap(sprite2!!, null, r, paint)

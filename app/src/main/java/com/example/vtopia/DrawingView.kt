@@ -20,12 +20,14 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
     val backgroundPaint = Paint()
     var drawing: Boolean = true
 
+    // Prend les dimensions de la drawingView
     val displayMetrics = DisplayMetrics()
     var w = context.resources.displayMetrics.widthPixels.toFloat()
     var h = context.resources.displayMetrics.heightPixels.toFloat()
 
-    val n = 5 // Nombre impair
+    val n = 7 // Entier impair
 
+    // Création du damier et des icones
     var damier = Damier(context, w, n)
     var therm_score = Icone(w/2,100F,400F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.score_therm_in),BitmapFactory.decodeResource(context.resources, R.drawable.score_therm_out))
     var star1 = Icone(0.4F*w,275F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.star_yellow),BitmapFactory.decodeResource(context.resources, R.drawable.star_bord))
@@ -41,13 +43,13 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
     var square_blue = Icone(5*w/6,h-575F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_blue),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
 
     var param = Icone(0.1F*w,100F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.param),null)
-    var play_pause = Icone(0.9F*w,100F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.play),null)
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
     }
 
     override fun run() {
+        // Création du damier et affichage
         damier.setDamier(n)
         while(drawing) {
             draw()
@@ -57,6 +59,7 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
     fun draw() {
         if (holder.surface.isValid) {
             canvas = holder.lockCanvas()
+            // Affichage des éléments
             canvas.drawRect(0F, 0F, canvas.getWidth()*1F, canvas.getHeight()*1F, backgroundPaint)
             for (ligne in damier.cases) {
                 for (case in ligne) case.draw(canvas)
@@ -73,7 +76,6 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
             square_pink.draw(canvas)
             square_yellow.draw(canvas)
             param.draw(canvas)
-            play_pause.draw(canvas)
             holder.unlockCanvasAndPost(canvas)
         }
     }
@@ -90,14 +92,29 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (event!!.action == MotionEvent.ACTION_DOWN) {
-            val x = event.rawX
-            val y = event.rawY - 200
-            for (ligne in damier.cases) {
-                for (case in ligne) {
-                    if (case.r.contains(x,y)) {
-                        case.changeState()
-                        break
+        // Quand on clique sur l'écran
+        when (event!!.action) {
+            MotionEvent.ACTION_DOWN -> {
+                val x = event.rawX
+                val y = event.rawY - 200
+                for (ligne in damier.cases) {
+                    for (case in ligne) {
+                        if (case.r.contains(x,y)) {
+                            case.changeState()
+                            break
+                        }
+                    }
+                }
+            }
+            MotionEvent.ACTION_MOVE -> {
+                val x = event.rawX
+                val y = event.rawY - 200
+                for (ligne in damier.cases) {
+                    for (case in ligne) {
+                        if (case.r.contains(x,y)) {
+                            case.state = false
+                            break
+                        }
                     }
                 }
             }
