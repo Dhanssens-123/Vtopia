@@ -24,7 +24,7 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
     var w = context.resources.displayMetrics.widthPixels.toFloat()
     var h = context.resources.displayMetrics.heightPixels.toFloat()
 
-    var n = 9
+    val n = 5 // Nombre impair
 
     var damier = Damier(context, w, n)
     var therm_score = Icone(w/2,100F,400F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.score_therm_in),BitmapFactory.decodeResource(context.resources, R.drawable.score_therm_out))

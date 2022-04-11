@@ -1,0 +1,4 @@
+- Mettre les icones en ImageButton
+- Mettre 2 activités (écran d'accueil et de jeu)
+- Diagramme de séquences
+- Attention répétition attributs
