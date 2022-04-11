@@ -95,7 +95,10 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
             val y = event.rawY - 200
             for (ligne in damier.cases) {
                 for (case in ligne) {
-                    if (case.r.contains(x,y)) case.changeState()
+                    if (case.r.contains(x,y)) {
+                        case.changeState()
+                        break
+                    }
                 }
             }
         }
