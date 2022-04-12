@@ -25,7 +25,7 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
     var w = context.resources.displayMetrics.widthPixels.toFloat()
     var h = context.resources.displayMetrics.heightPixels.toFloat()
 
-    val n = 7 // Entier impair
+    val n = 9 // Entier impair
 
     // Création du damier et des icones
     var damier = Damier(context, w, n)
@@ -96,7 +96,7 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
         when (event!!.action) {
             MotionEvent.ACTION_DOWN -> {
                 val x = event.rawX
-                val y = event.rawY - 200
+                val y = event.rawY - 75
                 for (ligne in damier.cases) {
                     for (case in ligne) {
                         if (case.r.contains(x,y)) {
