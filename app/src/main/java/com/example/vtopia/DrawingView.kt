@@ -28,21 +28,21 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
     val n = 9 // Entier impair
 
     // Création du damier et des icones
-    var damier = Damier(context, w, n)
-    var therm_score = Icone(w/2,100F,400F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.score_therm_in),BitmapFactory.decodeResource(context.resources, R.drawable.score_therm_out))
-    var star1 = Icone(0.4F*w,275F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.star_yellow),BitmapFactory.decodeResource(context.resources, R.drawable.star_bord))
-    var star2 = Icone(w/2,275F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.star_yellow),BitmapFactory.decodeResource(context.resources, R.drawable.star_bord))
-    var star3 = Icone(0.6F*w,275F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.star_bord),null)
+    var damier = Damier(context, w, h, n)
+    var therm_score = Icone(w/2,150F,400F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.score_therm_in),BitmapFactory.decodeResource(context.resources, R.drawable.score_therm_out))
+    var star1 = Icone(0.4F*w,325F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.star_yellow),BitmapFactory.decodeResource(context.resources, R.drawable.star_bord))
+    var star2 = Icone(w/2,325F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.star_yellow),BitmapFactory.decodeResource(context.resources, R.drawable.star_bord))
+    var star3 = Icone(0.6F*w,325F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.star_bord),null)
 
-    var square_green = Icone(w/6,h-575F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_green),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
-    var square_yellow = Icone(w/6,h-400F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
-    var square_corail = Icone(2*w/6,h-400F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_corail),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
-    var square_brown = Icone(3*w/6,h-400F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_brown),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
-    var square_grey = Icone(4*w/6,h-400F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_grey),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
-    var square_pink = Icone(5*w/6,h-400F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_pink),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
-    var square_blue = Icone(5*w/6,h-575F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_blue),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
+    var square_green = Icone(w/6,h-375F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_green),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
+    var square_yellow = Icone(w/6,h-200F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
+    var square_corail = Icone(2*w/6,h-200F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_corail),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
+    var square_brown = Icone(3*w/6,h-200F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_brown),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
+    var square_grey = Icone(4*w/6,h-200F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_grey),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
+    var square_pink = Icone(5*w/6,h-200F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_pink),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
+    var square_blue = Icone(5*w/6,h-375F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_blue),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
 
-    var param = Icone(0.1F*w,100F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.param),null)
+    var param = Icone(0.1F*w,150F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.param),null)
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
