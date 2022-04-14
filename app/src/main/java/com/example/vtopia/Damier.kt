@@ -6,7 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 
-class Damier @JvmOverloads constructor (context: Context, weigth: Float, height: Float, n: Int)  {
+class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
 
     val sprite1 : Bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.hex_yellow)
     val sprite2 : Bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord)
