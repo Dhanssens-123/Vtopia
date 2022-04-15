@@ -1,8 +1,9 @@
 package com.example.vtopia
 
+import android.content.Context
 import android.graphics.*
 
-class Icone (_x: Float, _y: Float, _w: Float, _h: Float, _sprite1: Bitmap, _sprite2: Bitmap?) {
+abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float, context: Context) {
 
     var x = _x
     var y = _y
@@ -12,13 +13,7 @@ class Icone (_x: Float, _y: Float, _w: Float, _h: Float, _sprite1: Bitmap, _spri
     val paint = Paint()
     var paint2 = Paint()
     var color = Color.argb(0,255,255,255)
-    var sprite1 = _sprite1
-    var sprite2 = _sprite2
 
-    fun draw(canvas: Canvas?) {
-        // Dessine l'icone
-        paint2.color = color
-        canvas?.drawBitmap(sprite1, null, r, paint)
-        if (sprite2 != null) canvas?.drawBitmap(sprite2!!, null, r, paint)
-    }
+    abstract fun draw(canvas: Canvas?)
+
 }

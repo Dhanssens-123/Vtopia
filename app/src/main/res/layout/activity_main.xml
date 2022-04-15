@@ -19,7 +19,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background=" #5dade2 "
-        android:onClick="onOff"
+        android:onClick="gameOnOff"
         android:scaleType="fitCenter"
         android:scaleX="1"
         android:scaleY="1"
@@ -30,5 +30,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.04"
         app:srcCompat="@drawable/play" />
+
+    <ImageButton
+        android:id="@+id/param"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background=" #5dade2 "
+        android:onClick="soundOnOff"
+        android:scaleType="fitCenter"
+        android:scaleX="1"
+        android:scaleY="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.04"
+        app:srcCompat="@drawable/param" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         drawingView = findViewById<DrawingView>(R.id.vMain)
     }
 
-    fun onOff(v: View) {
+    fun gameOnOff(v: View) {
         // Met l'activité drawingView en pause
         if (drawingView.drawing) {
             drawingView.pause()
@@ -28,6 +28,17 @@ class MainActivity : AppCompatActivity() {
         else {
             drawingView.resume()
             play_pause.setImageResource(R.drawable.play)
+        }
+    }
+
+    fun soundOnOff(v: View) {
+        if (drawingView.drawing) {
+            drawingView.pause()
+            param.setImageResource(R.drawable.outline)
+        }
+        else {
+            drawingView.resume()
+            param.setImageResource(R.drawable.param)
         }
     }
 

@@ -29,20 +29,22 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
 
     // Création du damier et des icones
     var damier = Damier(context, w, h, n)
-    var therm_score = Icone(w/2,150F,400F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.score_therm_in),BitmapFactory.decodeResource(context.resources, R.drawable.score_therm_out))
-    var star1 = Icone(0.4F*w,325F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.star_yellow),BitmapFactory.decodeResource(context.resources, R.drawable.star_bord))
-    var star2 = Icone(w/2,325F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.star_yellow),BitmapFactory.decodeResource(context.resources, R.drawable.star_bord))
-    var star3 = Icone(0.6F*w,325F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.star_bord),null)
+    var squares = arrayOf(
+        BtnCase(w/6,h-375F,150F,150F,context,"forêt"),
+        BtnCase(w/6,h-200F,150F,150F,context,"désert"),
+        BtnCase(2*w/6,h-200F,150F,150F,context,"extraction"),
+        BtnCase(3*w/6,h-200F,150F,150F,context,"habitat"),
+        BtnCase(4*w/6,h-200F,150F,150F, context,"industrie"),
+        BtnCase(5*w/6,h-200F,150F,150F, context, "culture"),
+        BtnCase(5*w/6,h-375F,150F,150F, context, "lac")
+    )
+    var stars = arrayOf(
+        IconLevel(0.4F*w,325F,100F,100F,context,1),
+        IconLevel(w/2,325F,100F,100F,context,1),
+        IconLevel(0.6F*w,325F,100F,100F,context,0)
+    )
 
-    var square_green = Icone(w/6,h-375F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_green),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
-    var square_yellow = Icone(w/6,h-200F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
-    var square_corail = Icone(2*w/6,h-200F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_corail),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
-    var square_brown = Icone(3*w/6,h-200F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_brown),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
-    var square_grey = Icone(4*w/6,h-200F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_grey),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
-    var square_pink = Icone(5*w/6,h-200F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_pink),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
-    var square_blue = Icone(5*w/6,h-375F,150F,150F,BitmapFactory.decodeResource(context.resources, R.drawable.square_blue),BitmapFactory.decodeResource(context.resources, R.drawable.square_bord))
-
-    var param = Icone(0.1F*w,150F,100F,100F,BitmapFactory.decodeResource(context.resources, R.drawable.param),null)
+    var therm_score = IconScore(w/2,150F,400F,150F,context,"therm_fill")
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
@@ -65,17 +67,13 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
                 for (case in ligne) case.draw(canvas)
             }
             therm_score.draw(canvas)
-            star1.draw(canvas)
-            star2.draw(canvas)
-            star3.draw(canvas)
-            square_blue.draw(canvas)
-            square_brown.draw(canvas)
-            square_corail.draw(canvas)
-            square_green.draw(canvas)
-            square_grey.draw(canvas)
-            square_pink.draw(canvas)
-            square_yellow.draw(canvas)
-            param.draw(canvas)
+            for (elem in squares) {
+                elem.draw(canvas)
+            }
+            for (elem in stars) {
+                elem.draw(canvas)
+            }
+            therm_score.draw(canvas)
             holder.unlockCanvasAndPost(canvas)
         }
     }
