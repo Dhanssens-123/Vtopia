@@ -69,7 +69,10 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
     fun reset() {
         resetDataSet()
         for (ligne in cases) {
-            for (case in ligne) case.type = "désert"
+            for (case in ligne) {
+                case.type = "désert"
+                case.bord = 0
+            }
         }
     }
 }

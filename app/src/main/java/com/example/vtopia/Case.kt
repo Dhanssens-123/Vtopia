@@ -17,8 +17,13 @@ class Case (_x: Float, _y: Float, _cote: Float, _type: String, _bord: Int, conte
         "habitat" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_brown),
         "culture" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_pink),
         "extraction" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_corail),
-        "industrie" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_grey),
-        "bord" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord)
+        "industrie" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_grey)
+    )
+
+    val spriteBord = mapOf<String, Bitmap>(
+        "bord" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord),
+        "bord_green" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord_green),
+        "bord_red" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord_red)
     )
 
     var x = _x
@@ -33,11 +38,13 @@ class Case (_x: Float, _y: Float, _cote: Float, _type: String, _bord: Int, conte
         // Dessine la case
         paint2.color = color
         if (state) {
+            canvas?.drawBitmap(spriteSet[type]!!, null, r, paint)
             if (bord == 0) {
-                canvas?.drawBitmap(spriteSet[type]!!, null, r, paint)
-                canvas?.drawBitmap(spriteSet["bord"]!!, null, r, paint)
-            } else {
-                canvas?.drawBitmap(spriteSet["bord"]!!, null, r, paint)
+                canvas?.drawBitmap(spriteBord["bord"]!!, null, r, paint)
+            } else if (bord == 1) {
+                canvas?.drawBitmap(spriteBord["bord_green"]!!, null, r, paint)
+            } else if (bord == 2) {
+                canvas?.drawBitmap(spriteBord["bord_red"]!!, null, r, paint)
             }
         }
     }

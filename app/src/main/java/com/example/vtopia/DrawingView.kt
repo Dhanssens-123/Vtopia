@@ -40,13 +40,13 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
     var game = GameManager()
     var damier = Damier(context, w, h, n)
     var squares = arrayOf(
-        BtnCase(w/6,h-375F,150F,150F,context,"forêt"),
-        BtnCase(w/6,h-200F,150F,150F,context,"désert"),
-        BtnCase(2*w/6,h-200F,150F,150F,context,"extraction"),
-        BtnCase(3*w/6,h-200F,150F,150F,context,"habitat"),
-        BtnCase(4*w/6,h-200F,150F,150F, context,"industrie"),
-        BtnCase(5*w/6,h-200F,150F,150F, context, "culture"),
-        BtnCase(5*w/6,h-375F,150F,150F, context, "lac")
+        BtnCase(w/6,h-375F,150F,150F,context,"forêt",damier),
+        BtnCase(w/6,h-200F,150F,150F,context,"désert",damier),
+        BtnCase(2*w/6,h-200F,150F,150F,context,"extraction",damier),
+        BtnCase(3*w/6,h-200F,150F,150F,context,"habitat",damier),
+        BtnCase(4*w/6,h-200F,150F,150F, context,"industrie",damier),
+        BtnCase(5*w/6,h-200F,150F,150F, context, "culture",damier),
+        BtnCase(5*w/6,h-375F,150F,150F, context, "lac",damier)
     )
     var stars = arrayOf(
         IconLevel(0.33F*w,h-375F,125F,125F,context,1),
