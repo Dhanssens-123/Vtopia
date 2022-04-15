@@ -8,7 +8,7 @@ import android.graphics.Canvas
 
 class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
 
-    val dataSet = mapOf<String, Int>(
+    var dataSet = mutableMapOf<String, Int>(
         "forêt" to 0,
         "désert" to 0,
         "lac" to 0,
@@ -26,15 +26,26 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
         "culture" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_pink),
         "extraction" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_corail),
         "industrie" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_grey),
+        "bord" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord)
     )
-
-    val sprite1 : Bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.hex_yellow)
-    val sprite2 : Bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord)
 
     var diam = 0.85F * weigth/n
     var posx = Array<Array<Float>>(n, {i -> Array(n, {j -> (weigth/2 - n/2*diam) + j*diam + diam/2*(i%2)})})
     var posy = Array(n, {i -> (height/2 - n/2*3*diam/(2*Math.sqrt(3.0).toFloat())) + i*3*diam/(2*Math.sqrt(3.0).toFloat())})
-    var cases = Array<Array<Case>>(n, {i -> Array(n, {j -> Case(posx[i][j],posy[i],diam,sprite1, sprite2,false)})})
+    var cases = Array<Array<Case>>(n, {i -> Array(n, {j -> Case(posx[i][j],posy[i],diam,"désert",0,context)})})
+
+    fun changeDataSet() {
+        resetDataSet()
+        for (ligne in cases) {
+            for (case in ligne) {
+                dataSet[case.type] = dataSet[case.type]!! + 1
+            }
+        }
+    }
+
+    fun resetDataSet() {
+        for ((key, value) in dataSet) dataSet[key] = 0
+    }
 
     fun setDamier(n: Int) {
 

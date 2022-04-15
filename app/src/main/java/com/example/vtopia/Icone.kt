@@ -12,7 +12,6 @@ abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float, context: Conte
     var r = RectF(x - w/2, y - h/2, x + w/2, y + h/2)
     val paint = Paint()
     var paint2 = Paint()
-    var color = Color.argb(0,255,255,255)
 
     abstract fun draw(canvas: Canvas?)
 

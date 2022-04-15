@@ -21,7 +21,6 @@ class BtnCase(_x: Float, _y: Float, _w: Float, _h: Float, context: Context, _typ
     )
 
     override fun draw(canvas: Canvas?) {
-        paint2.color = color
         canvas?.drawBitmap(spriteSet[type]!!, null, r, paint)
         canvas?.drawBitmap(spriteSet["bord"]!!, null, r, paint)
     }

@@ -15,7 +15,6 @@ class IconLevel(_x: Float, _y: Float, _w: Float, _h: Float, context: Context, _t
     )
 
     override fun draw(canvas: Canvas?) {
-        paint2.color = color
         if (type == 1) {
             canvas?.drawBitmap(spriteSet["star"]!!, null, r, paint)
             canvas?.drawBitmap(spriteSet["bord"]!!, null, r, paint)

@@ -27,7 +27,10 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
 
     val n = 9 // Entier impair
 
+    var type = "désert"
+
     // Création du damier et des icones
+    var game = GameManager()
     var damier = Damier(context, w, h, n)
     var squares = arrayOf(
         BtnCase(w/6,h-375F,150F,150F,context,"forêt"),
@@ -39,12 +42,13 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
         BtnCase(5*w/6,h-375F,150F,150F, context, "lac")
     )
     var stars = arrayOf(
-        IconLevel(0.4F*w,325F,100F,100F,context,1),
-        IconLevel(w/2,325F,100F,100F,context,1),
-        IconLevel(0.6F*w,325F,100F,100F,context,0)
+        IconLevel(0.33F*w,h-375F,125F,125F,context,1),
+        IconLevel(w/2,h-375F,125F,125F,context,1),
+        IconLevel(0.66F*w,h-375F,125F,125F,context,0)
     )
 
     var therm_score = IconScore(w/2,150F,400F,150F,context,"therm_fill")
+    var time_score = IconTime(w/2, 325F,80F,100F,context)
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
@@ -54,6 +58,8 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
         // Création du damier et affichage
         damier.setDamier(n)
         while(drawing) {
+            damier.changeDataSet()
+            game.updateScore(damier, therm_score)
             draw()
         }
     }
@@ -74,6 +80,7 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
                 elem.draw(canvas)
             }
             therm_score.draw(canvas)
+            time_score.draw(canvas)
             holder.unlockCanvasAndPost(canvas)
         }
     }
@@ -95,29 +102,28 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
             MotionEvent.ACTION_DOWN -> {
                 val x = event.rawX
                 val y = event.rawY - 75
-                for (ligne in damier.cases) {
-                    for (case in ligne) {
-                        if (case.r.contains(x,y)) {
-                            case.changeState()
-                            break
-                        }
-                    }
-                }
-            }
-            MotionEvent.ACTION_MOVE -> {
-                val x = event.rawX
-                val y = event.rawY - 200
-                for (ligne in damier.cases) {
-                    for (case in ligne) {
-                        if (case.r.contains(x,y)) {
-                            case.state = false
-                            break
-                        }
-                    }
-                }
+                checkClick(squares, damier.cases, x, y)
             }
         }
         return true
+    }
+
+    fun checkClick(squares : Array<BtnCase>, cases : Array<Array<Case>>, x : Float, y : Float) {
+        var flag = true
+        for (square in squares) {
+            if (square.r.contains(x,y) && flag) {
+                type = square.type
+                flag = false
+            }
+        }
+        for (ligne in cases) {
+            for (case in ligne) {
+                if (case.r.contains(x,y) && flag) {
+                    case.type = type
+                    flag = false
+                }
+            }
+        }
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
