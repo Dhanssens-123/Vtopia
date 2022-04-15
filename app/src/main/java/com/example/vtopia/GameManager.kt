@@ -2,14 +2,14 @@ package com.example.vtopia
 
 class GameManager {
 
-    val dataValueSet = mapOf<String, Int>(
+    var dataValueSet = mutableMapOf<String, Int>(
         "forêt" to 10,
         "désert" to 0,
         "lac" to 10,
         "habitat" to 20,
         "culture" to 10,
         "extraction" to 5,
-        "industrie" to 5,
+        "industrie" to 5
     )
 
     var totalTime = 10.0
@@ -20,6 +20,13 @@ class GameManager {
     fun updateScore(damier: Damier, icon_score : IconScore) {
         score = 0
         icon_score.score = 0
+
+        dataValueSet["forêt"] = 10*(damier.dataSet["habitat"]!! + 1)
+        dataValueSet["lac"] = 10*(damier.dataSet["habitat"]!! + 1)
+        dataValueSet["habitat"] = 20*(damier.dataSet["culture"]!! + 1) - 10*(damier.dataSet["habitat"]!! - damier.dataSet["extraction"]!!)
+
+        dataValueSet["industrie"] = 5 - 10*(damier.dataSet["industrie"]!! - damier.dataSet["habitat"]!!)
+
         for ((key, value) in damier.dataSet) {
             score += value * dataValueSet[key]!!
         }
