@@ -12,7 +12,7 @@ class GameManager {
         "industrie" to 5
     )
 
-    var totalTime = 10.0
+    var totalTime = 60.0
     var level = 0
     var score = 0
     var gameOver = false
@@ -46,7 +46,7 @@ class GameManager {
     fun reset() {
         score = 0
         level = 0
-        totalTime = 10.0
+        totalTime = 60.0
         gameOver = false
     }
 }
