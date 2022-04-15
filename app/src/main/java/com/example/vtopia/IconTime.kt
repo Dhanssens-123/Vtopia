@@ -6,11 +6,15 @@ import android.graphics.Color
 import android.util.TypedValue
 
 class IconTime(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h,context) {
+
+    var time = 0.0
+
     override fun draw(canvas: Canvas?) {
         paint.textSize = w
         paint.isFakeBoldText = true
         paint.color = Color.argb(255,52,73,94)
-        var text = "10 sec left"
+        var formatted_time = String.format("%.1f", time)
+        var text = "$formatted_time sec left"
         var offSet = paint.measureText(text)
         canvas?.drawText(text, x - offSet/2, y, paint)
     }

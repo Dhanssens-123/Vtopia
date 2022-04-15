@@ -1,8 +1,12 @@
 package com.example.vtopia
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.res.Resources
 import android.graphics.*
+import android.os.Bundle
 import android.util.AttributeSet
 import android.util.DisplayMetrics
 import android.view.Display
@@ -10,12 +14,15 @@ import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import kotlin.math.pow
 
 class DrawingView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), SurfaceHolder.Callback, Runnable {
 
     lateinit var thread: Thread
     lateinit var canvas: Canvas
+    val activity = context as FragmentActivity
 
     val backgroundPaint = Paint()
     var drawing: Boolean = true
@@ -57,10 +64,16 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
     override fun run() {
         // Création du damier et affichage
         damier.setDamier(n)
+        var previousFrameTime = System.currentTimeMillis()
         while(drawing) {
+            val currentTime = System.currentTimeMillis()
+            var elapsedTimeMS = (currentTime - previousFrameTime).toDouble()
+            game.updateTotalTime(elapsedTimeMS, time_score)
             damier.changeDataSet()
             game.updateScore(damier, therm_score)
             draw()
+            previousFrameTime = currentTime
+            checkGameOver()
         }
     }
 
@@ -83,6 +96,22 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
             time_score.draw(canvas)
             holder.unlockCanvasAndPost(canvas)
         }
+    }
+
+    fun checkGameOver() {
+        if (game.gameOver) {
+            drawing = false
+            showGameOverDialog(R.string.gameOver)
+        }
+    }
+
+    fun newGame() {
+        type = "désert"
+        game.reset()
+        damier.reset()
+        drawing = true
+        thread = Thread(this)
+        thread.start()
     }
 
     fun pause() {
@@ -141,5 +170,31 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
 
     override fun surfaceDestroyed(p0: SurfaceHolder) {
         TODO("Not yet implemented")
+    }
+
+    fun showGameOverDialog(messageId: Int) {
+        class GameResult: DialogFragment() {
+            override fun onCreateDialog(bundle: Bundle?): Dialog {
+                val builder = AlertDialog.Builder(activity)
+                builder.setTitle(resources.getString((messageId)))
+                builder.setMessage(resources.getString(R.string.results_format, game.score))
+                builder.setPositiveButton(R.string.reset_game, DialogInterface.OnClickListener { _, _->newGame()})
+                return builder.create()
+            }
+        }
+
+        activity.runOnUiThread(
+            Runnable {
+                val ft = activity.supportFragmentManager.beginTransaction()
+                val prev = activity.supportFragmentManager.findFragmentByTag("dialog")
+                if (prev != null) {
+                    ft.remove(prev)
+                }
+                ft.addToBackStack(null)
+                val gameResult = GameResult()
+                gameResult.setCancelable(false)
+                gameResult.show(ft,"dialog")
+            }
+        )
     }
 }

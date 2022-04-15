@@ -12,9 +12,10 @@ class GameManager {
         "industrie" to 5,
     )
 
-    var totalTime = 0
+    var totalTime = 10.0
     var level = 0
     var score = 0
+    var gameOver = false
 
     fun updateScore(damier: Damier, icon_score : IconScore) {
         score = 0
@@ -25,7 +26,20 @@ class GameManager {
         icon_score.score = score
     }
 
-    fun getElapsedTime() {
-        TODO()
+    fun updateTotalTime(elapsedTime : Double, icon_time : IconTime) {
+        totalTime -= elapsedTime / 1000.0
+        if (totalTime < 0) {
+            gameOver = true
+        }
+        else {
+            icon_time.time = totalTime
+        }
+    }
+
+    fun reset() {
+        score = 0
+        level = 0
+        totalTime = 10.0
+        gameOver = false
     }
 }
