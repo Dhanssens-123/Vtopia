@@ -3,4 +3,9 @@
     <string name="results_format">Score = %1$d</string>
     <string name="reset_game">Redémarre le jeu</string>
     <string name="gameOver">Temps écoulé !</string>
+    <string name="title_activity_starting_screen">StartingScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="button">Button</string>
+    <string name="new_game">NEW GAME</string>
 </resources>
