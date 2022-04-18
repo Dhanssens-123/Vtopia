@@ -141,7 +141,7 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
         var flag = true
         for (square in squares) {
             if (square.r.contains(x,y) && flag) {
-                type = square.type
+                type = square.type // changeIconeType()
                 flag = false
             }
         }

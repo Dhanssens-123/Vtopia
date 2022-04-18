@@ -2,3 +2,14 @@
 - Mettre 2 activités (écran d'accueil et de jeu)
 - Diagramme de séquences
 - Attention répétition attributs
+
+* Réu 2 *
+
+- Faire une réunion, avant la remise, pour les règles
+- Rajouter du design ?
+- Trop de cases ?
+
+- Fin : Dessin de la ville et on remplace les bouttons du bas par "retour", "recommencer", "quitter"
+- Clique dans l'eau -> Poisson qui jump
+
+- Attention bug : quand on clique sur la partie non visible du damier, la case se place quand même (en cache)
