@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Vtopia">
         <activity
+            android:name=".EasterEgg"
+            android:exported="false" />
+        <activity
+            android:name=".Tips"
+            android:exported="false" />
+        <activity
             android:name=".WelcomeScreen"
             android:exported="true">
             <intent-filter>
