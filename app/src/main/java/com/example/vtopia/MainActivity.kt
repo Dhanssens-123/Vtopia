@@ -18,12 +18,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         gameView = findViewById<GameView>(R.id.vMain)
 
+        // Récupère le niveau défini dans le WelcomeScreen
         val level = intent.getIntExtra("level",0)
         gameView.n = 9 - level
     }
 
     fun gameOnOff(v: View) {
-        // Met l'activité drawingView en pause
+        // Met l'activité gameView en pause
         if (gameView.drawing) {
             gameView.pause()
             play_pause.setImageResource(R.drawable.pause)
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun soundOnOff(v: View) {
+        // Met également l'activité gameView en pause
         if (gameView.drawing) {
             gameView.pause()
             param.setImageResource(R.drawable.outline)
