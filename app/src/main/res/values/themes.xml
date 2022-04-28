@@ -22,7 +22,7 @@
     </style>
 
     <style name="ThemeOverlay.Vtopia.FullscreenContainer" parent="">
-        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
-        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+        <item name="fullscreenBackgroundColor">@color/sea</item>
+        <item name="fullscreenTextColor">@color/sea</item>
     </style>
 </resources>

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.example.vtopia.DrawingView
+    <com.example.vtopia.GameView
         android:id="@+id/vMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:id="@+id/play_pause"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background=" #5dade2 "
+        android:background="#00ffffff"
         android:onClick="gameOnOff"
         android:scaleType="fitCenter"
         android:scaleX="1"
@@ -35,7 +35,7 @@
         android:id="@+id/param"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background=" #5dade2 "
+        android:background="#00ffffff"
         android:onClick="soundOnOff"
         android:scaleType="fitCenter"
         android:scaleX="1"

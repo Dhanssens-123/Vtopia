@@ -18,7 +18,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import kotlin.math.pow
 
-class DrawingView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), SurfaceHolder.Callback, Runnable {
+class GameView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), SurfaceHolder.Callback, Runnable {
 
     lateinit var thread: Thread
     lateinit var canvas: Canvas
@@ -32,7 +32,7 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
     var w = context.resources.displayMetrics.widthPixels.toFloat()
     var h = context.resources.displayMetrics.heightPixels.toFloat()
 
-    val n = 9 // Entier impair
+    var n = 9 // Entier impair
 
     var type = "désert"
 
@@ -139,18 +139,20 @@ class DrawingView  @JvmOverloads constructor (context: Context, attributes: Attr
 
     fun checkClick(squares : Array<BtnCase>, cases : Array<Array<Case>>, x : Float, y : Float) {
         var flag = true
-        for (square in squares) {
-            if (square.r.contains(x,y) && flag) {
-                type = square.type // changeIconeType()
-                flag = false
-            }
-        }
         for (ligne in cases) {
             for (case in ligne) {
                 if (case.r.contains(x,y) && flag) {
-                    case.type = type
+                    case.changeType(type)
                     flag = false
                 }
+            }
+        }
+        for (square in squares) {
+            if (square.r.contains(x,y) && flag) {
+                for (s in squares) s.reinit()
+                type = square.type // changeIconeType()
+                square.changeRect(25)
+                flag = false
             }
         }
     }

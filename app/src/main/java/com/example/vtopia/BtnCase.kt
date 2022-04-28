@@ -1,15 +1,13 @@
 package com.example.vtopia
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Color
+import android.graphics.*
 
-class BtnCase(_x: Float, _y: Float, _w: Float, _h: Float, context: Context, _type: String, _damier: Damier) : Icone(_x,_y,_w,_h,context) {
+class BtnCase(x: Float, y: Float, w: Float, h: Float, context: Context, _type: String, _damier: Damier) : Icone(x,y,w,h,context) {
 
     val type = _type
     val damier = _damier
+    var isClicked = false
 
     val spriteSet = mapOf<String, Bitmap>(
         "forêt" to BitmapFactory.decodeResource(context.resources, R.drawable.square_green),
@@ -31,5 +29,16 @@ class BtnCase(_x: Float, _y: Float, _w: Float, _h: Float, context: Context, _typ
         canvas?.drawBitmap(spriteSet[type]!!, null, r, paint)
         canvas?.drawBitmap(spriteSet["bord"]!!, null, r, paint)
         canvas?.drawText(text,x-offSet/2,y+offSet/3,paint2)
+    }
+
+    fun changeRect(a : Int) {
+        var add = a.toFloat()
+        var w2 = w + add
+        var h2 = h + add
+        r = RectF(x - w2 / 2, y - h2 / 2, x + w2 / 2, y + h2 / 2)
+    }
+
+    fun reinit() {
+        r = RectF(x - w/2, y - h/2, x + w/2, y + h/2)
     }
 }

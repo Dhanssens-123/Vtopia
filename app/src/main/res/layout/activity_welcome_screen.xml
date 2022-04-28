@@ -28,6 +28,58 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+    <ImageButton
+        android:id="@+id/star1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="#00ffffff"
+        android:onClick="star"
+        android:scaleType="fitCenter"
+        android:scaleX="1"
+        android:scaleY="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65"
+        app:srcCompat="@drawable/star_bord" />
+
+    <ImageButton
+        android:id="@+id/star2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="#00ffffff"
+        android:onClick="star"
+        android:scaleType="fitCenter"
+        android:scaleX="1"
+        android:scaleY="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65"
+        app:srcCompat="@drawable/star_bord" />
+
+    <ImageButton
+        android:id="@+id/star3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="#00ffffff"
+        android:onClick="star"
+        android:scaleType="fitCenter"
+        android:scaleX="1"
+        android:scaleY="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.66"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65"
+        app:srcCompat="@drawable/star_bord" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="165dp"

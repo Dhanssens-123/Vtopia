@@ -49,8 +49,8 @@ class Case (_x: Float, _y: Float, _cote: Float, _type: String, _bord: Int, conte
         }
     }
 
-    fun changeState() {
-        // Cache ou non la case
-        state = !state
+    fun changeType(_type : String) {
+        // Change le type de la case si affichée
+        if (state) type = _type
     }
 }

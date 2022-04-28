@@ -11,44 +11,47 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var drawingView : DrawingView
+    lateinit var gameView : GameView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        drawingView = findViewById<DrawingView>(R.id.vMain)
+        gameView = findViewById<GameView>(R.id.vMain)
+
+        val level = intent.getIntExtra("level",0)
+        gameView.n = 9 - level
     }
 
     fun gameOnOff(v: View) {
         // Met l'activité drawingView en pause
-        if (drawingView.drawing) {
-            drawingView.pause()
+        if (gameView.drawing) {
+            gameView.pause()
             play_pause.setImageResource(R.drawable.pause)
         }
         else {
-            drawingView.resume()
+            gameView.resume()
             play_pause.setImageResource(R.drawable.play)
         }
     }
 
     fun soundOnOff(v: View) {
-        if (drawingView.drawing) {
-            drawingView.pause()
+        if (gameView.drawing) {
+            gameView.pause()
             param.setImageResource(R.drawable.outline)
         }
         else {
-            drawingView.resume()
+            gameView.resume()
             param.setImageResource(R.drawable.param)
         }
     }
 
     override fun onPause() {
         super.onPause()
-        drawingView.pause()
+        gameView.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        drawingView.resume()
+        gameView.resume()
     }
 }
