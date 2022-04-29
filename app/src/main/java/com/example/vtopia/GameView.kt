@@ -18,7 +18,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import kotlin.math.pow
 
-class GameView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), SurfaceHolder.Callback, Runnable {
+class GameView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), Runnable {
 
     lateinit var thread: Thread
     lateinit var canvas: Canvas
@@ -34,40 +34,41 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
 
     // Prend les dimensions de la drawingView ( != dimensions de l'écran total)
     val displayMetrics = DisplayMetrics()
-    var w = context.resources.displayMetrics.widthPixels.toFloat()
-    var h = context.resources.displayMetrics.heightPixels.toFloat()
+    var screenWidth = context.resources.displayMetrics.widthPixels.toFloat()
+    var screenHeight = context.resources.displayMetrics.heightPixels.toFloat()
 
-    var n = 9 // Diamètre du damier (impair)
+    var n = 3 // Diamètre du damier (impair)
 
     var type = "désert" // Type de la case à placer
 
     // Création du damier et des icones
     var game = GameManager()
-    var damier = Damier(context, w, h, n)
-    var squares = arrayOf(
-        BtnCase(w/6,h-375F,150F,150F,context,"forêt",damier),
-        BtnCase(w/6,h-200F,150F,150F,context,"désert",damier),
-        BtnCase(2*w/6,h-200F,150F,150F,context,"extraction",damier),
-        BtnCase(3*w/6,h-200F,150F,150F,context,"habitat",damier),
-        BtnCase(4*w/6,h-200F,150F,150F, context,"industrie",damier),
-        BtnCase(5*w/6,h-200F,150F,150F, context, "culture",damier),
-        BtnCase(5*w/6,h-375F,150F,150F, context, "lac",damier)
-    )
+    lateinit var damier : Damier
+    lateinit var squares : Array<BtnCase>
     var stars = arrayOf(
-        IconLevel(0.33F*w,h-375F,125F,125F,context,1),
-        IconLevel(w/2,h-375F,125F,125F,context,1),
-        IconLevel(0.66F*w,h-375F,125F,125F,context,0)
+        IconLevel(0.33F*screenWidth,screenHeight-375F,125F,125F,context,1),
+        IconLevel(screenWidth/2,screenHeight-375F,125F,125F,context,1),
+        IconLevel(0.66F*screenWidth,screenHeight-375F,125F,125F,context,0)
     )
 
-    var therm_score = IconScore(w/2,150F,400F,150F,context,"therm_fill")
-    var time_score = IconTime(w/2, 325F,80F,100F,context)
+    var therm_score = IconScore(screenWidth/2,150F,400F,150F,context,"therm_fill")
+    var time_score = IconTime(screenWidth/2, 325F,80F,100F,context)
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
     }
 
     override fun run() {
-        // Création du damier et affichage
+        damier = Damier(context, screenWidth, screenHeight, n)
+        squares = arrayOf(
+            BtnCase(screenWidth/6,screenHeight-375F,150F,150F,context,"forêt",damier),
+            BtnCase(screenWidth/6,screenHeight-200F,150F,150F,context,"désert",damier),
+            BtnCase(2*screenWidth/6,screenHeight-200F,150F,150F,context,"extraction",damier),
+            BtnCase(3*screenWidth/6,screenHeight-200F,150F,150F,context,"habitat",damier),
+            BtnCase(4*screenWidth/6,screenHeight-200F,150F,150F, context,"industrie",damier),
+            BtnCase(5*screenWidth/6,screenHeight-200F,150F,150F, context, "culture",damier),
+            BtnCase(5*screenWidth/6,screenHeight-375F,150F,150F, context, "lac",damier)
+        )
         damier.setDamier(n)
         var previousFrameTime = System.currentTimeMillis() // t_0
         while(drawing) {
@@ -166,23 +167,6 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
                 flag = false
             }
         }
-    }
-
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-    }
-
-    override fun surfaceChanged(p0: SurfaceHolder, p1: Int, p2: Int, p3: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override fun surfaceCreated(p0: SurfaceHolder) {
-        thread = Thread(this)
-        thread.start()
-    }
-
-    override fun surfaceDestroyed(p0: SurfaceHolder) {
-        TODO("Not yet implemented")
     }
 
     fun showGameOverDialog(messageId: Int) {

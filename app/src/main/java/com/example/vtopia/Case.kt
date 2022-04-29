@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.*
 
-class Case (_x: Float, _y: Float, _cote: Float, _type: String, _bord: Int, context: Context) {
+class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, context: Context) {
 
     var type = _type
     var bord = _bord
@@ -28,9 +28,6 @@ class Case (_x: Float, _y: Float, _cote: Float, _type: String, _bord: Int, conte
     )
 
     // Définit les différents paramètres pour l'affichage via draw() du canvas.
-    var x = _x
-    var y = _y
-    var diametre = _cote
     var r = RectF(x - diametre/2, y - diametre/Math.sqrt(3.0).toFloat(), x + diametre/2, y + diametre/Math.sqrt(3.0).toFloat())
     val paint = Paint()
     var paint2 = Paint()

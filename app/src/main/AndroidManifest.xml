@@ -11,12 +11,15 @@
         android:theme="@style/Theme.Vtopia">
         <activity
             android:name=".EasterEgg"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Tips"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".WelcomeScreen"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +28,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
         </activity>
     </application>

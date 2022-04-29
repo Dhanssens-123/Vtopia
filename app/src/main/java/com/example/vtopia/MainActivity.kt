@@ -6,6 +6,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
+import android.widget.Toast
 import android.widget.ZoomControls
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,7 +21,8 @@ class MainActivity : AppCompatActivity() {
 
         // Récupère le niveau défini dans le WelcomeScreen
         val level = intent.getIntExtra("level",0)
-        gameView.n = 9 - level
+        gameView.n = 11 - 2*level
+        Toast.makeText(applicationContext, "$level", Toast.LENGTH_SHORT).show()
     }
 
     fun gameOnOff(v: View) {
