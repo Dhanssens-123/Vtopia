@@ -14,10 +14,8 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
     val spriteSet = mapOf<String, Bitmap>(
         "forêt" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_green),
         "désert" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_yellow),
-        "lac" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_blue),
         "habitat" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_brown),
         "culture" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_pink),
-        "extraction" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_corail),
         "industrie" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_grey)
     )
 

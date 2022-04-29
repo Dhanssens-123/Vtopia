@@ -45,18 +45,11 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     var game = GameManager()
     var damier = Damier(context, screenWidth, screenHeight, n)
     var squares = arrayOf(
-        BtnCase(screenWidth/6,screenHeight-375F,150F,150F,context,"forêt",damier),
         BtnCase(screenWidth/6,screenHeight-200F,150F,150F,context,"désert",damier),
-        BtnCase(2*screenWidth/6,screenHeight-200F,150F,150F,context,"extraction",damier),
+        BtnCase(2*screenWidth/6,screenHeight-200F,150F,150F,context,"culture",damier),
         BtnCase(3*screenWidth/6,screenHeight-200F,150F,150F,context,"habitat",damier),
         BtnCase(4*screenWidth/6,screenHeight-200F,150F,150F, context,"industrie",damier),
-        BtnCase(5*screenWidth/6,screenHeight-200F,150F,150F, context, "culture",damier),
-        BtnCase(5*screenWidth/6,screenHeight-375F,150F,150F, context, "lac",damier)
-    )
-    var stars = arrayOf(
-        IconLevel(0.33F*screenWidth,screenHeight-375F,125F,125F,context,1),
-        IconLevel(screenWidth/2,screenHeight-375F,125F,125F,context,1),
-        IconLevel(0.66F*screenWidth,screenHeight-375F,125F,125F,context,0)
+        BtnCase(5*screenWidth/6,screenHeight-200F,150F,150F, context, "forêt",damier)
     )
 
     var therm_score = IconScore(screenWidth/2,150F,400F,150F,context,"therm_fill")
@@ -92,9 +85,6 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
                 for (case in ligne) case.draw(canvas)
             }
             for (elem in squares) {
-                elem.draw(canvas)
-            }
-            for (elem in stars) {
                 elem.draw(canvas)
             }
             therm_score.draw(canvas)

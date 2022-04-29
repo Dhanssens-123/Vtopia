@@ -10,10 +10,8 @@ class GameManager {
     var dataValueSet = mutableMapOf<String, Int>(
         "forêt" to 10,
         "désert" to 0,
-        "lac" to 10,
         "habitat" to 20,
         "culture" to 10,
-        "extraction" to 5,
         "industrie" to 5
     )
 
@@ -29,8 +27,7 @@ class GameManager {
         icon_score.score = 0
         // Modification des valeurs pour chaque type selon les différentes combinaisons de types de case à l'écran
         dataValueSet["forêt"] = 10*(damier.dataSet["habitat"]!! + 1)
-        dataValueSet["lac"] = 10*(damier.dataSet["habitat"]!! + 1)
-        dataValueSet["habitat"] = 20*(damier.dataSet["culture"]!! + 1) - 10*(damier.dataSet["habitat"]!! - damier.dataSet["extraction"]!!)
+        dataValueSet["habitat"] = 20*(damier.dataSet["culture"]!! + 1)
         dataValueSet["industrie"] = 5 - 10*(damier.dataSet["industrie"]!! - damier.dataSet["habitat"]!!)
 
         for ((key, value) in damier.dataSet) {

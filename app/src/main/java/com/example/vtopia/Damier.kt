@@ -12,20 +12,16 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
     var dataSet = mutableMapOf<String, Int>(
         "forêt" to 0,
         "désert" to 0,
-        "lac" to 0,
         "habitat" to 0,
         "culture" to 0,
-        "extraction" to 0,
         "industrie" to 0,
     )
 
     val spriteSet = mapOf<String, Bitmap>(
         "forêt" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_green),
         "désert" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_yellow),
-        "lac" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_blue),
         "habitat" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_brown),
         "culture" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_pink),
-        "extraction" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_corail),
         "industrie" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_grey),
         "bord" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord)
     )

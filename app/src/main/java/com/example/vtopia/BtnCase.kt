@@ -12,10 +12,8 @@ class BtnCase(x: Float, y: Float, w: Float, h: Float, context: Context, _type: S
     val spriteSet = mapOf<String, Bitmap>(
         "forêt" to BitmapFactory.decodeResource(context.resources, R.drawable.square_green),
         "désert" to BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow),
-        "lac" to BitmapFactory.decodeResource(context.resources, R.drawable.square_blue),
         "habitat" to BitmapFactory.decodeResource(context.resources, R.drawable.square_brown),
         "culture" to BitmapFactory.decodeResource(context.resources, R.drawable.square_pink),
-        "extraction" to BitmapFactory.decodeResource(context.resources, R.drawable.square_corail),
         "industrie" to BitmapFactory.decodeResource(context.resources, R.drawable.square_grey),
         "bord" to BitmapFactory.decodeResource(context.resources, R.drawable.square_bord)
     )
