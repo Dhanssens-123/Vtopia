@@ -24,6 +24,7 @@ class WelcomeScreen() : AppCompatActivity(), Parcelable {
         // Commence une nouvelle partie quand le bouton est pressé
         val intent = Intent(this, MainActivity::class.java).apply {}
         intent.putExtra("level", level)
+        intent.putExtra("cityName", cityName.text.toString())
         startActivity(intent)
     }
 

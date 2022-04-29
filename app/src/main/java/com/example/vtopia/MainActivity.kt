@@ -21,17 +21,19 @@ class MainActivity : AppCompatActivity() {
 
         // Récupère le niveau défini dans le WelcomeScreen
         val level = intent.getIntExtra("level",0)
+        val cityName = intent.getStringExtra("cityName")
+        gameView.money.cityName = cityName!!
     }
 
     fun gameOnOff(v: View) {
         // Met l'activité gameView en pause
         if (gameView.drawing) {
             gameView.pause()
-            play_pause.setImageResource(R.drawable.pause)
+            play_pause.setImageResource(R.drawable.play)
         }
         else {
             gameView.resume()
-            play_pause.setImageResource(R.drawable.play)
+            play_pause.setImageResource(R.drawable.pause)
         }
     }
 
@@ -39,11 +41,11 @@ class MainActivity : AppCompatActivity() {
         // Met également l'activité gameView en pause
         if (gameView.drawing) {
             gameView.pause()
-            param.setImageResource(R.drawable.outline)
+            param.setImageResource(R.drawable.sound_on)
         }
         else {
             gameView.resume()
-            param.setImageResource(R.drawable.param)
+            param.setImageResource(R.drawable.sound_off)
         }
     }
 

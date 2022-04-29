@@ -51,7 +51,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         BtnCase(4*screenWidth/6,screenHeight-200F,150F,150F, context,"industrie",damier),
         BtnCase(5*screenWidth/6,screenHeight-200F,150F,150F, context, "forêt",damier)
     )
-
+    var money = Money(screenWidth/2, screenHeight-400F, 150F + 4*screenWidth/6, 150F, context)
     var therm_score = IconScore(screenWidth/2,150F,400F,150F,context,"therm_fill")
     var time_score = IconTime(screenWidth/2, 325F,80F,100F,context)
 
@@ -67,7 +67,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
             val currentTime = System.currentTimeMillis()
             var elapsedTimeMS = (currentTime - previousFrameTime).toDouble()
             // Màj du jeu et de l'affichage
-            game.updateTotalTime(elapsedTimeMS, time_score)
+            game.updateTotalTime(elapsedTimeMS, time_score, money)
             damier.changeDataSet()
             game.updateScore(damier, therm_score)
             draw()
@@ -87,6 +87,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
             for (elem in squares) {
                 elem.draw(canvas)
             }
+            money.draw(canvas)
             therm_score.draw(canvas)
             time_score.draw(canvas)
             holder.unlockCanvasAndPost(canvas)
@@ -140,8 +141,9 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         // Si une case est clickée, changement de son état
         for (ligne in cases) {
             for (case in ligne) {
-                if (case.r.contains(x,y) && flag) {
+                if (case.r.contains(x,y) && flag && money.nbreBloc >= 2) {
                     case.changeType(type)
+                    money.updateBloc(-2)
                     flag = false
                 }
             }
