@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         // Récupère le niveau défini dans le WelcomeScreen
         val level = intent.getIntExtra("level",0)
-        gameView.n = 11 - 2*level
-        Toast.makeText(applicationContext, "$level", Toast.LENGTH_SHORT).show()
     }
 
     fun gameOnOff(v: View) {
