@@ -22,19 +22,24 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
 
     lateinit var thread: Thread
     lateinit var canvas: Canvas
+    /*
+    La classe Canvas contient les appels "draw". Pour dessiner quelque chose, vous avez besoin de 4 composants de base :
+    Un bitmap pour contenir les pixels, un canevas pour accueillir les appels de dessin (écriture dans le bitmap),
+    une primitive de dessin (par exemple, Rect, Path, texte, bitmap) et une peinture (pour décrire les couleurs et les styles du dessin).
+    */
     val activity = context as FragmentActivity
 
-    val backgroundPaint = Paint()
-    var drawing: Boolean = true
+    val backgroundPaint = Paint() // Couleur de fond d'écran
+    var drawing: Boolean = true // Gère ou non la màj de l'affichage
 
-    // Prend les dimensions de la drawingView
+    // Prend les dimensions de la drawingView ( != dimensions de l'écran total)
     val displayMetrics = DisplayMetrics()
     var w = context.resources.displayMetrics.widthPixels.toFloat()
     var h = context.resources.displayMetrics.heightPixels.toFloat()
 
-    var n = 9 // Entier impair
+    var n = 9 // Diamètre du damier (impair)
 
-    var type = "désert"
+    var type = "désert" // Type de la case à placer
 
     // Création du damier et des icones
     var game = GameManager()
@@ -64,10 +69,12 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     override fun run() {
         // Création du damier et affichage
         damier.setDamier(n)
-        var previousFrameTime = System.currentTimeMillis()
+        var previousFrameTime = System.currentTimeMillis() // t_0
         while(drawing) {
+            // Temps écoulé
             val currentTime = System.currentTimeMillis()
             var elapsedTimeMS = (currentTime - previousFrameTime).toDouble()
+            // Màj du jeu et de l'affichage
             game.updateTotalTime(elapsedTimeMS, time_score)
             damier.changeDataSet()
             game.updateScore(damier, therm_score)
@@ -81,11 +88,10 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         if (holder.surface.isValid) {
             canvas = holder.lockCanvas()
             // Affichage des éléments
-            canvas.drawRect(0F, 0F, canvas.getWidth()*1F, canvas.getHeight()*1F, backgroundPaint)
+            canvas.drawRect(0F, 0F, canvas.getWidth()*1F, canvas.getHeight()*1F, backgroundPaint) // Fond d'écran
             for (ligne in damier.cases) {
                 for (case in ligne) case.draw(canvas)
             }
-            therm_score.draw(canvas)
             for (elem in squares) {
                 elem.draw(canvas)
             }
@@ -100,12 +106,15 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
 
     fun checkGameOver() {
         if (game.gameOver) {
+            // Cesse la mise à jour du jeu et de l'affichage
             drawing = false
+            // Affiche les scores et propose de relancer la partie
             showGameOverDialog(R.string.gameOver)
         }
     }
 
     fun newGame() {
+        // Relance une nouvelle partie
         type = "désert"
         game.reset()
         damier.reset()
@@ -126,9 +135,9 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        // Quand on clique sur l'écran
         when (event!!.action) {
             MotionEvent.ACTION_DOWN -> {
+                // Récupère les coordonnées du click sur l'écran et vérifie la correspondance
                 val x = event.rawX
                 val y = event.rawY - 75
                 checkClick(squares, damier.cases, x, y)
@@ -139,6 +148,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
 
     fun checkClick(squares : Array<BtnCase>, cases : Array<Array<Case>>, x : Float, y : Float) {
         var flag = true
+        // Si une case est clickée, changement de son état
         for (ligne in cases) {
             for (case in ligne) {
                 if (case.r.contains(x,y) && flag) {
@@ -149,6 +159,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         }
         for (square in squares) {
             if (square.r.contains(x,y) && flag) {
+                // Si un des carré est clické, réinitialise l'ensemble et affiche le nouveau
                 for (s in squares) s.reinit()
                 type = square.type // changeIconeType()
                 square.changeRect(25)
@@ -175,6 +186,10 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     }
 
     fun showGameOverDialog(messageId: Int) {
+        /*
+        Fonction directement copiée du jeu CanonView. A comprendre en détail.
+        Permet l'affichage du fragment en fin de jeu.
+         */
         class GameResult: DialogFragment() {
             override fun onCreateDialog(bundle: Bundle?): Dialog {
                 val builder = AlertDialog.Builder(activity)

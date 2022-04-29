@@ -8,6 +8,7 @@ import android.graphics.Canvas
 
 class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
 
+    // Attribue une valeur et une image à chaque type de case
     var dataSet = mutableMapOf<String, Int>(
         "forêt" to 0,
         "désert" to 0,
@@ -29,12 +30,14 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
         "bord" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord)
     )
 
+    // Fixe le diamètre du damier et les positions de chaque case pour la création du tableau de cases
     var diam = 0.85F * weigth/n
     var posx = Array<Array<Float>>(n, {i -> Array(n, {j -> (weigth/2 - n/2*diam) + j*diam + diam/2*(i%2)})})
     var posy = Array(n, {i -> (height/2 - n/2*3*diam/(2*Math.sqrt(3.0).toFloat())) + i*3*diam/(2*Math.sqrt(3.0).toFloat())})
     var cases = Array<Array<Case>>(n, {i -> Array(n, {j -> Case(posx[i][j],posy[i],diam,"désert",0,context)})})
 
     fun changeDataSet() {
+        // Màj du nombre de cases attribuées à chacun des types
         resetDataSet()
         for (ligne in cases) {
             for (case in ligne) {
@@ -55,18 +58,19 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
         // Partie supérieure du damier
         for (i in -mid..0) {
             for (j in (-mid + Math.round((-i-1 + mid%2) / 2.0)).toInt()..(mid - Math.round((-i + mid%2)/ 2.0)).toInt()) {
-                cases[mid + i][mid + j].state = true
+                cases[mid + i][mid + j].state = true // Affiche la case correspondante
             }
         }
         // Partie inférieure
         for (i in 1..mid) {
             for (j in (-mid + Math.round((i-1 + mid%2) / 2.0)).toInt()..(mid - Math.round((i + mid%2) / 2.0)).toInt()) {
-                cases[mid + i][mid + j].state = true
+                cases[mid + i][mid + j].state = true // Affiche la case correspondante
             }
         }
     }
 
     fun reset() {
+        // Réinitialise le damier
         resetDataSet()
         for (ligne in cases) {
             for (case in ligne) {

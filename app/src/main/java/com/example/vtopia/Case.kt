@@ -8,8 +8,9 @@ class Case (_x: Float, _y: Float, _cote: Float, _type: String, _bord: Int, conte
 
     var type = _type
     var bord = _bord
-    var state = false
+    var state = false // Etat d'affichage de la case
 
+    // Attribue une image et un bord à chaque type de case
     val spriteSet = mapOf<String, Bitmap>(
         "forêt" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_green),
         "désert" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_yellow),
@@ -26,6 +27,7 @@ class Case (_x: Float, _y: Float, _cote: Float, _type: String, _bord: Int, conte
         "bord_red" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord_red)
     )
 
+    // Définit les différents paramètres pour l'affichage via draw() du canvas.
     var x = _x
     var y = _y
     var diametre = _cote
@@ -50,7 +52,7 @@ class Case (_x: Float, _y: Float, _cote: Float, _type: String, _bord: Int, conte
     }
 
     fun changeType(_type : String) {
-        // Change le type de la case si affichée
+        // Change le type de la case si celle-ci est affichée
         if (state) type = _type
     }
 }

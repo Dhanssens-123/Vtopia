@@ -37,6 +37,7 @@ class WelcomeScreen() : AppCompatActivity(), Parcelable {
     }
 
     fun star(view: View) {
+        // Incrémente le niveau quand une des étoiles est touchée et affiche le nombre d'étoiles pleine en conséquence
         level = (level + 1) % 4
         var stars = arrayOf(star1, star2, star3)
         for (star in stars) star.setImageResource(R.drawable.star_bord)

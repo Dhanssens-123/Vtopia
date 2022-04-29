@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.*
 
 abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float, context: Context) {
-
+    /*
+    Contient les paramètres de base pour l'affichage via l'appel draw() du canvas de toutes les icônes de la GameView
+    */
     var x = _x
     var y = _y
     var w = _w
