@@ -26,7 +26,7 @@ class BtnCase(x: Float, y: Float, w: Float, h: Float, context: Context, _type: S
         var offSet = paint2.measureText(text)
         canvas?.drawBitmap(spriteSet[type]!!, null, r, paint)
         canvas?.drawBitmap(spriteSet["bord"]!!, null, r, paint)
-        canvas?.drawText(text,x-offSet/2,y+offSet/3,paint2)
+        canvas?.drawText(text,x-offSet/2,y+paint2.textSize/3,paint2)
     }
 
     fun changeRect(a : Int) {

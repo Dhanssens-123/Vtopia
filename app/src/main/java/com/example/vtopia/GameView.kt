@@ -53,8 +53,8 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     )
     var money = Money(screenWidth/2, screenHeight-525F, 150F + 4*screenWidth/6, 100F, context)
     var delta = Delta(screenWidth/2, screenHeight-375F,150F + 4*screenWidth/6, 100F, context)
-    var iconCity = IconCity(screenWidth/2,150F,400F,150F,context,"therm_fill")
-    var therm_score = IconScore(0.85F*screenWidth, 350F, 90F, 100F, context)
+    var iconCity = IconCity(screenWidth/2,150F,500F,150F, context)
+    var therm_score = IconScore(0.9F*screenWidth, 350F, 90F, 100F, context)
     var time_score = IconTime(0.1F*screenWidth, 350F,90F,100F,context)
 
     init {

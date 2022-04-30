@@ -16,7 +16,6 @@ class Money(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icon
 
     var nbreBloc = 5
     var lgrBloc = w / NBRE_BLOC_TOTAL
-    var cityName = "cityName"
 
     override fun draw(canvas: Canvas?) {
         canvas?.drawBitmap(sprite1,null, r, paint)
@@ -26,14 +25,6 @@ class Money(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icon
             bloc.left += lgrBloc
             bloc.right += lgrBloc
         }
-
-        paint2.textSize = w/8
-        paint2.isFakeBoldText = false
-        paint2.color = Color.argb(255,52,73,94)
-        // Gère l'affichage du score
-        var text = "$cityName"
-        var offSet = paint.measureText(text)
-        canvas?.drawText(text,x - offSet/2, y + paint2.textSize/3, paint2)
     }
 
     fun updateBloc(a: Int) {

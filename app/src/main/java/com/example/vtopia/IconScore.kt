@@ -12,12 +12,12 @@ class IconScore(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : 
     var score = 0
 
     override fun draw(canvas: Canvas?) {
+        var text = "$score"
         paint2.textSize = w
         paint2.isFakeBoldText = true
         paint2.color = Color.argb(255,52,73,94)
         // Gère l'affichage du score
-        var text = "$score"
-        var offSet = paint.measureText(text)
-        canvas?.drawText(text,x - offSet/2, y + paint2.textSize/3, paint2)
+        var offSet = paint2.measureText(text)
+        canvas?.drawText(text,x - text.length*offSet/2, y + paint2.textSize/3, paint2)
     }
 }

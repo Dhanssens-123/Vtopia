@@ -6,17 +6,21 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 
-class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context, _type: String) : Icone(_x,_y,_w,_h,context) {
+class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h,context) {
 
     // Contient le score à afficher sur l'écran, initialement nul et contrôlé par le GameManager
-    var type = _type
-    val spriteSet = mapOf<String, Bitmap>(
-        "therm_in" to BitmapFactory.decodeResource(context.resources, R.drawable.score_therm_in),
-        "therm_out" to BitmapFactory.decodeResource(context.resources, R.drawable.score_therm_out),
-        "therm_fill" to BitmapFactory.decodeResource(context.resources, R.drawable.score_therm_fill),
-    )
+    val sprite = BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow)
+    lateinit var cityName : String
 
     override fun draw(canvas: Canvas?) {
-        canvas?.drawBitmap(spriteSet[type]!!, null, r, paint)
+        canvas?.drawBitmap(sprite, null, r, paint)
+
+        var text = "$cityName"
+        paint2.textSize = 2*w/(text.length)
+        paint2.isFakeBoldText = false
+        paint2.color = Color.argb(255,52,73,94)
+        // Gère l'affichage du score
+        var offSet = paint2.measureText(text)
+        canvas?.drawText(text,x - offSet/2, y + paint2.textSize/3, paint2)
     }
 }

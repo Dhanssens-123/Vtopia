@@ -21,8 +21,9 @@ class MainActivity : AppCompatActivity() {
 
         // Récupère le niveau défini dans le WelcomeScreen
         val level = intent.getIntExtra("level",0)
-        val cityName = intent.getStringExtra("cityName")
-        gameView.money.cityName = cityName!!
+        var cityName = intent.getStringExtra("cityName")
+        if (cityName == "")  cityName = "En manque d'inspi ?"
+        gameView.iconCity.cityName = cityName!!
     }
 
     fun gameOnOff(v: View) {

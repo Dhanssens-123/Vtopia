@@ -18,6 +18,6 @@ class IconTime(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
         var formatted_time = String.format("%d", time.toInt())
         var text = "$formatted_time"
         var offSet = paint.measureText(text)
-        canvas?.drawText(text, x - offSet/2, y, paint)
+        canvas?.drawText(text, x - offSet/2, y + paint.textSize/3, paint)
     }
 }
