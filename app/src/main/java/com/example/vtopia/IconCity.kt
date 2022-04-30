@@ -16,7 +16,7 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
         canvas?.drawBitmap(sprite, null, r, paint)
 
         var text = "$cityName"
-        paint2.textSize = 2*w/(text.length)
+        paint2.textSize = if(1.5F*w/text.length < w/4F) 1.5F*w/text.length else w/4F // Détermination empirique
         paint2.isFakeBoldText = false
         paint2.color = Color.argb(255,52,73,94)
         // Gère l'affichage du score
