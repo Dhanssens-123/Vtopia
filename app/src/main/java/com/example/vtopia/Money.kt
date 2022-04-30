@@ -14,7 +14,7 @@ class Money(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icon
     var sprite2 = BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow)
     val NBRE_BLOC_TOTAL = 10
 
-    var nbreBloc = 0
+    var nbreBloc = 5
     var lgrBloc = w / NBRE_BLOC_TOTAL
     var cityName = "cityName"
 
@@ -37,6 +37,7 @@ class Money(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icon
     }
 
     fun updateBloc(a: Int) {
-        if (nbreBloc < NBRE_BLOC_TOTAL) nbreBloc += a
+        nbreBloc += a
+        if (nbreBloc >= NBRE_BLOC_TOTAL) nbreBloc = 10
     }
 }
