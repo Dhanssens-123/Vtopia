@@ -15,8 +15,8 @@ class IconTime(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
         paint.isFakeBoldText = true
         paint.color = Color.argb(255,52,73,94)
         // Gère l'affichage du timer
-        var formatted_time = String.format("%.1f", time)
-        var text = "$formatted_time sec left"
+        var formatted_time = String.format("%d", time.toInt())
+        var text = "$formatted_time"
         var offSet = paint.measureText(text)
         canvas?.drawText(text, x - offSet/2, y, paint)
     }
