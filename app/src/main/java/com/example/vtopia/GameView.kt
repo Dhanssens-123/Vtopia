@@ -69,9 +69,10 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
             val currentTime = System.currentTimeMillis()
             var elapsedTimeMS = (currentTime - previousFrameTime).toDouble()
             // Màj du jeu et de l'affichage
-            game.updateTotalTime(elapsedTimeMS, time_score, money)
+            game.updateTotalTimeAndScore(elapsedTimeMS, time_score, money, therm_score)
             damier.changeDataSet()
-            game.updateScore(damier, therm_score, delta)
+            game.updateDeltaScore(damier, therm_score, delta)
+            //game.bruleCase(damier, damier.cases)
             draw()
             previousFrameTime = currentTime
             checkGameOver()
@@ -172,7 +173,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
             override fun onCreateDialog(bundle: Bundle?): Dialog {
                 val builder = AlertDialog.Builder(activity)
                 builder.setTitle(resources.getString((messageId)))
-                builder.setMessage(resources.getString(R.string.results_format, game.score))
+                builder.setMessage(resources.getString(R.string.results_format, game.TotalScore))
                 builder.setPositiveButton(R.string.reset_game, DialogInterface.OnClickListener { _, _->newGame()})
                 return builder.create()
             }
@@ -193,3 +194,4 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         )
     }
 }
+//Nikzebi

@@ -10,8 +10,9 @@
         android:id="@+id/textView"
         android:layout_width="523dp"
         android:layout_height="209dp"
-        android:text="Ici, on mettrait un peu l'explication du jeu"
+        android:text="Ici, on mettrait un peu l'explication du jeu test 1 2 1 2 3"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="151dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

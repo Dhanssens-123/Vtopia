@@ -23,8 +23,10 @@ class Delta(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icon
     }
 
     fun updateBloc(delta: Int) {
-        if (delta < 20) nbreBloc += (delta / 10) else if (delta < 50) nbreBloc += (delta / 20) else nbreBloc += (delta / 50)
+        //if (delta < 20) nbreBloc += (delta / 10) else if (delta < 50) nbreBloc += (delta / 20) else nbreBloc += (delta / 50)
+        //if (delta < 0) nbreBloc += delta else if (delta > 0) nbreBloc += delta
+        nbreBloc = delta
         if (nbreBloc >= NBRE_BLOC_TOTAL) nbreBloc = 10 else if (nbreBloc <= 0) nbreBloc = 0
-    }
 
+    }
 }

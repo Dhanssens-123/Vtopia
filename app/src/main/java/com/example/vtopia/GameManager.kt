@@ -1,4 +1,5 @@
 package com.example.vtopia
+import kotlin.random.*
 
 class GameManager {
 
@@ -8,41 +9,59 @@ class GameManager {
 
     // Contient les valeurs de base attribuées à chaque type de case
     var dataValueSet = mutableMapOf<String, Int>(
-        "forêt" to 10,
+        "forêt" to 1,
         "désert" to 0,
-        "habitat" to 20,
-        "culture" to 10,
-        "industrie" to 20
+        "habitat" to 2,
+        "culture" to 1,
+        "feu" to 0,
+        "industrie" to 5
     )
 
     // Initialise la partie
     var totalTime = 60.0
     var oneSec = 1.0
+    var ScoreTime = 0.5
     var level = 0
-    var prevScore = 0
-    var score = 0
+    var TotalScore = 0
     var deltaScore = 0
     var gameOver = false // Partie en cours
+    val random = Random
 
-    fun updateScore(damier: Damier, icon_score : IconScore, delta : Delta) {
-        // Calcule le score total et le met à jour sur l'icone du score
-        prevScore = icon_score.score
-        score = 0
-        icon_score.score = 0
+    fun updateDeltaScore(damier: Damier, icon_score : IconScore, delta : Delta) {
+        // Calcule le DeltaScore
+
         // Modification des valeurs pour chaque type selon les différentes combinaisons de types de case à l'écran
-        dataValueSet["forêt"] = 10*(damier.dataSet["habitat"]!! + 1)
-        dataValueSet["habitat"] = 20*(damier.dataSet["culture"]!! + 1)
-        dataValueSet["industrie"] = 20 - 10*(damier.dataSet["industrie"]!! - damier.dataSet["habitat"]!!)
+        deltaScore = 0
+        if (damier.dataSet["industrie"]!! > damier.dataSet["forêt"]!!)
+            dataValueSet["industrie"] = -5
+        else
+            dataValueSet["industrie"] = 5
+            //bruleCase(damier, damier.cases[2][3])
+
+        if (damier.dataSet["habitat"]!! > damier.dataSet["industrie"]!! +1 )
+            dataValueSet["habitat"] = -2
+        else dataValueSet["habitat"] = 2
+
+        if (damier.dataSet["culture"]!! > 6 )
+            dataValueSet["culture"] = 1
+        else dataValueSet["culture"] = 5
 
         for ((key, value) in damier.dataSet) {
-            score += value * dataValueSet[key]!!
+            deltaScore += value * dataValueSet[key]!!
         }
-        deltaScore = score - prevScore
+
+        println(deltaScore)
         delta.updateBloc(deltaScore)
-        icon_score.score = score
+
     }
 
-    fun updateTotalTime(elapsedTime : Double, icon_time : IconTime, money : Money) {
+    fun updateTotalScore(icon_score: IconScore) {
+        TotalScore += deltaScore
+        icon_score.score = TotalScore
+    }
+
+
+    fun updateTotalTimeAndScore(elapsedTime : Double, icon_time : IconTime, money : Money, icon_score: IconScore ) {
         // Calcule le temps restant et le met à jour sur l'icone timer tant que celui-ci est positif
         totalTime -= elapsedTime / 1000.0
         if (totalTime < 0) {
@@ -53,17 +72,24 @@ class GameManager {
             icon_time.time = totalTime
         }
         oneSec -= elapsedTime / 1000.0
+        ScoreTime -= elapsedTime / 1000.0
         if (oneSec < 0) {
             money.updateBloc(1)
             oneSec = 1.0
+        }
+        if (ScoreTime < 0) {
+            updateTotalScore(icon_score)
+            ScoreTime = 0.5
+
         }
     }
 
     fun reset() {
         // Réinitialise la partie
-        score = 0
+        TotalScore = 0
         level = 0
         totalTime = 60.0
         gameOver = false
+        deltaScore = 0
     }
 }
