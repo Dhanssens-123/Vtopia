@@ -16,7 +16,8 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
         "désert" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_yellow),
         "habitat" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_brown),
         "culture" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_pink),
-        "industrie" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_grey)
+        "industrie" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_grey),
+        "feu" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_corail)
     )
 
     val spriteBord = mapOf<String, Bitmap>(
@@ -46,8 +47,14 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
         }
     }
 
+    fun bruleCase(bool : Boolean) {
+        //damier.cases[1][1].state = false
+            state = bool
+    }
+
     fun changeType(_type : String) {
         // Change le type de la case si celle-ci est affichée
         if (state) type = _type
+
     }
 }

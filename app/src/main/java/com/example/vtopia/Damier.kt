@@ -15,6 +15,7 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
         "habitat" to 0,
         "culture" to 0,
         "industrie" to 0,
+        "feu" to 0
     )
 
     val spriteSet = mapOf<String, Bitmap>(
@@ -23,6 +24,7 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
         "habitat" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_brown),
         "culture" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_pink),
         "industrie" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_grey),
+        "feu" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_corail),
         "bord" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord)
     )
 
