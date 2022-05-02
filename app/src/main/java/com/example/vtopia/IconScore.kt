@@ -20,5 +20,6 @@ class IconScore(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : 
         var length = paint2.measureText(text)
         var offSet = if (text.length > 2) (2*text.length-2)/(2*text.length).toFloat() else 0.5F
         canvas?.drawText(text,x - offSet*length, y + paint2.textSize/3, paint2)
+
     }
 }
