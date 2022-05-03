@@ -69,7 +69,7 @@ class GameManager {
             gameOver = true
         }
         else {
-            icon_time.time = totalTime
+            icon_time.changeTime(totalTime)
         }
         oneSec -= elapsedTime / 1000.0
         ScoreTime -= elapsedTime / 1000.0

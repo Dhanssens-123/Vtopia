@@ -18,7 +18,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import kotlin.math.pow
 
-class GameView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), Runnable {
+class GameView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), Runnable, Animation {
 
     lateinit var thread: Thread
     lateinit var canvas: Canvas
@@ -155,10 +155,9 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         }
         for (square in squares) {
             if (square.r.contains(x,y) && flag) {
-                // Si un des carré est clické, réinitialise l'ensemble et affiche le nouveau
-                for (s in squares) s.reinit()
+                // Si un des carré est clické, le met en avant et change le type actuel
+                grow(square, squares)
                 type = square.type // changeIconeType()
-                square.changeRect(25)
                 flag = false
             }
         }
