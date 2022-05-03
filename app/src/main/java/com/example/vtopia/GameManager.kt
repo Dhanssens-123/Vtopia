@@ -88,6 +88,8 @@ class GameManager {
         TotalScore = 0
         level = 0
         totalTime = 60.0
+        oneSec = 1.0
+        ScoreTime = 1.0
         gameOver = false
         deltaScore = 0
     }

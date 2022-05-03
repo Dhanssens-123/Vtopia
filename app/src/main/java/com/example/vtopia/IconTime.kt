@@ -24,7 +24,7 @@ class IconTime(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
         var formatted_time = String.format("%d", time.toInt())
         if (time.toInt() % 10 == 0) {
             formatted_time = blink(formatted_time, switch)
-            switch += 1
+            switch += 2
         } else switch = 0
         var offSet = paint.measureText(formatted_time)
         canvas?.drawText(formatted_time, x - offSet/2, y + paint.textSize/3, paint)

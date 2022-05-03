@@ -19,6 +19,6 @@ interface Animation {
     }
 
     fun blink(txt: String, flag: Int) : String {
-        return if (flag % 5 == 0) "" else txt
+        return if ((flag % 20) < 10) "" else txt
     }
 }
