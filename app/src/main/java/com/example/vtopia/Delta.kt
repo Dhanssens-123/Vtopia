@@ -23,10 +23,7 @@ class Delta(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icon
     }
 
     fun updateBloc(delta: Int) {
-        //if (delta < 20) nbreBloc += (delta / 10) else if (delta < 50) nbreBloc += (delta / 20) else nbreBloc += (delta / 50)
-        //if (delta < 0) nbreBloc += delta else if (delta > 0) nbreBloc += delta
-        nbreBloc = delta
-        if (nbreBloc >= NBRE_BLOC_TOTAL) nbreBloc = 10 else if (nbreBloc <= 0) nbreBloc = 0
-
+        val map = {x : Int, a: Int, b: Int, c: Int, d: Int -> (x-a)*(d-c)/(b-a) + c} // Transpose un nombre x d'une plage [a,b] à une autre [c,d]
+        nbreBloc = 5 + map(delta, -50, 50, -5, 5)
     }
 }

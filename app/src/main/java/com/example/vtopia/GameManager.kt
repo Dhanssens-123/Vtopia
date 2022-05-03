@@ -20,7 +20,7 @@ class GameManager {
     // Initialise la partie
     var totalTime = 60.0
     var oneSec = 1.0
-    var ScoreTime = 0.5
+    var ScoreTime = 1.0
     var level = 0
     var TotalScore = 0
     var deltaScore = 0
@@ -79,8 +79,7 @@ class GameManager {
         }
         if (ScoreTime < 0) {
             updateTotalScore(icon_score)
-            ScoreTime = 0.5
-
+            ScoreTime = 1.0
         }
     }
 

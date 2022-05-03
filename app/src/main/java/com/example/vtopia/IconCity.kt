@@ -17,7 +17,7 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
 
         var text = "$cityName"
         paint2.textSize = if(1.5F*w/text.length < w/4F) 1.5F*w/text.length else w/4F // Détermination empirique
-        paint2.isFakeBoldText = false
+        paint2.isFakeBoldText = true
         paint2.color = Color.argb(255,52,73,94)
         // Gère l'affichage du score
         var offSet = paint2.measureText(text)
