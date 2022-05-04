@@ -7,13 +7,13 @@ abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float, context: Conte
     /*
     Contient les paramètres de base pour l'affichage via l'appel draw() du canvas de toutes les icônes de la GameView
     */
-    var x = _x
-    var y = _y
-    var w = _w
-    var h = _h
+    protected var x = _x
+    protected var y = _y
+    protected var w = _w
+    protected var h = _h
     var r = RectF(x - w/2, y - h/2, x + w/2, y + h/2)
-    val paint = Paint()
-    var paint2 = Paint()
+    protected val paint = Paint()
+    protected var paint2 = Paint()
 
     abstract fun draw(canvas: Canvas?)
 

@@ -18,7 +18,7 @@ interface Animation {
         square.changeRect(25)
     }
 
-    fun blink(txt: String, flag: Int) : String {
-        return if ((flag % 20) < 10) "" else txt
+    fun blink(txt: String,newtxt: String, flag: Int) : String {
+        return if ((flag % 20) < 10) newtxt else txt
     }
 }

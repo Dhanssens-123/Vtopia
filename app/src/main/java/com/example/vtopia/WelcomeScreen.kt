@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_welcome_screen.*
 class WelcomeScreen() : AppCompatActivity(), Parcelable {
     constructor(parcel: Parcel) : this()
 
-    var level = 0
+    private var level = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

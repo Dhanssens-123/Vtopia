@@ -10,12 +10,12 @@ import kotlin.coroutines.coroutineContext
 
 class Money(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h,context) {
 
-    var sprite1 = BitmapFactory.decodeResource(context.resources, R.drawable.square_corail)
-    var sprite2 = BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow)
-    val NBRE_BLOC_TOTAL = 10
+    private var sprite1 = BitmapFactory.decodeResource(context.resources, R.drawable.square_corail)
+    private var sprite2 = BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow)
+    private val NBRE_BLOC_TOTAL = 10
 
-    var nbreBloc = 5
-    var lgrBloc = w / NBRE_BLOC_TOTAL
+    public var nbreBloc = 5
+    private var lgrBloc = w / NBRE_BLOC_TOTAL
 
     override fun draw(canvas: Canvas?) {
         canvas?.drawBitmap(sprite1,null, r, paint)

@@ -6,8 +6,8 @@ import android.graphics.*
 class BtnCase(x: Float, y: Float, w: Float, h: Float, context: Context, _type: String, _damier: Damier) : Icone(x,y,w,h,context) {
 
     val type = _type
-    val damier = _damier
-    var isClicked = false
+    private val damier = _damier
+    private var isClicked = false
 
     val spriteSet = mapOf<String, Bitmap>(
         "forêt" to BitmapFactory.decodeResource(context.resources, R.drawable.square_green),

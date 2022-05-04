@@ -27,35 +27,35 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     Un bitmap pour contenir les pixels, un canevas pour accueillir les appels de dessin (écriture dans le bitmap),
     une primitive de dessin (par exemple, Rect, Path, texte, bitmap) et une peinture (pour décrire les couleurs et les styles du dessin).
     */
-    val activity = context as FragmentActivity
+    private val activity = context as FragmentActivity
 
-    val backgroundPaint = Paint() // Couleur de fond d'écran
+    private val backgroundPaint = Paint() // Couleur de fond d'écran
     var drawing: Boolean = true // Gère ou non la màj de l'affichage
 
     // Prend les dimensions de la drawingView ( != dimensions de l'écran total)
-    val displayMetrics = DisplayMetrics()
-    var screenWidth = context.resources.displayMetrics.widthPixels.toFloat()
-    var screenHeight = context.resources.displayMetrics.heightPixels.toFloat()
+    private val displayMetrics = DisplayMetrics()
+    private var screenWidth = context.resources.displayMetrics.widthPixels.toFloat()
+    private var screenHeight = context.resources.displayMetrics.heightPixels.toFloat()
 
-    val n = 5 // Diamètre du damier (impair)
+    private val n = 5 // Diamètre du damier (impair)
 
-    var type = "désert" // Type de la case à placer
+    private var type = "désert" // Type de la case à placer
 
     // Création du damier et des icones
-    var game = GameManager()
-    var damier = Damier(context, screenWidth, screenHeight, n)
-    var squares = arrayOf(
+    private var game = GameManager()
+    private var damier = Damier(context, screenWidth, screenHeight, n)
+    private var squares = arrayOf(
         BtnCase(screenWidth/6,screenHeight-200F,150F,150F,context,"désert",damier),
         BtnCase(2*screenWidth/6,screenHeight-200F,150F,150F,context,"culture",damier),
         BtnCase(3*screenWidth/6,screenHeight-200F,150F,150F,context,"habitat",damier),
         BtnCase(4*screenWidth/6,screenHeight-200F,150F,150F, context,"industrie",damier),
         BtnCase(5*screenWidth/6,screenHeight-200F,150F,150F, context, "forêt",damier)
     )
-    var money = Money(screenWidth/2, screenHeight-525F, 150F + 4*screenWidth/6, 100F, context)
-    var delta = Delta(screenWidth/2, screenHeight-375F,150F + 4*screenWidth/6, 100F, context)
+    private var money = Money(screenWidth/2, screenHeight-525F, 150F + 4*screenWidth/6, 100F, context)
+    private var delta = Delta(screenWidth/2, screenHeight-375F,150F + 4*screenWidth/6, 100F, context)
     var iconCity = IconCity(screenWidth/2,150F,500F,150F, context)
-    var therm_score = IconScore(0.875F*screenWidth, 350F, 90F, 100F, context)
-    var time_score = IconTime(0.125F*screenWidth, 350F,90F,100F,context)
+    private var therm_score = IconScore(0.875F*screenWidth, 350F, 90F, 100F, context)
+    private var time_score = IconTime(0.125F*screenWidth, 350F,90F,100F,context)
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)

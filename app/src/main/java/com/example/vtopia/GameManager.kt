@@ -8,7 +8,7 @@ class GameManager {
      */
 
     // Contient les valeurs de base attribuées à chaque type de case
-    var dataValueSet = mutableMapOf<String, Int>(
+    private var dataValueSet = mutableMapOf<String, Int>(
         "forêt" to 1,
         "désert" to 0,
         "habitat" to 2,
@@ -18,14 +18,14 @@ class GameManager {
     )
 
     // Initialise la partie
-    var totalTime = 60.0
-    var oneSec = 1.0
-    var ScoreTime = 1.0
-    var level = 0
+    private var totalTime = 60.0
+    private var oneSec = 1.0
+    private var ScoreTime = 1.0
+    private var level = 0
     var TotalScore = 0
-    var deltaScore = 0
+    private var deltaScore = 0
     var gameOver = false // Partie en cours
-    val random = Random
+    private val random = Random
 
     fun updateDeltaScore(damier: Damier, icon_score : IconScore, delta : Delta) {
         // Calcule le DeltaScore
@@ -57,7 +57,7 @@ class GameManager {
 
     fun updateTotalScore(icon_score: IconScore) {
         TotalScore += deltaScore
-        icon_score.score = TotalScore
+        icon_score.changeScore(TotalScore)
     }
 
 

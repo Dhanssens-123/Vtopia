@@ -9,13 +9,17 @@ import android.graphics.Color
 class IconScore(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h,context), Animation {
 
     // Contient le score à afficher sur l'écran, initialement nul et contrôlé par le GameManager
-    var score = 0
-    var switch = 0
+    private var score = 0
+    private var switch = 0
+
+    fun changeScore(newscore : Int) {
+        score = newscore
+    }
 
     override fun draw(canvas: Canvas?) {
         var text = "$score"
         if (score < 0) {
-            text = blink(text, switch)
+            text = blink(text,"", switch)
             switch += 1
         } else switch = 0
         paint2.textSize = w
