@@ -10,11 +10,11 @@ class Parois (x1: Float, y1: Float, x2: Float, y2: Float) {
     val paint = Paint()
 
     fun draw(canvas: Canvas) {
-        paint.color = Color.GREEN
+        paint.color = Color.argb(0,0,0,0)
         canvas.drawRect(r, paint)
     }
 
-    fun gereBalle(b: AirPlane) {
+    fun gereBalle(b: Aerial) {
         if (RectF.intersects(r, b.r)) {
             if (r.width() > r.height()) {
                 b.changeDirection (true)
