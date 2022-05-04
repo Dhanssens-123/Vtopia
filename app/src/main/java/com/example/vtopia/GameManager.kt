@@ -36,7 +36,6 @@ class GameManager {
             dataValueSet["industrie"] = -5
         else
             dataValueSet["industrie"] = 5
-            //bruleCase(damier, damier.cases[2][3])
 
         if (damier.dataSet["habitat"]!! > damier.dataSet["industrie"]!! +1 )
             dataValueSet["habitat"] = -2
@@ -55,13 +54,14 @@ class GameManager {
 
     }
 
-    fun updateTotalScore(icon_score: IconScore) {
+    fun updateTotalScore(icon_score: IconScore, damier : Damier) {
         TotalScore += deltaScore
         icon_score.changeScore(TotalScore)
+        damier.cases[random.nextInt(3)][random.nextInt(3)].bruleCase(true)
     }
 
 
-    fun updateTotalTimeAndScore(elapsedTime : Double, icon_time : IconTime, money : Money, icon_score: IconScore ) {
+    fun updateTotalTime(elapsedTime : Double, icon_time : IconTime, money : Money, icon_score: IconScore, damier : Damier) {
         // Calcule le temps restant et le met à jour sur l'icone timer tant que celui-ci est positif
         totalTime -= elapsedTime / 1000.0
         if (totalTime < 0) {
@@ -78,7 +78,7 @@ class GameManager {
             oneSec = 1.0
         }
         if (ScoreTime < 0) {
-            updateTotalScore(icon_score)
+            updateTotalScore(icon_score, damier)
             ScoreTime = 1.0
         }
     }

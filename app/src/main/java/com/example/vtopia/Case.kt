@@ -48,13 +48,15 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
     }
 
     fun bruleCase(bool : Boolean) {
-        //damier.cases[1][1].state = false
-            state = bool
+        if (true)
+            state = false
+            changeType("feu")
     }
 
-    fun changeType(_type : String) {
+    fun changeType(newtype : String) {
         // Change le type de la case si celle-ci est affichée
-        if (state) type = _type
+        if (state)
+            type = newtype
 
     }
 }
