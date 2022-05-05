@@ -38,13 +38,15 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
+        snake.updatePos(airplane)
         for (i in 1..10) clouds.add(Cloud(random.nextFloat()*screenWidth*0.9f, random.nextFloat()*screenHeight*0.9f,75f))
     }
 
 
     override fun run() {
         while (drawing) {
-            for (elem in snake.chain) elem.bouge(lesParois)
+            airplane.bouge(lesParois)
+            snake.update(clouds, airplane)
             draw()
         }
     }
@@ -66,7 +68,7 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
             canvas.drawRect(0F, 0F, canvas.getWidth()*1F, canvas.getHeight()*1F, backgroundPaint) // Fond d'écran
             for (cloud in clouds) {
                 if (RectF.intersects(airplane.r, cloud.r)) {
-                    snake.ellongate(cloud, airplane, lesParois)
+                    snake.ellongate(cloud, airplane)
                     clouds.remove(cloud)
                     break
                 }
