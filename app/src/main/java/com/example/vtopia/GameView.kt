@@ -16,12 +16,14 @@ import android.view.SurfaceView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
+import java.util.*
 import kotlin.math.pow
 
 class GameView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), Runnable, Animation {
 
     lateinit var thread: Thread
     lateinit var canvas: Canvas
+    var random = Random()
     /*
     La classe Canvas contient les appels "draw". Pour dessiner quelque chose, vous avez besoin de 4 composants de base :
     Un bitmap pour contenir les pixels, un canevas pour accueillir les appels de dessin (écriture dans le bitmap),
@@ -44,6 +46,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     // Création du damier et des icones
     private var game = GameManager()
     private var damier = Damier(context, screenWidth, screenHeight, n)
+    var clouds = ArrayList<Cloud>(5)
     private var squares = arrayOf(
         BtnCase(screenWidth/6,screenHeight-200F,150F,150F,context,"désert",damier),
         BtnCase(2*screenWidth/6,screenHeight-200F,150F,150F,context,"culture",damier),
@@ -59,6 +62,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
+        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.9f, random.nextFloat()*screenHeight*0.9f,100f))
     }
 
     override fun run() {
@@ -84,6 +88,9 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
             canvas = holder.lockCanvas()
             // Affichage des éléments
             canvas.drawRect(0F, 0F, canvas.getWidth()*1F, canvas.getHeight()*1F, backgroundPaint) // Fond d'écran
+            for (cloud in clouds) {
+                cloud.draw(canvas)
+            }
             for (ligne in damier.cases) {
                 for (case in ligne) case.draw(canvas)
             }

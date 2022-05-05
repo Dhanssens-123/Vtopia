@@ -21,4 +21,8 @@ interface Animation {
     fun blink(txt: String,newtxt: String, flag: Int) : String {
         return if ((flag % 20) < 10) newtxt else txt
     }
+
+    fun vibrate(cloud: Cloud, vx : Float, vy : Float) {
+        cloud.r.offset(vx, vy)
+    }
 }

@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
+import java.util.*
 
 open class Aerial (_x: Float, _y: Float, _diametre : Float) {
     var x = _x
@@ -13,6 +14,7 @@ open class Aerial (_x: Float, _y: Float, _diametre : Float) {
     var diametre = if(_diametre < 100F) _diametre else 100F
     var r = RectF(x - diametre/2, y - diametre/2, x + diametre/2, y + diametre/2)
     val paint = Paint()
+    val random = Random()
 
     open fun draw(canvas: Canvas?) {
         canvas?.drawOval(r, paint)
@@ -29,7 +31,7 @@ open class Aerial (_x: Float, _y: Float, _diametre : Float) {
     }
 
     fun bouge(lesParois : Array<Parois>) {
-        r.offset(10.0F*dx, 10.0F*dy)
+        r.offset(5.0F*dx, 5.0F*dy)
         for (p in lesParois) {
             p.gereBalle(this)
         }
