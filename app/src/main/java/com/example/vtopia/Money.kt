@@ -33,6 +33,6 @@ class Money(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icon
     }
 
     fun getNbreBloc() : Int {
-        return getNbreBloc()
+        return nbreBloc
     }
 }
