@@ -1,12 +1,10 @@
 package com.example.vtopia
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.RectF
+import android.content.Context
+import android.graphics.*
 import java.util.*
 
-class Cloud (x: Float, y: Float, _diametre : Float) : Aerial(x,y,_diametre), Animation {
+class Cloud (x: Float, y: Float, _diametre : Float, context: Context) : Aerial(x,y,_diametre, context), Animation {
     var color = Color.argb(255,random.nextInt(255),255,255)
     var tempox = 100 + random.nextInt(200)
     var tempoy = 100 + random.nextInt(200)
@@ -14,6 +12,8 @@ class Cloud (x: Float, y: Float, _diametre : Float) : Aerial(x,y,_diametre), Ani
     var vy = random.nextFloat()
     var switchx = 0
     var switchy = 0
+
+    var sprite = BitmapFactory.decodeResource(context.resources, R.drawable.cloud)
 
     override fun vibrate(vx : Float, vy: Float) {
         this.r.offset(vx, vy)
@@ -29,7 +29,7 @@ class Cloud (x: Float, y: Float, _diametre : Float) : Aerial(x,y,_diametre), Ani
             vy = -vy
         }
         vibrate(vx,vy)
-        canvas?.drawOval(r, paint)
+        canvas?.drawBitmap(sprite, null, r, paint)
         paint.color = color
     }
 }

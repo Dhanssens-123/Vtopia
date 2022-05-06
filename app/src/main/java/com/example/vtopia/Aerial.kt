@@ -1,12 +1,13 @@
 package com.example.vtopia
 
+import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import java.util.*
 
-open class Aerial (_x: Float, _y: Float, _diametre : Float) {
+open class Aerial (_x: Float, _y: Float, _diametre : Float, context: Context) {
     protected var x = _x
     protected var y = _y
     protected var dx = 1

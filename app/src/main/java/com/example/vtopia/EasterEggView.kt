@@ -39,7 +39,7 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
         snake.updatePos(airplane)
-        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.95f, random.nextFloat()*screenHeight*0.95f,100f))
+        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.95f, random.nextFloat()*screenHeight*0.95f,100f, context))
     }
 
 
