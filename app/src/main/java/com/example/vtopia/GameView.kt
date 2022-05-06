@@ -63,7 +63,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
-        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.9f, random.nextFloat()*screenHeight*0.9f,100f))
+        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.9f, random.nextFloat()*screenHeight*0.9f,100f, context))
     }
 
     override fun run() {

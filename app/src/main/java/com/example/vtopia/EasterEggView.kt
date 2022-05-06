@@ -22,7 +22,7 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
     private var screenWidth = context.resources.displayMetrics.widthPixels.toFloat()
     private var screenHeight = context.resources.displayMetrics.heightPixels.toFloat()
 
-    private var airplane = AirPlane(screenWidth/2, screenHeight/2, 75f)
+    private var airplane = AirPlane(screenWidth/2, screenHeight/2, 75f, context)
     private var clouds = ArrayList<Cloud>(5)
     private var snake = Snake(airplane)
     private var lesParois = arrayOf(
