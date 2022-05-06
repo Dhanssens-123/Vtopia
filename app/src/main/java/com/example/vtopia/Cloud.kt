@@ -4,12 +4,12 @@ import android.content.Context
 import android.graphics.*
 import java.util.*
 
-class Cloud (x: Float, y: Float, _diametre : Float, context: Context) : Aerial(x,y,_diametre, context), Animation {
+class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aerial(x,y, w, h, context), Animation {
     var color = Color.argb(255,random.nextInt(255),255,255)
-    var tempox = 100 + random.nextInt(200)
-    var tempoy = 100 + random.nextInt(200)
-    var vx = random.nextFloat()
-    var vy = random.nextFloat()
+    var tempox = 200 + random.nextInt(200)
+    var tempoy = 200 + random.nextInt(200)
+    var vx = random.nextFloat()*1.5f
+    var vy = random.nextFloat()*1.5f
     var switchx = 0
     var switchy = 0
 
@@ -21,7 +21,7 @@ class Cloud (x: Float, y: Float, _diametre : Float, context: Context) : Aerial(x
 
     override fun draw(canvas: Canvas?) {
         switchx = (switchx + 1)%tempox
-        switchy = (switchx + 1)%tempoy
+        switchy = (switchy + 1)%tempoy
         if (switchx == tempox/2) {
             vx = -vx
         }

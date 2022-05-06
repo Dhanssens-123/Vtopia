@@ -22,7 +22,7 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
     private var screenWidth = context.resources.displayMetrics.widthPixels.toFloat()
     private var screenHeight = context.resources.displayMetrics.heightPixels.toFloat()
 
-    private var airplane = AirPlane(screenWidth/2, screenHeight/2, 75f, context)
+    private var airplane = AirPlane(screenWidth/2, screenHeight/2, 200f, 220f, context)
     private var clouds = ArrayList<Cloud>(5)
     private var snake = Snake(airplane)
     private var lesParois = arrayOf(
@@ -39,7 +39,7 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
         snake.updatePos(airplane)
-        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.95f, random.nextFloat()*screenHeight*0.95f,100f, context))
+        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.95f, random.nextFloat()*screenHeight*0.95f,140f, 70f, context))
     }
 
 

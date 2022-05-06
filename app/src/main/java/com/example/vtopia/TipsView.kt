@@ -27,11 +27,11 @@ class TipsView  @JvmOverloads constructor (context: Context, attributes: Attribu
     private var screenHeight = context.resources.displayMetrics.heightPixels.toFloat()
 
     private var clouds = ArrayList<Cloud>(5)
-    private var iconCity = IconCity(screenWidth/2,150F,500F,150F, context)
+    private var iconCity = IconCity(screenWidth/2,150F,600F,200F, context)
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
-        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.95f, random.nextFloat()*screenHeight*0.95f,100f, context))
+        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.95f, random.nextFloat()*screenHeight*0.95f,200f, 100f, context))
         iconCity.setCityName("")
     }
 

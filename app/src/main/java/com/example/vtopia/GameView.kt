@@ -57,13 +57,13 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     )
     private var money = Money(screenWidth/2, screenHeight-525F, 150F + 4*screenWidth/6, 100F, context)
     private var delta = Delta(screenWidth/2, screenHeight-375F,150F + 4*screenWidth/6, 100F, context)
-    private var iconCity = IconCity(screenWidth/2,150F,500F,150F, context)
+    private var iconCity = IconCity(screenWidth/2,150F,600F,200F, context)
     private var therm_score = IconScore(0.875F*screenWidth, 350F, 90F, 100F, context)
     private var time_score = IconTime(0.125F*screenWidth, 350F,90F,100F,context)
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
-        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.9f, random.nextFloat()*screenHeight*0.9f,100f, context))
+        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.9f, random.nextFloat()*screenHeight*0.9f,200f, 100f, context))
     }
 
     override fun run() {
