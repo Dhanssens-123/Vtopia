@@ -7,14 +7,14 @@ import android.graphics.RectF
 import java.util.*
 
 open class Aerial (_x: Float, _y: Float, _diametre : Float) {
-    var x = _x
-    var y = _y
-    var dx = 1
-    var dy = 1
-    var diametre = if(_diametre < 100F) _diametre else 100F
-    var r = RectF(x - diametre/2, y - diametre/2, x + diametre/2, y + diametre/2)
-    val paint = Paint()
-    val random = Random()
+    protected var x = _x
+    protected var y = _y
+    protected var dx = 1
+    protected var dy = 1
+    protected var diametre = if(_diametre < 100F) _diametre else 100F
+    protected var r = RectF(x - diametre/2, y - diametre/2, x + diametre/2, y + diametre/2)
+    protected val paint = Paint()
+    protected val random = Random()
 
     open fun draw(canvas: Canvas?) {
         canvas?.drawOval(r, paint)
@@ -35,5 +35,9 @@ open class Aerial (_x: Float, _y: Float, _diametre : Float) {
         for (p in lesParois) {
             p.gereBalle(this)
         }
+    }
+
+    fun getRect() : RectF {
+        return r
     }
 }

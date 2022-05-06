@@ -6,7 +6,7 @@ import android.graphics.*
 class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h,context), Animation {
 
     // Contient le score à afficher sur l'écran, initialement nul et contrôlé par le GameManager
-    val sprite = mapOf<String, Bitmap>(
+    private val sprite = mapOf<String, Bitmap>(
         "yellow" to BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow),
         "blue" to BitmapFactory.decodeResource(context.resources, R.drawable.square_blue)
     )
@@ -14,7 +14,7 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
     private val r1 = RectF(r.left, r.top, r.right - step*w, r.bottom)
     private val r2 = RectF((1.1f-step)*w + r.left, r.top, r.right, r.bottom)
     private var switch = 0
-    lateinit var cityName : String
+    private var cityName = ""
 
     override fun draw(canvas: Canvas?) {
         var sprite_string = "yellow"
@@ -30,5 +30,9 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
         // Gère l'affichage du score
         var offSet = paint2.measureText(text)
         canvas?.drawText(text,x - offSet/2 - step/2*w, y + paint2.textSize/3, paint2)
+    }
+
+    fun setCityName(name : String) {
+        cityName = name
     }
 }

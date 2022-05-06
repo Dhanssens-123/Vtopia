@@ -11,10 +11,13 @@ abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float, context: Conte
     protected var y = _y
     protected var w = _w
     protected var h = _h
-    var r = RectF(x - w/2, y - h/2, x + w/2, y + h/2)
+    protected var r = RectF(x - w/2, y - h/2, x + w/2, y + h/2)
     protected val paint = Paint()
     protected var paint2 = Paint()
 
     abstract fun draw(canvas: Canvas?)
 
+    fun getRect() : RectF {
+        return r
+    }
 }

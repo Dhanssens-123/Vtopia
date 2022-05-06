@@ -15,6 +15,10 @@ class Cloud (x: Float, y: Float, _diametre : Float) : Aerial(x,y,_diametre), Ani
     var switchx = 0
     var switchy = 0
 
+    override fun vibrate(vx : Float, vy: Float) {
+        this.r.offset(vx, vy)
+    }
+
     override fun draw(canvas: Canvas?) {
         switchx = (switchx + 1)%tempox
         switchy = (switchx + 1)%tempoy
@@ -24,7 +28,7 @@ class Cloud (x: Float, y: Float, _diametre : Float) : Aerial(x,y,_diametre), Ani
         if (switchy == tempoy/2) {
             vy = -vy
         }
-        vibrate(this, vx,vy)
+        vibrate(vx,vy)
         canvas?.drawOval(r, paint)
         paint.color = color
     }

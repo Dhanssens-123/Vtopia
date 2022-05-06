@@ -7,7 +7,7 @@ import android.graphics.RectF
 import java.util.*
 
 class AirPlane (x: Float, y: Float, _diametre : Float) : Aerial(x,y,_diametre) {
-    var color = Color.argb(255,255,0,0)
+    private var color = Color.argb(255,255,0,0)
 
     init {
         if (random.nextDouble() > 0.5) dx = 1 else dx = -1

@@ -14,25 +14,25 @@ import java.util.*
 
 class EasterEggView @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), Runnable {
 
-    val backgroundPaint = Paint()
-    var random = Random()
+    private val backgroundPaint = Paint()
+    private var random = Random()
 
     // Prend les dimensions de la drawingView ( != dimensions de l'écran total)
     private val displayMetrics = DisplayMetrics()
     private var screenWidth = context.resources.displayMetrics.widthPixels.toFloat()
     private var screenHeight = context.resources.displayMetrics.heightPixels.toFloat()
 
-    var airplane = AirPlane(screenWidth/2, screenHeight/2, 75f)
-    var clouds = ArrayList<Cloud>(5)
-    var snake = Snake(airplane)
-    var lesParois = arrayOf(
+    private var airplane = AirPlane(screenWidth/2, screenHeight/2, 75f)
+    private var clouds = ArrayList<Cloud>(5)
+    private var snake = Snake(airplane)
+    private var lesParois = arrayOf(
         Parois(0f, 0f, 25f, screenHeight),
         Parois(0f, 0f, screenWidth, 25f),
         Parois(0f, screenHeight - 25f, screenWidth, screenHeight),
         Parois(screenWidth - 25f, 0f, screenWidth, screenHeight)
     )
 
-    var drawing: Boolean = true
+    private var drawing: Boolean = true
     lateinit var canvas: Canvas
     lateinit var thread: Thread
 
@@ -67,13 +67,13 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
             canvas = holder.lockCanvas()
             canvas.drawRect(0F, 0F, canvas.getWidth()*1F, canvas.getHeight()*1F, backgroundPaint) // Fond d'écran
             for (cloud in clouds) {
-                if (RectF.intersects(airplane.r, cloud.r)) {
+                if (RectF.intersects(airplane.getRect(), cloud.getRect())) {
                     snake.ellongate(cloud, airplane)
                     clouds.remove(cloud)
                     break
                 }
             }
-            for (elem in snake.chain) elem.draw(canvas)
+            for (elem in snake.getSnake()) elem.draw(canvas)
             for (cloud in clouds) {
                 cloud.draw(canvas)
             }

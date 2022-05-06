@@ -1,34 +1,34 @@
 package com.example.vtopia
 
 class Snake(cockpit: AirPlane) {
-    var chain = mutableListOf<Aerial>(cockpit)
-    var xCockpit = mutableListOf<Float>()
-    var yCockpit = mutableListOf<Float>()
-    var xChain = mutableListOf<Float>()
-    var yChain = mutableListOf<Float>()
+    private var chain = mutableListOf<Aerial>(cockpit)
+    private var xCockpit = mutableListOf<Float>()
+    private var yCockpit = mutableListOf<Float>()
+    private var xChain = mutableListOf<Float>()
+    private var yChain = mutableListOf<Float>()
 
     fun ellongate(cloud: Cloud, cockpit: AirPlane) {
         updatePos(cockpit)
         xChain.add(xCockpit[20*chain.size])
         yChain.add(yCockpit[20*chain.size])
-        cloud.r.offsetTo(xChain.last(),yChain.last())
+        cloud.getRect().offsetTo(xChain.last(),yChain.last())
         chain.add(cloud)
     }
 
     fun update(clouds : ArrayList<Cloud>, cockpit: AirPlane) {
-        slide(xCockpit, cockpit.r.left)
-        slide(yCockpit, cockpit.r.top)
+        slide(xCockpit, cockpit.getRect().left)
+        slide(yCockpit, cockpit.getRect().top)
         if (chain.size > 1) {
             for (i in 0 until xChain.size) xChain[i] = xCockpit[20 * (i + 1)]
             for (i in 0 until yChain.size) yChain[i] = yCockpit[20 * (i + 1)]
-            for (i in 1 until chain.size) chain[i].r.offsetTo(xChain[i-1], yChain[i-1])
+            for (i in 1 until chain.size) chain[i].getRect().offsetTo(xChain[i-1], yChain[i-1])
         }
     }
 
     fun updatePos(cockpit: AirPlane) {
         for (i in 1..20) {
-            xCockpit.add(chain.last().r.left)
-            yCockpit.add(chain.last().r.top)
+            xCockpit.add(chain.last().getRect().left)
+            yCockpit.add(chain.last().getRect().top)
         }
     }
 
@@ -36,5 +36,9 @@ class Snake(cockpit: AirPlane) {
         val copylst = lst.toTypedArray()
         for (i in 1 until lst.size) lst[i] = copylst[i-1]
         lst[0] = x
+    }
+
+    fun getSnake() : MutableList<Aerial> {
+        return chain
     }
 }

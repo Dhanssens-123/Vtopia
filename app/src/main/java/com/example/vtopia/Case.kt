@@ -6,9 +6,9 @@ import android.graphics.*
 
 class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, context: Context) {
 
-    var type = _type
-    var bord = _bord
-    var state = false // Etat d'affichage de la case
+    private var type = _type
+    private var bord = _bord
+    private var state = false // Etat d'affichage de la case
 
     // Attribue une image et un bord à chaque type de case
     val spriteSet = mapOf<String, Bitmap>(
@@ -57,6 +57,21 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
         // Change le type de la case si celle-ci est affichée
         if (state)
             type = newtype
+    }
 
+    fun getType() : String {
+        return type
+    }
+
+    fun setType(newType : String) {
+        type = newType
+    }
+
+    fun setVisible(visible : Boolean){
+        state = visible
+    }
+
+    fun setBord(int : Int) {
+        bord = int
     }
 }

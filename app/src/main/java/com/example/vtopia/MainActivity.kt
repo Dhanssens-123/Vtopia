@@ -23,12 +23,12 @@ class MainActivity : AppCompatActivity() {
         val level = intent.getIntExtra("level",0)
         var cityName = intent.getStringExtra("cityName")
         if (cityName == "")  cityName = "En manque d'inspi ?"
-        gameView.iconCity.cityName = cityName!!
+        gameView.setCityName(cityName!!)
     }
 
     fun gameOnOff(v: View) {
         // Met l'activité gameView en pause
-        if (gameView.drawing) {
+        if (gameView.isDrawing()) {
             gameView.pause()
             play_pause.setImageResource(R.drawable.play)
         }
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     fun soundOnOff(v: View) {
         // Met également l'activité gameView en pause
-        if (gameView.drawing) {
+        if (gameView.isDrawing()) {
             gameView.pause()
             param.setImageResource(R.drawable.sound_on)
         }

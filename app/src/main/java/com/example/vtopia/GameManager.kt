@@ -22,9 +22,9 @@ class GameManager {
     private var oneSec = 1.0
     private var ScoreTime = 1.0
     private var level = 0
-    var TotalScore = 0
+    private var TotalScore = 0
     private var deltaScore = 0
-    var gameOver = false // Partie en cours
+    private var gameOver = false // Partie en cours
     private val random = Random
 
     fun updateDeltaScore(damier: Damier, icon_score : IconScore, delta : Delta) {
@@ -32,21 +32,21 @@ class GameManager {
 
         // Modification des valeurs pour chaque type selon les différentes combinaisons de types de case à l'écran
         deltaScore = 0
-        if (damier.dataSet["industrie"]!! > damier.dataSet["forêt"]!!)
+        if (damier.getDataSet()["industrie"]!! > damier.getDataSet()["forêt"]!!)
             dataValueSet["industrie"] = -5
         else
             dataValueSet["industrie"] = 5
             //bruleCase(damier, damier.cases[2][3])
 
-        if (damier.dataSet["habitat"]!! > damier.dataSet["industrie"]!! +1 )
+        if (damier.getDataSet()["habitat"]!! > damier.getDataSet()["industrie"]!! +1 )
             dataValueSet["habitat"] = -2
         else dataValueSet["habitat"] = 2
 
-        if (damier.dataSet["culture"]!! > 6 )
+        if (damier.getDataSet()["culture"]!! > 6 )
             dataValueSet["culture"] = 1
         else dataValueSet["culture"] = 5
 
-        for ((key, value) in damier.dataSet) {
+        for ((key, value) in damier.getDataSet()) {
             deltaScore += value * dataValueSet[key]!!
         }
 
@@ -58,7 +58,7 @@ class GameManager {
     fun updateTotalScore(icon_score: IconScore, damier: Damier) {
         TotalScore += deltaScore
         icon_score.changeScore(TotalScore)
-        damier.cases[random.nextInt(3)][random.nextInt(3)].bruleCase(true)
+        damier.getCases()[random.nextInt(3)][random.nextInt(3)].bruleCase(true)
     }
 
 
@@ -93,5 +93,13 @@ class GameManager {
         ScoreTime = 1.0
         gameOver = false
         deltaScore = 0
+    }
+
+    fun getGameOverState() : Boolean {
+        return gameOver
+    }
+
+    fun getTotalScore() : Int {
+        return TotalScore
     }
 }

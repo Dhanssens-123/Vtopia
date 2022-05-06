@@ -5,7 +5,7 @@ import android.graphics.*
 
 class BtnCase(x: Float, y: Float, w: Float, h: Float, context: Context, _type: String, _damier: Damier) : Icone(x,y,w,h,context) {
 
-    val type = _type
+    private val type = _type
     private val damier = _damier
     private var isClicked = false
 
@@ -22,7 +22,7 @@ class BtnCase(x: Float, y: Float, w: Float, h: Float, context: Context, _type: S
         paint2.textSize = w/2
         paint2.isFakeBoldText = true
         paint2.color = Color.argb(255,52,73,94)
-        var text = "${damier.dataSet[type]}"
+        var text = "${damier.getDataSet()[type]}"
         var offSet = paint2.measureText(text)
         canvas?.drawBitmap(spriteSet[type]!!, null, r, paint)
         canvas?.drawBitmap(spriteSet["bord"]!!, null, r, paint)
@@ -38,5 +38,9 @@ class BtnCase(x: Float, y: Float, w: Float, h: Float, context: Context, _type: S
 
     fun reinit() {
         r = RectF(x - w/2, y - h/2, x + w/2, y + h/2)
+    }
+
+    fun getType() : String {
+        return type
     }
 }

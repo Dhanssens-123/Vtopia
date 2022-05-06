@@ -16,6 +16,7 @@ import android.view.SurfaceView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
+import kotlinx.android.synthetic.main.activity_welcome_screen.view.*
 import java.util.*
 import kotlin.math.pow
 
@@ -23,7 +24,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
 
     lateinit var thread: Thread
     lateinit var canvas: Canvas
-    var random = Random()
+    private var random = Random()
     /*
     La classe Canvas contient les appels "draw". Pour dessiner quelque chose, vous avez besoin de 4 composants de base :
     Un bitmap pour contenir les pixels, un canevas pour accueillir les appels de dessin (écriture dans le bitmap),
@@ -32,7 +33,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     private val activity = context as FragmentActivity
 
     private val backgroundPaint = Paint() // Couleur de fond d'écran
-    var drawing: Boolean = true // Gère ou non la màj de l'affichage
+    private var drawing: Boolean = true // Gère ou non la màj de l'affichage
 
     // Prend les dimensions de la drawingView ( != dimensions de l'écran total)
     private val displayMetrics = DisplayMetrics()
@@ -46,7 +47,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     // Création du damier et des icones
     private var game = GameManager()
     private var damier = Damier(context, screenWidth, screenHeight, n)
-    var clouds = ArrayList<Cloud>(5)
+    private var clouds = ArrayList<Cloud>(5)
     private var squares = arrayOf(
         BtnCase(screenWidth/6,screenHeight-200F,150F,150F,context,"désert",damier),
         BtnCase(2*screenWidth/6,screenHeight-200F,150F,150F,context,"culture",damier),
@@ -56,7 +57,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     )
     private var money = Money(screenWidth/2, screenHeight-525F, 150F + 4*screenWidth/6, 100F, context)
     private var delta = Delta(screenWidth/2, screenHeight-375F,150F + 4*screenWidth/6, 100F, context)
-    var iconCity = IconCity(screenWidth/2,150F,500F,150F, context)
+    private var iconCity = IconCity(screenWidth/2,150F,500F,150F, context)
     private var therm_score = IconScore(0.875F*screenWidth, 350F, 90F, 100F, context)
     private var time_score = IconTime(0.125F*screenWidth, 350F,90F,100F,context)
 
@@ -91,7 +92,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
             for (cloud in clouds) {
                 cloud.draw(canvas)
             }
-            for (ligne in damier.cases) {
+            for (ligne in damier.getCases()) {
                 for (case in ligne) case.draw(canvas)
             }
             for (elem in squares) {
@@ -107,7 +108,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     }
 
     fun checkGameOver() {
-        if (game.gameOver) {
+        if (game.getGameOverState()) {
             // Cesse la mise à jour du jeu et de l'affichage
             drawing = false
             // Affiche les scores et propose de relancer la partie
@@ -142,7 +143,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
                 // Récupère les coordonnées du click sur l'écran et vérifie la correspondance
                 val x = event.rawX
                 val y = event.rawY - 75
-                checkClick(squares, damier.cases, x, y)
+                checkClick(squares, damier.getCases(), x, y)
             }
         }
         return true
@@ -153,7 +154,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         // Si une case est clickée, changement de son état
         for (ligne in cases) {
             for (case in ligne) {
-                if (case.r.contains(x,y) && flag && money.nbreBloc >= 2) {
+                if (case.r.contains(x,y) && flag && money.getNbreBloc() >= 2) {
                     case.changeType(type)
                     money.updateBloc(-2)
                     flag = false
@@ -161,10 +162,10 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
             }
         }
         for (square in squares) {
-            if (square.r.contains(x,y) && flag) {
+            if (square.getRect().contains(x,y) && flag) {
                 // Si un des carré est clické, le met en avant et change le type actuel
                 grow(square, squares)
-                type = square.type // changeIconeType()
+                type = square.getType() // changeIconeType()
                 flag = false
             }
         }
@@ -179,7 +180,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
             override fun onCreateDialog(bundle: Bundle?): Dialog {
                 val builder = AlertDialog.Builder(activity)
                 builder.setTitle(resources.getString((messageId)))
-                builder.setMessage(resources.getString(R.string.results_format, game.TotalScore))
+                builder.setMessage(resources.getString(R.string.results_format, game.getTotalScore()))
                 builder.setPositiveButton(R.string.reset_game, DialogInterface.OnClickListener { _, _->newGame()})
                 return builder.create()
             }
@@ -198,5 +199,13 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
                 gameResult.show(ft,"dialog")
             }
         )
+    }
+
+    fun setCityName(name : String) {
+        iconCity.setCityName(name)
+    }
+
+    fun isDrawing() : Boolean {
+        return drawing
     }
 }
