@@ -5,7 +5,6 @@ import android.graphics.*
 import java.util.*
 
 class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aerial(x,y, w, h, context), Animation {
-    var color = Color.argb(255,random.nextInt(255),255,255)
     var tempox = 200 + random.nextInt(200)
     var tempoy = 200 + random.nextInt(200)
     var vx = random.nextFloat()*1.5f
@@ -30,6 +29,5 @@ class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aeria
         }
         vibrate(vx,vy)
         canvas?.drawBitmap(sprite, null, r, paint)
-        paint.color = color
     }
 }
