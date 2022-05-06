@@ -6,8 +6,12 @@ import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_welcome_screen.*
 
 class WelcomeScreen() : AppCompatActivity(), Parcelable {
@@ -18,6 +22,9 @@ class WelcomeScreen() : AppCompatActivity(), Parcelable {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome_screen)
+        var translate = AnimationUtils.loadAnimation(this, R.anim.translate)
+
+        airplane.startAnimation(translate)
     }
 
     fun newGame(view: View) {
