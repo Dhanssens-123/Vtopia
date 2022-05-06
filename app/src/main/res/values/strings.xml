@@ -9,4 +9,16 @@
     <string name="button">Button</string>
     <string name="new_game">NEW GAME</string>
     <string name="tips_ans_tricks">Tips ans Tricks</string>
+    <string name="rule">
+        Construisez l\'île de vos rêves !\n
+        \n
+        Chaque seconde, vous obtenez des ressources vous permettant
+        de construire sur une case spécfique de l\'île en choissant son type et ensuit l\'endroit sur l\'île
+        par un simple click.\n
+        \n
+        Un compteur s\'incrémente également chaque seconde ce qui permet d\'augmenter la valeur de votre île.
+        Attention à votre choix car un excès de certaines cases peuvent aussi vous pénaliser.\n
+        \n
+        Cherchez le meilleur équilibre. Bon jeu !
+    </string>
 </resources>

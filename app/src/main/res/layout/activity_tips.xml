@@ -6,13 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".Tips">
 
+    <com.example.vtopia.TipsView
+        android:id="@+id/vTips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView"
-        android:layout_width="523dp"
-        android:layout_height="209dp"
-        android:text="Ici, on mettrait un peu l'explication du jeu test 1 2 1 2 3"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@color/sea"
+        android:gravity="center_horizontal"
+        android:text="@string/rule"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintVertical_bias="0.498" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
