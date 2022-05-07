@@ -11,7 +11,7 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
     private var state = false // Etat d'affichage de la case
 
     // Attribue une image et un bord à chaque type de case
-    val spriteSet = mapOf<String, Bitmap>(
+    private val spriteSet = mapOf<String, Bitmap>(
         "forêt" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_green),
         "désert" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_yellow),
         "habitat" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_brown),
@@ -20,17 +20,17 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
         "feu" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_corail)
     )
 
-    val spriteBord = mapOf<String, Bitmap>(
+    private val spriteBord = mapOf<String, Bitmap>(
         "bord" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord),
         "bord_green" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord_green),
         "bord_red" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord_red)
     )
 
     // Définit les différents paramètres pour l'affichage via draw() du canvas.
-    var r = RectF(x - diametre/2, y - diametre/Math.sqrt(3.0).toFloat(), x + diametre/2, y + diametre/Math.sqrt(3.0).toFloat())
-    val paint = Paint()
-    var paint2 = Paint()
-    var color = Color.argb(0,255,255,255)
+    private var r = RectF(x - diametre/2, y - diametre/Math.sqrt(3.0).toFloat(), x + diametre/2, y + diametre/Math.sqrt(3.0).toFloat())
+    private val paint = Paint()
+    private var paint2 = Paint()
+    private var color = Color.argb(0,255,255,255)
 
     fun draw(canvas: Canvas?) {
         // Dessine la case
@@ -73,5 +73,9 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
 
     fun setBord(int : Int) {
         bord = int
+    }
+
+    fun getRect() : RectF {
+        return r
     }
 }

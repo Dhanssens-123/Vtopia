@@ -14,13 +14,13 @@ class Parois (x1: Float, y1: Float, x2: Float, y2: Float) {
         canvas.drawRect(r, paint)
     }
 
-    fun gereBalle(b: AirPlane) {
-        if (RectF.intersects(r, b.getRect())) {
+    fun gereAirPlane(airplane: AirPlane) {
+        if (RectF.intersects(r, airplane.getRect())) {
             if (r.width() > r.height()) {
-                b.changeDirection (true)
+                airplane.changeDirection (true)
             }
             else {
-                b.changeDirection(false)
+                airplane.changeDirection(false)
             }
         }
     }

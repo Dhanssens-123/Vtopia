@@ -2,6 +2,7 @@ package com.example.vtopia
 
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.RectF
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
@@ -22,7 +23,7 @@ interface Animation {
         return if ((flag % 20) < 10) newtxt else txt
     }
 
-    fun vibrate(vx : Float, vy : Float) {
+    fun vibrate(r : RectF, vx : Float, vy : Float) {
     }
 }
 

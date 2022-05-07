@@ -5,15 +5,15 @@ import android.graphics.*
 import java.util.*
 
 class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h,context), Animation {
-    var random = Random()
-    var band_bmp = flipImageVertically(BitmapFactory.decodeResource(context.resources, R.drawable.band))
-    var tempoy = 100
-    var tempo = 20
-    var vy = random.nextFloat()
-    var switchy = 0
+    private var random = Random()
+    private var band_bmp = flipImageVertically(BitmapFactory.decodeResource(context.resources, R.drawable.band))
+    private var tempoy = 100
+    private var tempo = 20
+    private var vy = random.nextFloat()
+    private var switchy = 0
 
     // Contient le score à afficher sur l'écran, initialement nul et contrôlé par le GameManager
-    var sprite = mutableMapOf<String, Bitmap>(
+    private var sprite = mutableMapOf<String, Bitmap>(
         "airplane" to BitmapFactory.decodeResource(context.resources, R.drawable.airplane),
         "band" to band_bmp
     )
@@ -23,8 +23,8 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
     private var switch = 0
     private var cityName = ""
 
-    override fun vibrate(vx : Float, vy: Float) {
-        this.r1.offset(vx, vy)
+    override fun vibrate(rect: RectF, vx : Float, vy: Float) {
+        rect.offset(vx, vy)
     }
 
     override fun draw(canvas: Canvas?) {
@@ -36,7 +36,7 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
         if (switch == tempo/2) {
             band_bmp = flipImageHorizontally(band_bmp)
         }
-        vibrate(0f,vy)
+        vibrate(r1,0f,vy)
         canvas?.drawBitmap(band_bmp, null, r1, paint)
         canvas?.drawBitmap(sprite["airplane"]!!, null, r2, paint)
         var flag = 0.75f*w

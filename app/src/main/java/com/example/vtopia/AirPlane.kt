@@ -4,9 +4,9 @@ import android.content.Context
 import android.graphics.*
 import java.util.*
 
-class AirPlane (x: Float, y: Float,  w : Float, h : Float, context: Context) : Aerial(x,y,w,h, context) {
+class AirPlane (x: Float, y: Float,  w : Float, h : Float, context: Context) : Aerial(x,y,w,h) {
     private var color = Color.argb(255,255,0,0)
-    var sprite = BitmapFactory.decodeResource(context.resources, R.drawable.airplane)
+    private var sprite = BitmapFactory.decodeResource(context.resources, R.drawable.airplane)
 
     init {
         if (random.nextDouble() > 0.5) dx = 1 else {
@@ -24,7 +24,7 @@ class AirPlane (x: Float, y: Float,  w : Float, h : Float, context: Context) : A
     fun bouge(lesParois : Array<Parois>) {
         r.offset(5.0F*dx, 5.0F*dy)
         for (p in lesParois) {
-            p.gereBalle(this)
+            p.gereAirPlane(this)
         }
     }
 

@@ -13,11 +13,11 @@ import java.util.*
 
 class TipsView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), Runnable {
 
-    val backgroundPaint = Paint()
-    val textPaint = Paint()
+    private val backgroundPaint = Paint()
+    private val textPaint = Paint()
     private var random = Random()
 
-    var drawing: Boolean = true
+    private var drawing: Boolean = true
     lateinit var canvas: Canvas
     lateinit var thread: Thread
 
