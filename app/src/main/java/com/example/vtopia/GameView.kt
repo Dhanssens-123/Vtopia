@@ -16,6 +16,7 @@ import android.view.SurfaceView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
+import com.example.vtopia.R.integer
 import kotlinx.android.synthetic.main.activity_welcome_screen.view.*
 import java.util.*
 import kotlin.math.pow
