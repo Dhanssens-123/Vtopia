@@ -157,7 +157,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         // Si une case est clickée, changement de son état
         for (ligne in cases) {
             for (case in ligne) {
-                if (case.getRect().contains(x,y) && flag && money.getNbreBloc() >= 2) {
+                if (case.isVisible() && case.getRect().contains(x,y) && flag && case.getType() != type && case.getType() != "feu" && money.getNbreBloc() >= 2) {
                     case.changeType(type)
                     money.updateBloc(-2)
                     flag = false

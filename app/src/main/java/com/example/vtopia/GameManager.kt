@@ -50,7 +50,6 @@ class GameManager {
             deltaScore += value * dataValueSet[key]!!
         }
 
-        println(deltaScore)
         delta.updateBloc(deltaScore)
 
     }
@@ -58,7 +57,10 @@ class GameManager {
     fun updateTotalScore(icon_score: IconScore, damier: Damier) {
         TotalScore += deltaScore
         icon_score.changeScore(TotalScore)
-        damier.getCases()[random.nextInt(3)][random.nextInt(3)].bruleCase(true)
+        if (TotalScore < 0 && random.nextInt(2) == 1) {
+            var case = damier.getCases()[random.nextInt(damier.getCases().size)][random.nextInt(damier.getCases().size)]
+            if (case.isVisible()) case.bruleCase()
+        }
     }
 
 

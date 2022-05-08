@@ -44,10 +44,8 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
         }
     }
 
-    fun bruleCase(bool : Boolean) {
-        if (true)
-            state = false
-            changeType("feu")
+    fun bruleCase() {
+        changeType("feu")
     }
 
     fun changeType(newtype : String) {
@@ -66,6 +64,10 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
 
     fun setVisible(visible : Boolean){
         state = visible
+    }
+
+    fun isVisible() : Boolean {
+        return state
     }
 
     fun setBord(int : Int) {
