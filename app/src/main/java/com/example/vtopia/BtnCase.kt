@@ -19,21 +19,14 @@ class BtnCase(x: Float, y: Float, w: Float, h: Float, context: Context, _type: S
     )
 
     override fun draw(canvas: Canvas?) {
-        paint2.textSize = w/2
-        paint2.isFakeBoldText = true
-        paint2.color = Color.argb(255,52,73,94)
+        paint.textSize = w/2
+        paint.isFakeBoldText = true
+        paint.color = Color.argb(255,52,73,94)
         var text = "${damier.getDataSet()[type]}"
-        var offSet = paint2.measureText(text)
+        var offSet = paint.measureText(text)
         canvas?.drawBitmap(spriteSet[type]!!, null, r, paint)
         canvas?.drawBitmap(spriteSet["bord"]!!, null, r, paint)
-        canvas?.drawText(text,x-offSet/2,y+paint2.textSize/3,paint2)
-    }
-
-    fun changeRect(a : Int) {
-        var add = a.toFloat()
-        var w2 = w + add
-        var h2 = h + add
-        r = RectF(x - w2 / 2, y - h2 / 2, x + w2 / 2, y + h2 / 2)
+        canvas?.drawText(text,x-offSet/2,y+paint.textSize/3,paint)
     }
 
     fun reinit() {

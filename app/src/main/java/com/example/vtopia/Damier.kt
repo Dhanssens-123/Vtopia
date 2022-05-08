@@ -29,12 +29,17 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
     )
 
     // Fixe le diamètre du damier et les positions de chaque case pour la création du tableau de cases
-    private var diam = 0.85F * weigth/n
-    private var posx = Array<Array<Float>>(n, {i -> Array(n, {j -> (weigth/2 - n/2*diam) + j*diam + diam/2*(i%2)})})
-    private var posy = Array(n, {i -> (height/2 - n/2*3*diam/(2*Math.sqrt(3.0).toFloat())) + i*3*diam/(2*Math.sqrt(3.0).toFloat())})
-    private var cases = Array<Array<Case>>(n, {i -> Array(n, {j -> Case(posx[i][j],posy[i],diam,"désert",0,context)})})
+    private val diamx = 0.85F * weigth/n
+    private val diamy = 3*diamx/(2*Math.sqrt(3.0).toFloat())
+    private val posx = Array<Array<Float>>(n, {i -> Array(n, {j -> (weigth/2 - n/2*diamx) + j*diamx + diamx/2*(i%2)})})
+    private val posy = Array(n, {i -> (height/2 - n/2*diamy + i*diamy)})
+    private val cases = Array<Array<Case>>(n, {i -> Array(n, {j -> Case(posx[i][j],posy[i],diamx,"désert",0,context)})})
 
-    fun changeDataSet() {
+    init {
+        setDamier(n)
+    }
+
+    fun updateDataSet() {
         // Màj du nombre de cases attribuées à chacun des types
         resetDataSet()
         for (ligne in cases) {

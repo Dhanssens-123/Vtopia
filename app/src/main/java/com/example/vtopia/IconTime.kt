@@ -6,7 +6,7 @@ import android.graphics.Color
 import android.graphics.RectF
 import android.util.TypedValue
 
-class IconTime(_x: Float, _y: Float, _w: Float, _h: Float) : Icone(_x,_y,_w,_h), Animation {
+class IconTime(_x: Float, _y: Float, _w: Float, _h: Float) : Icone(_x,_y,_w,_h), Animable {
 
     // Contient le timer à afficher sur l'écran contrôlé par le GameManager
     private var time = 0.0

@@ -7,12 +7,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 
-interface Animation {
-
-    fun bounce(obj : ImageButton) {
-        var bounce = AnimationUtils.loadAnimation(null, R.anim.bounce)
-        obj.startAnimation(bounce)
-    }
+interface Animable {
 
     fun blink(txt: String, newtxt: String, flag: Int) : String
 

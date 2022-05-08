@@ -1,10 +1,7 @@
 package com.example.vtopia
 
 import android.content.Context
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.RectF
+import android.graphics.*
 import android.widget.Toast
 import kotlin.coroutines.coroutineContext
 
@@ -17,8 +14,17 @@ class Money(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icon
     private var nbreBloc = 5
     private var lgrBloc = w / NBRE_BLOC_TOTAL
 
+    init {
+        changeRectSize(rStroke, 10f,10f)
+        paintStroke.color = Color.argb(255,52,73,94)
+        paintStroke.style = Paint.Style.STROKE
+        paintStroke.strokeWidth = 20f
+    }
+
     override fun draw(canvas: Canvas?) {
-        canvas?.drawBitmap(sprite1,null, r, paint)
+
+        canvas?.drawRoundRect(rStroke,10f,10f,paintStroke)
+
         var bloc = RectF(x - w/2, y - h/2, x - w/2 + lgrBloc, y + h/2)
         for (i in 0 until nbreBloc) {
             canvas?.drawBitmap(sprite2,null, bloc, paint)

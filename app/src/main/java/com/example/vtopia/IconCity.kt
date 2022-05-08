@@ -4,7 +4,8 @@ import android.content.Context
 import android.graphics.*
 import java.util.*
 
-class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h), Animation {
+class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h), Animable {
+
     private var random = Random()
     private var band_bmp = flipImageVertically(BitmapFactory.decodeResource(context.resources, R.drawable.band))
     private var tempoy = 100
@@ -37,12 +38,12 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
         canvas?.drawBitmap(sprite["airplane"]!!, null, r2, paint)
         var flag = 0.75f*w
         var text = "$cityName"
-        paint2.textSize = if(1.5F*w/text.length < flag/4F) flag/text.length else flag/6F // Détermination empirique
-        paint2.isFakeBoldText = true
-        paint2.color = Color.argb(255,52,73,94)
+        paint.textSize = if(1.5F*w/text.length < flag/4F) flag/text.length else flag/6F // Détermination empirique
+        paint.isFakeBoldText = true
+        paint.color = Color.argb(255,52,73,94)
         // Gère l'affichage du score
-        var offSet = paint2.measureText(text)
-        canvas?.drawText(text,r1.left + w/2 - offSet/2 - step/2*w, r1.top + h/2 + paint2.textSize/3, paint2)
+        var offSet = paint.measureText(text)
+        canvas?.drawText(text,r1.left + w/2 - offSet/2 - step/2*w, r1.top + h/2 + paint.textSize/3, paint)
     }
 
     fun setCityName(name : String) {

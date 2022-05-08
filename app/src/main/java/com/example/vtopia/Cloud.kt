@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.*
 import java.util.*
 
-class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aerial(x,y, w, h), Animation {
+class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aerial(x,y, w, h), Animable {
 
     private var color = Color.argb(255,random.nextInt(255),255,255)
     private var tempox = 200 + random.nextInt(200)

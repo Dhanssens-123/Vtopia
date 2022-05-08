@@ -10,11 +10,11 @@ class Snake(cockpit: AirPlane) {
     private var STEP = 20
 
     init {
-        this.updatePos(cockpit)
+        this.updatePos()
     }
 
-    fun ellongate(cloud: Cloud, cockpit: AirPlane) {
-        updatePos(cockpit)
+    fun ellongate(cloud: Cloud) {
+        updatePos()
         xChain.add(xCockpit[STEP*chain.size])
         yChain.add(yCockpit[STEP*chain.size])
         cloud.getRect().offsetTo(xChain.last(),yChain.last())
@@ -27,11 +27,11 @@ class Snake(cockpit: AirPlane) {
         if (chain.size > 1) {
             for (i in 0 until xChain.size) xChain[i] = xCockpit[STEP * (i + 1)]
             for (i in 0 until yChain.size) yChain[i] = yCockpit[STEP * (i + 1)]
-            for (i in 1 until chain.size) chain[i].getRect().offsetTo(xChain[i-1], yChain[i-1])
+            for (i in 1 until chain.size) chain[i].getRect().offsetTo(xChain[i-1],yChain[i-1])
         }
     }
 
-    fun updatePos(cockpit: AirPlane) {
+    fun updatePos() {
         for (i in 1..STEP) {
             xCockpit.add(chain.last().getRect().left)
             yCockpit.add(chain.last().getRect().top)

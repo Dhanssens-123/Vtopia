@@ -68,7 +68,6 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         backgroundPaint.color = Color.argb(255,93,173,226)
         for (i in 1..NBRE_CLOUDS) clouds.add(Cloud(w/20 + random.nextFloat()*9/10*w,
             w/20 + random.nextFloat()*9/10*h,w/6, w/12, context))
-        damier.setDamier(DIAM_DAMIER)
     }
 
     override fun run() {
@@ -79,7 +78,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
             var elapsedTimeMS = (currentTime - previousFrameTime).toDouble()
             // Màj du jeu et de l'affichage
             game.updateTotalTime(elapsedTimeMS, time_score, money, therm_score, damier)
-            damier.changeDataSet()
+            damier.updateDataSet()
             game.updateDeltaScore(damier, therm_score, delta)
             //game.bruleCase(damier, damier.cases)
             draw()
@@ -177,7 +176,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
 
     fun grow(square: BtnCase, squares: Array<BtnCase>) {
         for (s in squares) s.reinit()
-        square.changeRect(25)
+        square.changeRectSize(square.getRect(), 25f, 25f)
     }
 
     fun showGameOverDialog(messageId: Int) {

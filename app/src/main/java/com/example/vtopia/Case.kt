@@ -29,12 +29,9 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
     // Définit les différents paramètres pour l'affichage via draw() du canvas.
     private var r = RectF(x - diametre/2, y - diametre/Math.sqrt(3.0).toFloat(), x + diametre/2, y + diametre/Math.sqrt(3.0).toFloat())
     private val paint = Paint()
-    private var paint2 = Paint()
-    private var color = Color.argb(0,255,255,255)
 
     fun draw(canvas: Canvas?) {
         // Dessine la case
-        paint2.color = color
         if (state) {
             canvas?.drawBitmap(spriteSet[type]!!, null, r, paint)
             if (bord == 0) {

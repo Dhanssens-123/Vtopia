@@ -68,7 +68,7 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
             canvas.drawRect(0F, 0F, w*1f, h*1f, backgroundPaint) // Fond d'écran
             for (cloud in clouds) {
                 if (RectF.intersects(airplane.getRect(), cloud.getRect())) {
-                    snake.ellongate(cloud, airplane)
+                    snake.ellongate(cloud)
                     clouds.remove(cloud)
                     break
                 }

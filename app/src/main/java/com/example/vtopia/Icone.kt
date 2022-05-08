@@ -12,11 +12,21 @@ abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float) {
     protected var y = _y
     protected var w = _w
     protected var h = _h
+
     protected var r = RectF(x - w/2, y - h/2, x + w/2, y + h/2)
     protected val paint = Paint()
-    protected var paint2 = Paint()
+
+    protected var rStroke = r
+    protected var paintStroke = Paint()
 
     abstract fun draw(canvas: Canvas?) // Une méthode abstraite possède une signature mais pas de corps
+
+    fun changeRectSize(r: RectF, vx: Float, vy: Float) {
+        r.left -= vx
+        r.right += vx
+        r.top -= vy
+        r.bottom += vy
+    }
 
     fun getRect() : RectF {
         return r
