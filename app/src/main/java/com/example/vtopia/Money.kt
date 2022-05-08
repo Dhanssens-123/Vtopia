@@ -8,7 +8,7 @@ import android.graphics.RectF
 import android.widget.Toast
 import kotlin.coroutines.coroutineContext
 
-class Money(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h,context) {
+class Money(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h) {
 
     private var sprite1 = BitmapFactory.decodeResource(context.resources, R.drawable.square_corail)
     private var sprite2 = BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow)

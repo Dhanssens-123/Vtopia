@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.*
 import java.util.*
 
-class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h,context), Animation {
+class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h), Animation {
     private var random = Random()
     private var band_bmp = flipImageVertically(BitmapFactory.decodeResource(context.resources, R.drawable.band))
     private var tempoy = 100
@@ -22,10 +22,6 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
     private val r2 = RectF((1f-step)*w + r.left, r.top, r.right, r.bottom)
     private var switch = 0
     private var cityName = ""
-
-    override fun vibrate(rect: RectF, vx : Float, vy: Float) {
-        rect.offset(vx, vy)
-    }
 
     override fun draw(canvas: Canvas?) {
         switchy = (switchy + 1)%tempoy
@@ -63,5 +59,13 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
         var matrix = Matrix().apply { postScale(1f, -1f, bmp.width / 2f, bmp.height / 2f) }
         var newbmp = Bitmap.createBitmap(bmp, 0, 0, bmp.width, bmp.height, matrix, true)
         return newbmp
+    }
+
+    override fun vibrate(rect: RectF, vx : Float, vy: Float) {
+        rect.offset(vx, vy)
+    }
+
+    override fun blink(txt: String, newtxt: String, flag: Int): String {
+        TODO("Not yet implemented")
     }
 }

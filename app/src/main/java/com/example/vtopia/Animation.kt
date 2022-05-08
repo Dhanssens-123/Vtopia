@@ -14,17 +14,9 @@ interface Animation {
         obj.startAnimation(bounce)
     }
 
-    fun grow(square: BtnCase, squares: Array<BtnCase>) {
-        for (s in squares) s.reinit()
-        square.changeRect(25)
-    }
+    fun blink(txt: String, newtxt: String, flag: Int) : String
 
-    fun blink(txt: String, newtxt: String, flag: Int) : String {
-        return if ((flag % 20) < 10) newtxt else txt
-    }
-
-    fun vibrate(r : RectF, vx : Float, vy : Float) {
-    }
+    fun vibrate(r : RectF, vx : Float, vy : Float)
 }
 
 // Exemple liste d'éléments qui héritent pas tous de l'interface, on vérifie et on applique si ça hérite ---> Animation->Animable

@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_welcome_screen.view.*
 import java.util.*
 import kotlin.math.pow
 
-class GameView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), Runnable, Animation {
+class GameView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), Runnable {
 
     lateinit private var thread: Thread
     lateinit private var canvas: Canvas
@@ -61,8 +61,8 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     private val money = Money(w/2, 0.75f*h, 4*w/6, h/20, context)
     private val delta = Delta(w/2, 0.85f*h,4*w/6, h/20, context)
     private val iconCity = IconCity(w/2,h/14,w/2,h/10, context)
-    private val therm_score = IconScore(7*w/8, h/6, w/10, h/10, context)
-    private val time_score = IconTime(w/8, h/6,w/10,h/10,context)
+    private val therm_score = IconScore(7*w/8, h/6, w/10, h/10)
+    private val time_score = IconTime(w/8, h/6,w/10,h/10)
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
@@ -173,6 +173,11 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
                 flag = false
             }
         }
+    }
+
+    fun grow(square: BtnCase, squares: Array<BtnCase>) {
+        for (s in squares) s.reinit()
+        square.changeRect(25)
     }
 
     fun showGameOverDialog(messageId: Int) {

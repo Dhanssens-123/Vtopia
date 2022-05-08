@@ -3,7 +3,7 @@ package com.example.vtopia
 import android.content.Context
 import android.graphics.*
 
-class Delta(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h,context) {
+class Delta(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h) {
     private var sprite1 = BitmapFactory.decodeResource(context.resources, R.drawable.square_corail)
     private var sprite2 = BitmapFactory.decodeResource(context.resources, R.drawable.square_green)
     private val NBRE_BLOC_TOTAL = 10

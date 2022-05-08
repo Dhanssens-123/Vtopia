@@ -16,10 +16,6 @@ class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aeria
 
     private var sprite = BitmapFactory.decodeResource(context.resources, R.drawable.cloud).extractAlpha()
 
-    override fun vibrate(rect : RectF, vx : Float, vy: Float) {
-        rect.offset(vx, vy)
-    }
-
     override fun draw(canvas: Canvas?) {
         switchx = (switchx + 1)%tempox
         switchy = (switchy + 1)%tempoy
@@ -33,5 +29,13 @@ class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aeria
 
         paint.color = color
         canvas?.drawBitmap(sprite, null, r, paint)
+    }
+
+    override fun vibrate(rect : RectF, vx : Float, vy: Float) {
+        rect.offset(vx, vy)
+    }
+
+    override fun blink(txt: String, newtxt: String, flag: Int): String {
+        TODO("Not yet implemented")
     }
 }
