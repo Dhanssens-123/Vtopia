@@ -18,20 +18,22 @@ class TipsView  @JvmOverloads constructor (context: Context, attributes: Attribu
     private var random = Random()
 
     private var drawing: Boolean = true
-    lateinit var canvas: Canvas
-    lateinit var thread: Thread
+    lateinit private var canvas: Canvas
+    lateinit private var thread: Thread
 
     // Prend les dimensions de la drawingView ( != dimensions de l'écran total)
     private val displayMetrics = DisplayMetrics()
-    private var screenWidth = context.resources.displayMetrics.widthPixels.toFloat()
-    private var screenHeight = context.resources.displayMetrics.heightPixels.toFloat()
+    private var w = context.resources.displayMetrics.widthPixels.toFloat()
+    private var h = context.resources.displayMetrics.heightPixels.toFloat()
 
     private var clouds = ArrayList<Cloud>(5)
-    private var iconCity = IconCity(screenWidth/2,150F,600F,200F, context)
+    private var iconCity = IconCity(w/2,h/10,w/2,h/10, context)
+    private var NBRE_CLOUDS = 20
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
-        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.95f, random.nextFloat()*screenHeight*0.95f,200f, 100f, context))
+        for (i in 1..NBRE_CLOUDS) clouds.add(Cloud(w/20 + random.nextFloat()*9/10*w,
+            w/20 + random.nextFloat()*9/10*h,w/6, w/12, context))
         iconCity.setCityName("")
     }
 
@@ -55,8 +57,8 @@ class TipsView  @JvmOverloads constructor (context: Context, attributes: Attribu
     fun draw() {
         if (holder.surface.isValid) {
             canvas = holder.lockCanvas()
-            canvas.drawRect(0F, 0F, canvas.getWidth()*1F,
-                canvas.getHeight()*1F, backgroundPaint)
+            canvas.drawRect(0F, 0F, w,
+                h, backgroundPaint)
             for (cloud in clouds) {
                 cloud.draw(canvas)
             }

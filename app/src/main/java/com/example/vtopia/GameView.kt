@@ -22,9 +22,10 @@ import kotlin.math.pow
 
 class GameView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), Runnable, Animation {
 
-    lateinit var thread: Thread
-    lateinit var canvas: Canvas
-    private var random = Random()
+    lateinit private var thread: Thread
+    lateinit private var canvas: Canvas
+    private val random = Random()
+
     /*
     La classe Canvas contient les appels "draw". Pour dessiner quelque chose, vous avez besoin de 4 composants de base :
     Un bitmap pour contenir les pixels, un canevas pour accueillir les appels de dessin (écriture dans le bitmap),
@@ -37,37 +38,40 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
 
     // Prend les dimensions de la drawingView ( != dimensions de l'écran total)
     private val displayMetrics = DisplayMetrics()
-    private var screenWidth = context.resources.displayMetrics.widthPixels.toFloat()
-    private var screenHeight = context.resources.displayMetrics.heightPixels.toFloat()
+    private val w = context.resources.displayMetrics.widthPixels.toFloat()
+    private val h = context.resources.displayMetrics.heightPixels.toFloat()
+    private val hStatusBar = context.resources.getDimensionPixelSize(context.resources.getIdentifier("status_bar_height","dimen","android"))
 
-    private val n = 5 // Diamètre du damier (impair)
+    private val DIAM_DAMIER = 5 // Diamètre du damier (impair)
+    private val NBRE_CLOUDS = 20
 
     private var type = "désert" // Type de la case à placer
 
     // Création du damier et des icones
-    private var game = GameManager()
-    private var damier = Damier(context, screenWidth, screenHeight, n)
-    private var clouds = ArrayList<Cloud>(5)
-    private var squares = arrayOf(
-        BtnCase(screenWidth/6,screenHeight-200F,150F,150F,context,"désert",damier),
-        BtnCase(2*screenWidth/6,screenHeight-200F,150F,150F,context,"culture",damier),
-        BtnCase(3*screenWidth/6,screenHeight-200F,150F,150F,context,"habitat",damier),
-        BtnCase(4*screenWidth/6,screenHeight-200F,150F,150F, context,"industrie",damier),
-        BtnCase(5*screenWidth/6,screenHeight-200F,150F,150F, context, "forêt",damier)
+    private val game = GameManager()
+    private val damier = Damier(context, w, h, DIAM_DAMIER)
+    private val clouds = ArrayList<Cloud>()
+    private val squares = arrayOf(
+        BtnCase(w/6,0.95f*h,w/8,h/20,context,"désert",damier),
+        BtnCase(2*w/6,0.95f*h,w/8,h/20,context,"culture",damier),
+        BtnCase(3*w/6,0.95f*h,w/8,h/20,context,"habitat",damier),
+        BtnCase(4*w/6,0.95f*h,w/8,h/20, context,"industrie",damier),
+        BtnCase(5*w/6,0.95f*h,w/8,h/20, context, "forêt",damier)
     )
-    private var money = Money(screenWidth/2, screenHeight-525F, 150F + 4*screenWidth/6, 100F, context)
-    private var delta = Delta(screenWidth/2, screenHeight-375F,150F + 4*screenWidth/6, 100F, context)
-    private var iconCity = IconCity(screenWidth/2,150F,600F,200F, context)
-    private var therm_score = IconScore(0.875F*screenWidth, 350F, 90F, 100F, context)
-    private var time_score = IconTime(0.125F*screenWidth, 350F,90F,100F,context)
+    private val money = Money(w/2, 0.75f*h, 4*w/6, h/20, context)
+    private val delta = Delta(w/2, 0.85f*h,4*w/6, h/20, context)
+    private val iconCity = IconCity(w/2,h/14,w/2,h/10, context)
+    private val therm_score = IconScore(7*w/8, h/6, w/10, h/10, context)
+    private val time_score = IconTime(w/8, h/6,w/10,h/10,context)
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
-        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.9f, random.nextFloat()*screenHeight*0.9f,200f, 100f, context))
+        for (i in 1..NBRE_CLOUDS) clouds.add(Cloud(w/20 + random.nextFloat()*9/10*w,
+            w/20 + random.nextFloat()*9/10*h,w/6, w/12, context))
+        damier.setDamier(DIAM_DAMIER)
     }
 
     override fun run() {
-        damier.setDamier(n)
         var previousFrameTime = System.currentTimeMillis() // t_0
         while(drawing) {
             // Temps écoulé
@@ -88,12 +92,12 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         if (holder.surface.isValid) {
             canvas = holder.lockCanvas()
             // Affichage des éléments
-            canvas.drawRect(0F, 0F, canvas.getWidth()*1F, canvas.getHeight()*1F, backgroundPaint) // Fond d'écran
+            canvas.drawRect(0F, 0F, w, h, backgroundPaint) // Fond d'écran
             for (cloud in clouds) {
                 cloud.draw(canvas)
             }
-            for (ligne in damier.getCases()) {
-                for (case in ligne) case.draw(canvas)
+            for (line in damier.getCases()) {
+                for (case in line) case.draw(canvas)
             }
             for (elem in squares) {
                 elem.draw(canvas)
@@ -142,7 +146,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
             MotionEvent.ACTION_DOWN -> {
                 // Récupère les coordonnées du click sur l'écran et vérifie la correspondance
                 val x = event.rawX
-                val y = event.rawY - 75
+                val y = event.rawY - hStatusBar
                 checkClick(squares, damier.getCases(), x, y)
             }
         }
