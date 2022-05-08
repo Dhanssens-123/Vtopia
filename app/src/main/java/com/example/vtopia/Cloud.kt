@@ -5,6 +5,8 @@ import android.graphics.*
 import java.util.*
 
 class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aerial(x,y, w, h), Animation {
+
+    private var color = Color.argb(255,random.nextInt(255),255,255)
     private var tempox = 200 + random.nextInt(200)
     private var tempoy = 200 + random.nextInt(200)
     private var vx = random.nextFloat()*1.5f
@@ -12,7 +14,7 @@ class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aeria
     private var switchx = 0
     private var switchy = 0
 
-    private var sprite = BitmapFactory.decodeResource(context.resources, R.drawable.cloud)
+    private var sprite = BitmapFactory.decodeResource(context.resources, R.drawable.cloud).extractAlpha()
 
     override fun vibrate(rect : RectF, vx : Float, vy: Float) {
         rect.offset(vx, vy)
@@ -28,6 +30,8 @@ class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aeria
             vy = -vy
         }
         vibrate(r,vx,vy)
+
+        paint.color = color
         canvas?.drawBitmap(sprite, null, r, paint)
     }
 }

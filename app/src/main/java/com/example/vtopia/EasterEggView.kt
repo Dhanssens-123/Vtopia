@@ -19,34 +19,34 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
 
     // Prend les dimensions de la drawingView ( != dimensions de l'écran total)
     private val displayMetrics = DisplayMetrics()
-    private var screenWidth = context.resources.displayMetrics.widthPixels.toFloat()
-    private var screenHeight = context.resources.displayMetrics.heightPixels.toFloat()
+    private var w = context.resources.displayMetrics.widthPixels.toFloat()
+    private var h = context.resources.displayMetrics.heightPixels.toFloat()
 
-    private var airplane = AirPlane(screenWidth/2, screenHeight/2, 200f, 220f, context)
+    private var airplane = AirPlane(w/2, h/2, w/5, w/5, context)
     private var clouds = ArrayList<Cloud>(5)
     private var snake = Snake(airplane)
     private var lesParois = arrayOf(
-        Parois(0f, 0f, 25f, screenHeight),
-        Parois(0f, 0f, screenWidth, 25f),
-        Parois(0f, screenHeight - 25f, screenWidth, screenHeight),
-        Parois(screenWidth - 25f, 0f, screenWidth, screenHeight)
+        Parois(0f, 0f, 25f, h),
+        Parois(0f, 0f, w, 25f),
+        Parois(0f, h - 25f, w, h),
+        Parois(w - 25f, 0f, w, h)
     )
+    private val NBRE_CLOUDS = 20
 
     private var drawing: Boolean = true
-    lateinit var canvas: Canvas
-    lateinit var thread: Thread
+    lateinit private var canvas: Canvas
+    lateinit private var thread: Thread
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
-        snake.updatePos(airplane)
-        for (i in 1..20) clouds.add(Cloud(random.nextFloat()*screenWidth*0.95f, random.nextFloat()*screenHeight*0.95f,140f, 70f, context))
+        for (i in 1..NBRE_CLOUDS) clouds.add(Cloud(w/20 + random.nextFloat()*9/10*w,
+            w/20 + random.nextFloat()*9/10*h,w/6, w/12, context))
     }
-
 
     override fun run() {
         while (drawing) {
             airplane.bouge(lesParois)
-            snake.update(clouds, airplane)
+            snake.update(airplane)
             draw()
         }
     }
@@ -65,7 +65,7 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
     fun draw() {
         if (holder.surface.isValid) {
             canvas = holder.lockCanvas()
-            canvas.drawRect(0F, 0F, canvas.getWidth()*1F, canvas.getHeight()*1F, backgroundPaint) // Fond d'écran
+            canvas.drawRect(0F, 0F, w*1f, h*1f, backgroundPaint) // Fond d'écran
             for (cloud in clouds) {
                 if (RectF.intersects(airplane.getRect(), cloud.getRect())) {
                     snake.ellongate(cloud, airplane)
@@ -77,7 +77,6 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
             for (cloud in clouds) {
                 cloud.draw(canvas)
             }
-            for (p in lesParois) p.draw(canvas)
             holder.unlockCanvasAndPost(canvas)
         }
     }

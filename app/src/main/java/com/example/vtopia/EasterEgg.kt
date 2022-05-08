@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class EasterEgg : AppCompatActivity() {
 
-    lateinit var easterEggView : EasterEggView
+    lateinit private var easterEggView : EasterEggView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
