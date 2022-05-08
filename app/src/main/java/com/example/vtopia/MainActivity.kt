@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import android.widget.ZoomControls
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_welcome_screen.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,8 +23,9 @@ class MainActivity : AppCompatActivity() {
         // Récupère le niveau défini dans le WelcomeScreen
         val level = intent.getIntExtra("level",0)
         var cityName = intent.getStringExtra("cityName")
-        if (cityName == "")  cityName = "En manque d'inspi ?"
+        if (cityName == "")  cityName = "VTOPIA"
         gameView.setCityName(cityName!!)
+        gameView.setLevel(level)
     }
 
     fun gameOnOff(v: View) {

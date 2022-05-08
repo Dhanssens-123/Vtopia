@@ -6,7 +6,6 @@ import java.util.*
 
 class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h), Animable {
 
-    private val random = Random()
     private var band_bmp = flipImageVertically(BitmapFactory.decodeResource(context.resources, R.drawable.band))
     private var airplane_bmp = BitmapFactory.decodeResource(context.resources, R.drawable.airplane)
     private var tempo_band = 20
@@ -18,6 +17,7 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
     // Contient le score à afficher sur l'écran, initialement nul et contrôlé par le GameManager
     private val step = 0.4f
     private var cityName = ""
+    private val MAX_LENGTH = 10
 
     override fun draw(canvas: Canvas?) {
 
@@ -33,12 +33,11 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
         canvas?.drawBitmap(band_bmp, null, r1, paint)
         canvas?.drawBitmap(airplane_bmp, null, r2, paint)
 
-        var flag = 0.75f*w
-        var text = "$cityName"
-        paintText.textSize = if(1.5F*w/text.length < flag/4F) flag/text.length else flag/6F // Détermination empirique
+        var text = "$cityName".toUpperCase()
+        paintText.textSize = r1.width()/MAX_LENGTH * (1 + 0.1f*(MAX_LENGTH - text.length))
         // Gère l'affichage du score
         var offSet = paintText.measureText(text)
-        canvas?.drawText(text,r1.left + w/2 - offSet/2 - step/2*w, r1.top + h/2 + paintText.textSize/3, paintText)
+        canvas?.drawText(text,r1.left + w/2 - offSet/2 - step/2*w - r1.width()/20, r1.top + h/2 + paintText.textSize/3, paintText)
     }
 
     fun setCityName(name : String) {
@@ -62,6 +61,10 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
     }
 
     override fun blink(txt: String, newtxt: String, counter: Int, period: Int): String {
+        TODO("Not yet implemented")
+    }
+
+    override fun changeColor(paint: Paint) {
         TODO("Not yet implemented")
     }
 }

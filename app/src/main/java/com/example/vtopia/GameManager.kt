@@ -21,7 +21,7 @@ class GameManager {
     private var totalTime = 60.0
     private var oneSec = 1.0
     private var ScoreTime = 1.0
-    private var level = 0
+    private var level = 1
     private var TotalScore = 0
     private var deltaScore = 0
     private var gameOver = false // Partie en cours
@@ -57,7 +57,11 @@ class GameManager {
     fun updateTotalScore(icon_score: IconScore, damier: Damier) {
         TotalScore += deltaScore
         icon_score.changeScore(TotalScore)
-        if (TotalScore < 0 && random.nextInt(2) == 1) {
+        if (deltaScore < 0 && random.nextInt(2) ==1) {
+            var case = damier.getCases()[random.nextInt(damier.getCases().size)][random.nextInt(damier.getCases().size)]
+            if (case.isVisible()) case.bruleCase()
+        }
+        if (TotalScore < 0) {
             var case = damier.getCases()[random.nextInt(damier.getCases().size)][random.nextInt(damier.getCases().size)]
             if (case.isVisible()) case.bruleCase()
         }
@@ -67,13 +71,11 @@ class GameManager {
     fun updateTotalTime(elapsedTime : Double, icon_time : IconTime, money : Money, icon_score: IconScore, damier: Damier) {
         // Calcule le temps restant et le met à jour sur l'icone timer tant que celui-ci est positif
         totalTime -= elapsedTime / 1000.0
-        if (totalTime < 0) {
+        if (totalTime <= 0) {
             // Le jeu est terminé
             gameOver = true
-        }
-        else {
-            icon_time.changeTime(totalTime)
-        }
+        } else icon_time.changeTime(totalTime)
+
         oneSec -= elapsedTime / 1000.0
         ScoreTime -= elapsedTime / 1000.0
         if (oneSec < 0) {
@@ -89,7 +91,7 @@ class GameManager {
     fun reset() {
         // Réinitialise la partie
         TotalScore = 0
-        level = 0
+        level = 1
         totalTime = 60.0
         oneSec = 1.0
         ScoreTime = 1.0
@@ -103,5 +105,13 @@ class GameManager {
 
     fun getTotalScore() : Int {
         return TotalScore
+    }
+
+    fun setLevel(lvl: Int) {
+        level = lvl
+    }
+
+    fun getLevel() : Int {
+        return level
     }
 }

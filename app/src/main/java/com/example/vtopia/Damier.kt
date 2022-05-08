@@ -5,6 +5,7 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import java.util.*
 
 class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
 
@@ -33,7 +34,9 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
     private val diamy = 3*diamx/(2*Math.sqrt(3.0).toFloat())
     private val posx = Array<Array<Float>>(n, {i -> Array(n, {j -> (weigth/2 - n/2*diamx) + j*diamx + diamx/2*(i%2)})})
     private val posy = Array(n, {i -> (height/2 - n/2*diamy + i*diamy)})
-    private val cases = Array<Array<Case>>(n, {i -> Array(n, {j -> Case(posx[i][j],posy[i],diamx,"désert",0,context)})})
+    private val cases = Array<Array<Case>>(n, {i -> Array(n, {j -> Case(posx[i][j],posy[i],diamx,"désert",1,context)})})
+
+    private val random = Random()
 
     init {
         setDamier(n)
@@ -78,7 +81,25 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
         for (ligne in cases) {
             for (case in ligne) {
                 case.setType("désert")
+                case.setBord(1)
+            }
+        }
+    }
+
+    fun createRandomCity(game: GameManager) {
+        var intType = mapOf<Int, String>(
+            0 to "forêt",
+            1 to "habitat",
+            2 to "industrie"
+        )
+        var num = 2*game.getLevel()
+        while (num > 0) {
+            var case = cases[random.nextInt(cases.size)][random.nextInt(cases.size)]
+            if (case.isVisible() && case.getType() == "désert") {
+                case.changeType(intType[random.nextInt(3)]!!)
+                case.freeze()
                 case.setBord(0)
+                num -= 1
             }
         }
     }

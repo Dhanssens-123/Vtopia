@@ -60,9 +60,9 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     )
     private val money = Money(w/2, 0.725f*h, 4*w/6, h/20, context)
     private val delta = Delta(w/2, 0.8f*h,4*w/6, h/20, context)
-    private val iconCity = IconCity(w/2,h/14,w/2,h/10, context)
-    private val therm_score = IconScore(7*w/8, h/6, w/10, h/10)
-    private val time_score = IconTime(w/8, h/6,w/10,h/10)
+    private val iconCity = IconCity(w/2,h/12,w/2,h/10, context)
+    private val therm_score = IconScore(7*w/8, h/5, w/10, h/10)
+    private val time_score = IconTime(w/8, h/5,w/10,h/10)
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
@@ -71,6 +71,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     }
 
     override fun run() {
+        damier.createRandomCity(game)
         var previousFrameTime = System.currentTimeMillis() // t_0
         while(drawing) {
             // Temps écoulé
@@ -124,6 +125,11 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         type = "désert"
         game.reset()
         damier.reset()
+        for (s in squares) {
+            s.reinitRectSize(s.getRect())
+            s.changeRectSize(s.getRectStroke(),s.getStrokeSize(),s.getStrokeSize())
+        }
+        time_score.reset()
         drawing = true
         thread = Thread(this)
         thread.start()
@@ -157,7 +163,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         // Si une case est clickée, changement de son état
         for (ligne in cases) {
             for (case in ligne) {
-                if (case.isVisible() && case.getRect().contains(x,y) && flag && case.getType() != type && case.getType() != "feu" && money.getNbreBloc() >= 2) {
+                if (case.isVisible() && case.getRect().contains(x,y) && flag && case.getType() != type && !case.isFreeze() && money.getNbreBloc() >= 2) {
                     case.changeType(type)
                     money.updateBloc(-2)
                     flag = false
@@ -214,6 +220,10 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
 
     fun setCityName(name : String) {
         iconCity.setCityName(name)
+    }
+
+    fun setLevel(lvl: Int) {
+        game.setLevel(lvl)
     }
 
     fun isDrawing() : Boolean {

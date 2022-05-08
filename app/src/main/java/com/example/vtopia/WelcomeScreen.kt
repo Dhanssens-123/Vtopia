@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_welcome_screen.*
 class WelcomeScreen() : AppCompatActivity(), Parcelable {
     constructor(parcel: Parcel) : this()
 
-    private var level = 0
+    private var level = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class WelcomeScreen() : AppCompatActivity(), Parcelable {
         startActivity(intent)
     }
 
-    fun tips(view: View) {
+    fun toRule(view: View) {
         // Montre les règles du jeu
         startActivity(Intent(this, Tips::class.java).apply {})
     }
@@ -44,13 +44,26 @@ class WelcomeScreen() : AppCompatActivity(), Parcelable {
         startActivity(Intent(this, EasterEgg::class.java).apply {})
     }
 
+
     fun star(view: View) {
-        // Incrémente le niveau quand une des étoiles est touchée et affiche le nombre d'étoiles pleine en conséquence
-        level = (level + 1) % 4
         var stars = arrayOf(star1, star2, star3)
         for (star in stars) star.setImageResource(R.drawable.star_bord)
-        for (i in 0..(level-1)) {
-            stars[i].setImageResource(R.drawable.star_yellow)
+        when(view.id) {
+            R.id.star1 -> {
+                level = 1
+                star1.setImageResource(R.drawable.star_yellow)
+            }
+            R.id.star2 -> {
+                level = 2
+                star1.setImageResource(R.drawable.star_yellow)
+                star2.setImageResource(R.drawable.star_yellow)
+            }
+            R.id.star3 -> {
+                level = 3
+                star1.setImageResource(R.drawable.star_yellow)
+                star2.setImageResource(R.drawable.star_yellow)
+                star3.setImageResource(R.drawable.star_yellow)
+            }
         }
     }
 

@@ -9,6 +9,7 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
     private var type = _type
     private var bord = _bord
     private var state = false // Etat d'affichage de la case
+    private var freeze = false
 
     // Attribue une image et un bord à chaque type de case
     private val spriteSet = mapOf<String, Bitmap>(
@@ -46,6 +47,8 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
 
     fun bruleCase() {
         changeType("feu")
+        freeze = true
+        bord = 2
     }
 
     fun changeType(newtype : String) {
@@ -68,6 +71,14 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
 
     fun isVisible() : Boolean {
         return state
+    }
+
+    fun isFreeze() : Boolean {
+        return freeze
+    }
+
+    fun freeze() {
+        freeze = true
     }
 
     fun setBord(int : Int) {

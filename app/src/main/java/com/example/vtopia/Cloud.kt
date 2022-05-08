@@ -34,4 +34,8 @@ class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aeria
     override fun blink(txt: String, newtxt: String, counter: Int, period: Int): String {
         TODO("Not yet implemented")
     }
+
+    override fun changeColor(paint: Paint) {
+        TODO("Not yet implemented")
+    }
 }

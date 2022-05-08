@@ -35,4 +35,8 @@ class IconScore(x: Float, y: Float, w: Float, h: Float) : Icone(x,y,w,h), Animab
     override fun vibrate(r: RectF, vx: Float, vy: Float) {
         TODO("Not yet implemented")
     }
+
+    override fun changeColor(paint: Paint) {
+        TODO("Not yet implemented")
+    }
 }

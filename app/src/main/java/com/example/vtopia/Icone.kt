@@ -3,6 +3,7 @@ package com.example.vtopia
 import android.content.Context
 import android.graphics.*
 import androidx.core.graphics.toRect
+import java.util.*
 
 abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float) {
     /*
@@ -16,6 +17,7 @@ abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float) {
 
     protected var r = RectF(x - w/2, y - h/2, x + w/2, y + h/2)
     protected val paint = Paint()
+    protected val random = Random()
 
     protected val STROKE_SIZE = r.height()/10
     protected val STROKE_RADIUS = 10f
@@ -27,9 +29,9 @@ abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float) {
     }
 
     protected val paintText = Paint().apply {
-        textSize = w
+        textSize = r.width()
         isFakeBoldText = true
-        color = Color.argb(255,52,73,94)
+        color =  Color.argb(255,52,73,94)
     }
 
     abstract fun draw(canvas: Canvas?) // Une méthode abstraite possède une signature mais pas de corps
