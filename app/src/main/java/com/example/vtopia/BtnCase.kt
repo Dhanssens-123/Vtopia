@@ -14,23 +14,23 @@ class BtnCase(x: Float, y: Float, w: Float, h: Float, context: Context, _type: S
         "désert" to BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow),
         "habitat" to BitmapFactory.decodeResource(context.resources, R.drawable.square_brown),
         "culture" to BitmapFactory.decodeResource(context.resources, R.drawable.square_pink),
-        "industrie" to BitmapFactory.decodeResource(context.resources, R.drawable.square_grey),
-        "bord" to BitmapFactory.decodeResource(context.resources, R.drawable.square_bord)
+        "industrie" to BitmapFactory.decodeResource(context.resources, R.drawable.square_grey)
     )
 
-    override fun draw(canvas: Canvas?) {
-        paint.textSize = w/2
-        paint.isFakeBoldText = true
-        paint.color = Color.argb(255,52,73,94)
-        var text = "${damier.getDataSet()[type]}"
-        var offSet = paint.measureText(text)
-        canvas?.drawBitmap(spriteSet[type]!!, null, r, paint)
-        canvas?.drawBitmap(spriteSet["bord"]!!, null, r, paint)
-        canvas?.drawText(text,x-offSet/2,y+paint.textSize/3,paint)
+    init{
+        changeRectSize(rStroke, STROKE_SIZE,STROKE_SIZE)
     }
 
-    fun reinit() {
-        r = RectF(x - w/2, y - h/2, x + w/2, y + h/2)
+    override fun draw(canvas: Canvas?) {
+
+        paintText.textSize = r.width()/2
+        var text = "${damier.getDataSet()[type]}"
+        var offSet = paintText.measureText(text)
+
+        canvas?.drawBitmap(spriteSet[type]!!, null, r, paintText)
+        canvas?.drawRoundRect(rStroke,10f,10f,paintStroke)
+
+        canvas?.drawText(text,x-offSet/2,y+paintText.textSize/3,paintText)
     }
 
     fun getType() : String {

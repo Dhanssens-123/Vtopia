@@ -52,11 +52,11 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     private val damier = Damier(context, w, h, DIAM_DAMIER)
     private val clouds = ArrayList<Cloud>()
     private val squares = arrayOf(
-        BtnCase(w/6,0.95f*h,w/8,h/20,context,"désert",damier),
-        BtnCase(2*w/6,0.95f*h,w/8,h/20,context,"culture",damier),
-        BtnCase(3*w/6,0.95f*h,w/8,h/20,context,"habitat",damier),
-        BtnCase(4*w/6,0.95f*h,w/8,h/20, context,"industrie",damier),
-        BtnCase(5*w/6,0.95f*h,w/8,h/20, context, "forêt",damier)
+        BtnCase(w/6,0.95f*h,w/8,w/8,context,"désert",damier),
+        BtnCase(2*w/6,0.95f*h,w/8,w/8,context,"culture",damier),
+        BtnCase(3*w/6,0.95f*h,w/8,w/8,context,"habitat",damier),
+        BtnCase(4*w/6,0.95f*h,w/8,w/8, context,"industrie",damier),
+        BtnCase(5*w/6,0.95f*h,w/8,w/8, context, "forêt",damier)
     )
     private val money = Money(w/2, 0.75f*h, 4*w/6, h/20, context)
     private val delta = Delta(w/2, 0.85f*h,4*w/6, h/20, context)
@@ -175,7 +175,10 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     }
 
     fun grow(square: BtnCase, squares: Array<BtnCase>) {
-        for (s in squares) s.reinit()
+        for (s in squares) {
+            s.reinitRectSize(s.getRect())
+            s.changeRectSize(s.getRectStroke(),s.getStrokeSize(),s.getStrokeSize())
+        }
         square.changeRectSize(square.getRect(), 25f, 25f)
     }
 

@@ -11,10 +11,7 @@ class Delta(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icon
     private var lgrBloc = w / NBRE_BLOC_TOTAL
 
     init {
-        changeRectSize(rStroke,10f,10f)
-        paintStroke.color = Color.argb(255,52,73,94)
-        paintStroke.style = Paint.Style.STROKE
-        paintStroke.strokeWidth = 20f
+        changeRectSize(rStroke,STROKE_SIZE,STROKE_SIZE)
     }
 
     override fun draw(canvas: Canvas?) {
