@@ -18,6 +18,7 @@ abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float) {
     protected val paint = Paint()
 
     protected val STROKE_SIZE = r.height()/10
+    protected val STROKE_RADIUS = 10f
     protected var rStroke = r
     protected var paintStroke = Paint().apply {
         color = Color.argb(255,52,73,94)
@@ -26,6 +27,7 @@ abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float) {
     }
 
     protected val paintText = Paint().apply {
+        textSize = w
         isFakeBoldText = true
         color = Color.argb(255,52,73,94)
     }

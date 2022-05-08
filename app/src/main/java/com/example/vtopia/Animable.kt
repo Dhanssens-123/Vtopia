@@ -9,7 +9,7 @@ import android.widget.ImageButton
 
 interface Animable {
 
-    fun blink(txt: String, newtxt: String, flag: Int) : String
+    fun blink(txt: String, newtxt: String, counter: Int, period: Int) : String
 
     fun vibrate(r : RectF, vx : Float, vy : Float)
 }

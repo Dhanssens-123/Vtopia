@@ -11,20 +11,16 @@ class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aeria
     private var tempoy = 200 + random.nextInt(200)
     private var vx = random.nextFloat()*1.5f
     private var vy = random.nextFloat()*1.5f
-    private var switchx = 0
-    private var switchy = 0
+    private var counterx = 0
+    private var countery = 0
 
     private var sprite = BitmapFactory.decodeResource(context.resources, R.drawable.cloud).extractAlpha()
 
     override fun draw(canvas: Canvas?) {
-        switchx = (switchx + 1)%tempox
-        switchy = (switchy + 1)%tempoy
-        if (switchx == tempox/2) {
-            vx = -vx
-        }
-        if (switchy == tempoy/2) {
-            vy = -vy
-        }
+        counterx = (counterx + 1)%tempox
+        countery = (countery + 1)%tempoy
+        if (counterx == tempox/2) vx = -vx
+        if (countery == tempoy/2) vy = -vy
         vibrate(r,vx,vy)
 
         paint.color = color
@@ -35,7 +31,7 @@ class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aeria
         rect.offset(vx, vy)
     }
 
-    override fun blink(txt: String, newtxt: String, flag: Int): String {
+    override fun blink(txt: String, newtxt: String, counter: Int, period: Int): String {
         TODO("Not yet implemented")
     }
 }

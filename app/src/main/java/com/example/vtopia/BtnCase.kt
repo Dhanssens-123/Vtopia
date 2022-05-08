@@ -28,7 +28,7 @@ class BtnCase(x: Float, y: Float, w: Float, h: Float, context: Context, _type: S
         var offSet = paintText.measureText(text)
 
         canvas?.drawBitmap(spriteSet[type]!!, null, r, paintText)
-        canvas?.drawRoundRect(rStroke,10f,10f,paintStroke)
+        canvas?.drawRoundRect(rStroke,STROKE_RADIUS,STROKE_RADIUS,paintStroke)
 
         canvas?.drawText(text,x-offSet/2,y+paintText.textSize/3,paintText)
     }

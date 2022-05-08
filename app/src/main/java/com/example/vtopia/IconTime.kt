@@ -10,13 +10,8 @@ class IconTime(_x: Float, _y: Float, _w: Float, _h: Float) : Icone(_x,_y,_w,_h),
 
     // Contient le timer à afficher sur l'écran contrôlé par le GameManager
     private var time = 0.0
-    private var switch = 0
-
-    init {
-        paint.textSize = w
-        paint.isFakeBoldText = true
-        paint.color = Color.argb(255,52,73,94)
-    }
+    private var counter = 0
+    private var BLINK_PERIOD = 20 // Divisible par 2
 
     fun changeTime(newTime: Double) {
         time = newTime
@@ -25,17 +20,17 @@ class IconTime(_x: Float, _y: Float, _w: Float, _h: Float) : Icone(_x,_y,_w,_h),
     override fun draw(canvas: Canvas?) {
         var formatted_time = String.format("%d", time.toInt())
 
-        if (time.toInt() % 10 == 0) {
-            formatted_time = blink(formatted_time, "", switch)
-            switch += 2
-        } else switch = 0
+        if (time.toInt() % 10 == 0 || time.toInt() < 5) {
+            formatted_time = blink(formatted_time, "", counter, BLINK_PERIOD)
+            counter += 1
+        } else counter = 0
 
-        var offSet = paint.measureText(formatted_time)
-        canvas?.drawText(formatted_time, x - offSet/2, y + paint.textSize/3, paint)
+        var offSet = paintText.measureText(formatted_time)
+        canvas?.drawText(formatted_time, x - offSet/2, y + paintText.textSize/3, paintText)
     }
 
-    override  fun blink(txt: String, newtxt: String, flag: Int) : String {
-        return if ((flag % 20) < 10) newtxt else txt
+    override  fun blink(txt: String, newtxt: String, counter: Int, period: Int) : String {
+        return if ((counter % period) < period/2) newtxt else txt
     }
 
     override fun vibrate(r: RectF, vx: Float, vy: Float) {

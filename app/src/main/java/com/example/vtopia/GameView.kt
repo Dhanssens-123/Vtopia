@@ -49,17 +49,17 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
 
     // Création du damier et des icones
     private val game = GameManager()
-    private val damier = Damier(context, w, h, DIAM_DAMIER)
+    private val damier = Damier(context, w, 0.9f*h, DIAM_DAMIER)
     private val clouds = ArrayList<Cloud>()
     private val squares = arrayOf(
-        BtnCase(w/6,0.95f*h,w/8,w/8,context,"désert",damier),
-        BtnCase(2*w/6,0.95f*h,w/8,w/8,context,"culture",damier),
-        BtnCase(3*w/6,0.95f*h,w/8,w/8,context,"habitat",damier),
-        BtnCase(4*w/6,0.95f*h,w/8,w/8, context,"industrie",damier),
-        BtnCase(5*w/6,0.95f*h,w/8,w/8, context, "forêt",damier)
+        BtnCase(w/6,0.9f*h,w/8,w/8,context,"désert",damier),
+        BtnCase(2*w/6,0.9f*h,w/8,w/8,context,"culture",damier),
+        BtnCase(3*w/6,0.9f*h,w/8,w/8,context,"habitat",damier),
+        BtnCase(4*w/6,0.9f*h,w/8,w/8, context,"industrie",damier),
+        BtnCase(5*w/6,0.9f*h,w/8,w/8, context, "forêt",damier)
     )
-    private val money = Money(w/2, 0.75f*h, 4*w/6, h/20, context)
-    private val delta = Delta(w/2, 0.85f*h,4*w/6, h/20, context)
+    private val money = Money(w/2, 0.725f*h, 4*w/6, h/20, context)
+    private val delta = Delta(w/2, 0.8f*h,4*w/6, h/20, context)
     private val iconCity = IconCity(w/2,h/14,w/2,h/10, context)
     private val therm_score = IconScore(7*w/8, h/6, w/10, h/10)
     private val time_score = IconTime(w/8, h/6,w/10,h/10)
