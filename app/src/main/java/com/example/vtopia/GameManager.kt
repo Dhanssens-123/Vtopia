@@ -92,7 +92,6 @@ class GameManager(_damier: Damier) {
     fun reset() {
         // Réinitialise la partie
         TotalScore = 0
-        level = 1
         totalTime = 60.0
         oneSec = 1.0
         ScoreTime = 1.0
