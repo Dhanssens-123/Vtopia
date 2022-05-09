@@ -3,7 +3,7 @@ package com.example.vtopia
 import android.content.Context
 import android.graphics.*
 
-class CaseButton(x: Float, y: Float, w: Float, h: Float, context: Context, _type: String, _damier: Damier) : Icon(x,y,w,h) {
+class ButtonCase(x: Float, y: Float, w: Float, h: Float, context: Context, _type: String, _damier: Damier) : Icon(x,y,w,h) {
 
     private val type = _type
     private val damier = _damier

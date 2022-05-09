@@ -48,11 +48,11 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     private val game = GameManager(damier)
     private val clouds = ArrayList<Cloud>()
     private val squares = arrayOf(
-        CaseButton(w/6,0.9f*h,w/8,w/8,context,"désert",damier),
-        CaseButton(2*w/6,0.9f*h,w/8,w/8,context,"culture",damier),
-        CaseButton(3*w/6,0.9f*h,w/8,w/8,context,"habitat",damier),
-        CaseButton(4*w/6,0.9f*h,w/8,w/8, context,"industrie",damier),
-        CaseButton(5*w/6,0.9f*h,w/8,w/8, context, "forêt",damier)
+        ButtonCase(w/6,0.9f*h,w/8,w/8,context,"désert",damier),
+        ButtonCase(2*w/6,0.9f*h,w/8,w/8,context,"culture",damier),
+        ButtonCase(3*w/6,0.9f*h,w/8,w/8,context,"habitat",damier),
+        ButtonCase(4*w/6,0.9f*h,w/8,w/8, context,"industrie",damier),
+        ButtonCase(5*w/6,0.9f*h,w/8,w/8, context, "forêt",damier)
     )
     private val money = IconMoney(w/2, 0.725f*h, 4*w/6, h/20, context)
     private val delta = IconDelta(w/2, 0.8f*h,4*w/6, h/20, context)
@@ -154,7 +154,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         return true
     }
 
-    fun checkClick(squares : Array<CaseButton>, cases : Array<Array<Case>>, x : Float, y : Float) {
+    fun checkClick(squares : Array<ButtonCase>, cases : Array<Array<Case>>, x : Float, y : Float) {
         var flag = true
         // Si une case est clickée, changement de son état
         for (ligne in cases) {
@@ -176,7 +176,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         }
     }
 
-    fun grow(square: CaseButton, squares: Array<CaseButton>) {
+    fun grow(square: ButtonCase, squares: Array<ButtonCase>) {
         for (s in squares) {
             s.reinitRectSize(s.getRect())
             s.changeRectSize(s.getRectStroke(),s.getStrokeSize(),s.getStrokeSize())
