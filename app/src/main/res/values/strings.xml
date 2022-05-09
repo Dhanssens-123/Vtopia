@@ -11,14 +11,15 @@
     <string name="tips_ans_tricks">Règles</string>
     <string name="rule">
         Construisez l\'île de vos rêves !\n
-        \n
-        Chaque seconde, vous obtenez des ressources vous permettant
+        \nChaque seconde, vous obtenez des ressources vous permettant
         de construire sur une case spécfique de l\'île en choissant son type et ensuite l\'endroit sur l\'île
         par un simple click.\n
-        \n
-        Un compteur s\'incrémente également chaque seconde ce qui permet d\'augmenter la valeur de votre île.
+        \nUn compteur s\'incrémente également chaque seconde ce qui permet d\'augmenter la valeur de votre île.
         Attention à votre choix car un excès de certaines cases peut aussi vous pénaliser.\n
-        \n
-        Cherchez le meilleur équilibre. Bon jeu !
+        Il ne doit pas y avoir plus d\'industries que de forêts et plus d\'habitations que d\'industries. Les édifices culturels
+        rapportent également moins de valeur lorsqu\'ils sont en excès par rapport au nombre d\'habitations.\n
+        \nSi votre score diminue, vous risquez d\'entraîner des révoltes, ce qui aura pour effet de détruire de manière irréversible
+        certaines régions de l\'île au cours du temps.\n
+        \nCherchez le meilleur équilibre. Bon jeu !
     </string>
 </resources>
