@@ -1,19 +1,15 @@
 package com.example.vtopia
 
-import androidx.appcompat.app.AppCompatActivity
+import android.media.MediaPlayer
 import android.os.Bundle
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.view.ScaleGestureDetector
 import android.view.View
-import android.widget.Toast
-import android.widget.ZoomControls
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_welcome_screen.view.*
 
 class MainActivity : AppCompatActivity() {
-
-    lateinit var gameView : GameView
+    var mMediaPlayer: MediaPlayer? = null
+    private var musictheme = false
+    lateinit var gameView: GameView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,9 +17,9 @@ class MainActivity : AppCompatActivity() {
         gameView = findViewById<GameView>(R.id.vMain)
 
         // Récupère le niveau défini dans le WelcomeScreen
-        val level = intent.getIntExtra("level",0)
+        val level = intent.getIntExtra("level", 0)
         var cityName = intent.getStringExtra("cityName")
-        if (cityName == "")  cityName = "VTOPIA"
+        if (cityName == "") cityName = "VTOPIA"
         gameView.setCityName(cityName!!)
         gameView.setLevel(level)
     }
@@ -33,22 +29,33 @@ class MainActivity : AppCompatActivity() {
         if (gameView.isDrawing()) {
             gameView.pause()
             play_pause.setImageResource(R.drawable.play)
-        }
-        else {
+        } else {
             gameView.resume()
             play_pause.setImageResource(R.drawable.pause)
         }
     }
 
-    fun soundOnOff(v: View) {
-        // Met également l'activité gameView en pause
-        if (gameView.isDrawing()) {
-            gameView.pause()
-            param.setImageResource(R.drawable.sound_on)
+    fun playMusic() {
+        if (mMediaPlayer == null) {
+            mMediaPlayer = MediaPlayer.create(this, R.raw.theme)
+            mMediaPlayer!!.isLooping = true
+            mMediaPlayer!!.start()
+        } else mMediaPlayer!!.start()
+    }
+    fun pauseMusic() {
+        if (mMediaPlayer?.isPlaying == true) {
+            mMediaPlayer?.pause()
         }
+    }
+    fun soundOnOff(v: View) {
+        if (musictheme == false) {
+            playMusic()
+            param.setImageResource(R.drawable.sound_on)
+            musictheme = true}
         else {
-            gameView.resume()
+            pauseMusic()
             param.setImageResource(R.drawable.sound_off)
+            musictheme = false
         }
     }
 
@@ -60,5 +67,13 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         gameView.resume()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (mMediaPlayer != null) {
+            mMediaPlayer!!.release()
+            mMediaPlayer = null
+        }
     }
 }
