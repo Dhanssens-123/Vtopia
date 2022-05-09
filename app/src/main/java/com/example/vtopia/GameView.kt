@@ -25,15 +25,17 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     Un bitmap pour contenir les pixels, un canevas pour accueillir les appels de dessin (écriture dans le bitmap),
     une primitive de dessin (par exemple, Rect, Path, texte, bitmap) et une peinture (pour décrire les couleurs et les styles du dessin).
     */
+
     private val activity = context as FragmentActivity
 
     private val backgroundPaint = Paint() // Couleur de fond d'écran
     private var drawing: Boolean = true // Gère ou non la màj de l'affichage
 
-    // Prend les dimensions de la drawingView ( != dimensions de l'écran total)
+    // Récupère les dimensions de la drawingView ( != dimensions de l'écran total)
     private val displayMetrics = DisplayMetrics()
     private val w = context.resources.displayMetrics.widthPixels.toFloat()
     private val h = context.resources.displayMetrics.heightPixels.toFloat()
+    // Récupère la hauteur de la barre de statut
     private val hStatusBar = context.resources.getDimensionPixelSize(context.resources.getIdentifier("status_bar_height","dimen","android"))
 
     private val DIAM_DAMIER = 5 // Diamètre du damier (impair)
@@ -42,8 +44,8 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     private var type = "désert" // Type de la case à placer
 
     // Création du damier et des icones
-    private val game = GameManager()
     private val damier = Damier(context, w, 0.9f*h, DIAM_DAMIER)
+    private val game = GameManager(damier)
     private val clouds = ArrayList<Cloud>()
     private val squares = arrayOf(
         CaseButton(w/6,0.9f*h,w/8,w/8,context,"désert",damier),
@@ -71,9 +73,9 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
             val currentTime = System.currentTimeMillis()
             var elapsedTimeMS = (currentTime - previousFrameTime).toDouble()
             // Màj du jeu et de l'affichage
-            game.updateTotalTime(elapsedTimeMS, time_score, money, therm_score, damier)
+            game.updateTotalTime(elapsedTimeMS, time_score, money, therm_score)
             damier.updateDataSet()
-            game.updateDeltaScore(damier, therm_score, delta)
+            game.updateDeltaScore(therm_score, delta)
             //game.bruleCase(damier, damier.cases)
             draw()
             previousFrameTime = currentTime

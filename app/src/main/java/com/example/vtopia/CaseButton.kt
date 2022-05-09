@@ -23,13 +23,13 @@ class CaseButton(x: Float, y: Float, w: Float, h: Float, context: Context, _type
 
     override fun draw(canvas: Canvas?) {
 
-        paintText.textSize = r.width()/2
-        var text = "${damier.getDataSet()[type]}"
-        var offSet = paintText.measureText(text)
-
+        // Dessine la case
         canvas?.drawBitmap(spriteSet[type]!!, null, r, paintText)
         canvas?.drawRoundRect(rStroke,STROKE_RADIUS,STROKE_RADIUS,paintStroke)
-
+        // Affiche sur le boutton le nombre de cases du même type sur l'île
+        paintText.textSize = r.width()/2
+        val text = "${damier.getDataSet()[type]}"
+        val offSet = paintText.measureText(text)
         canvas?.drawText(text,x-offSet/2,y+paintText.textSize/3,paintText)
     }
 

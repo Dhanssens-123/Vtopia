@@ -21,11 +21,12 @@ class RulesView  @JvmOverloads constructor (context: Context, attributes: Attrib
     lateinit private var canvas: Canvas
     lateinit private var thread: Thread
 
-    // Prend les dimensions de la drawingView ( != dimensions de l'écran total)
+    // Récupère les dimensions de la drawingView ( != dimensions de l'écran total)
     private val displayMetrics = DisplayMetrics()
     private var w = context.resources.displayMetrics.widthPixels.toFloat()
     private var h = context.resources.displayMetrics.heightPixels.toFloat()
 
+    // Création des différents éléments de la SurfaceView
     private var clouds = ArrayList<Cloud>(5)
     private var iconCity = IconCity(w/2,h/10,w/2,h/10, context)
     private var NBRE_CLOUDS = 20

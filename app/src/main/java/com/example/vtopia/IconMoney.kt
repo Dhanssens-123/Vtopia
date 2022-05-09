@@ -17,8 +17,9 @@ class IconMoney(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : 
 
     override fun draw(canvas: Canvas?) {
 
+        // Trace le cadre global
         canvas?.drawRoundRect(rStroke,STROKE_RADIUS,STROKE_RADIUS,paintStroke)
-
+        // Trace chaque bloc et son contour
         var bloc = RectF(x - w/2, y - h/2, x - w/2 + lgrBloc, y + h/2)
         var blocStroke = bloc
         for (i in 0 until nbreBloc) {

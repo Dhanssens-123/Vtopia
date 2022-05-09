@@ -20,16 +20,20 @@ class IconTime(_x: Float, _y: Float, _w: Float, _h: Float) : Icon(_x,_y,_w,_h), 
     override fun draw(canvas: Canvas?) {
         var formatted_time = String.format("%d", time.toInt())
 
+        // Si le timer se trouve à une certaine valeur,
+        // met à jour le compteur et clignote en fonction de ce dernier
         if (time.toInt() % 10 == 0 || time.toInt() < 10) {
             formatted_time = blink(formatted_time, "", counter, BLINK_PERIOD)
             counter += 1
         } else counter = 0
-
+        // S'il reste moins de 5sec,
+        // change régulièrement la couleur selon le compteur
         if (time.toInt() <= 5) {
             paintText.textSize = 1.5f*w
             if (counter%MULTICOLOR_PERIOD == MULTICOLOR_PERIOD/2) changeColor(paintText)
         }
 
+        // Affiche le temps restant
         var offSet = paintText.measureText(formatted_time)
         canvas?.drawText(formatted_time, x - offSet/2, y + paintText.textSize/3, paintText)
     }

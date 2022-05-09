@@ -2,6 +2,8 @@ package com.example.vtopia
 
 class Snake(cockpit: AirPlane) {
 
+    // Aggrégation : les nuages appartiennent à la classe Snake mais peuvent exister en dehors
+    // (cf. clouds dans l'EasterEggView)
     private var chain = mutableListOf<Aerial>(cockpit)
     private var xCockpit = mutableListOf<Float>()
     private var yCockpit = mutableListOf<Float>()

@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         gameView = findViewById<GameView>(R.id.vMain)
 
-        // Récupère le niveau défini dans le WelcomeScreen
+        // Récupère le niveau et le nom de la ville définis dans le WelcomeScreen
         val level = intent.getIntExtra("level", 0)
         var cityName = intent.getStringExtra("cityName")
         if (cityName == "") cityName = "VTOPIA"
@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun gameOnOff(v: View) {
-        // Met l'activité gameView en pause
+        // Gère l'état de l'activité gameView
         if (gameView.isDrawing()) {
             gameView.pause()
             play_pause.setImageResource(R.drawable.play)
         } else {
-            gameView.resume()
+            onPause()
             play_pause.setImageResource(R.drawable.pause)
         }
     }
@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun soundOnOff(v: View) {
+        // Gère le contrôle du son
         if (musictheme == false) {
             playMusic()
             param.setImageResource(R.drawable.sound_on)

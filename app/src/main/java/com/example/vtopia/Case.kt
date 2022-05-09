@@ -8,9 +8,8 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
 
     private var type = _type
     private var bord = _bord
-    private var state = false // Etat d'affichage de la case
-    private var freeze = false
-    private val STROKE_SIZE = diametre/10
+    private var visible = false // Etat d'affichage de la case
+    private var freeze = false // Case muable ?
 
     // Attribue une image et un bord à chaque type de case
     private val spriteSet = mapOf<String, Bitmap>(
@@ -21,20 +20,19 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
         "industrie" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_grey),
         "feu" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_corail)
     )
-
     private val spriteBord = mapOf<Int, Bitmap>(
         0 to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord),
         1 to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord_green),
         2 to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord_red)
     )
 
-    // Définit les différents paramètres pour l'affichage via draw() du canvas.
+    // Définit les différents paramètres pour l'affichage du canvas via draw()
     private var r = RectF(x - diametre/2, y - diametre/Math.sqrt(3.0).toFloat(), x + diametre/2, y + diametre/Math.sqrt(3.0).toFloat())
     private val paint = Paint()
 
     fun draw(canvas: Canvas?) {
         // Dessine la case
-        if (state) {
+        if (visible) {
             canvas?.drawBitmap(spriteSet[type]!!, null, r, paint)
             canvas?.drawBitmap(spriteBord[bord]!!, null, r, paint)
         }
@@ -47,7 +45,6 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
     }
 
     fun changeType(newtype : String) {
-        // Change le type de la case si celle-ci est affichée
         type = newtype
     }
 
@@ -59,12 +56,12 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
         type = newType
     }
 
-    fun setVisible(visible : Boolean){
-        state = visible
+    fun setVisible(_visible : Boolean){
+        visible = _visible
     }
 
     fun isVisible() : Boolean {
-        return state
+        return visible
     }
 
     fun isFreeze() : Boolean {

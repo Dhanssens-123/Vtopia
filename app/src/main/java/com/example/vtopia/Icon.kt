@@ -7,19 +7,20 @@ import java.util.*
 
 abstract class Icon (_x: Float, _y: Float, _w: Float, _h: Float) {
     /*
-    Contient les paramètres de base pour l'affichage via l'appel draw() du canvas de toutes les icônes de la GameView.
-    Une classe abstraite ne peut pas être instanciée.
+    Contient les paramètres et méthodes de base pour l'affichage via l'appel draw() du canvas de
+    toutes les icônes de la GameView.
+    Rappel : Une classe abstraite ne peut pas être instanciée.
     */
     protected var x = _x
     protected var y = _y
     protected var w = _w
     protected var h = _h
-
+    // Rectangle principal
     protected var r = RectF(x - w/2, y - h/2, x + w/2, y + h/2)
     protected val paint = Paint()
     protected val random = Random()
     protected val color_dark = Color.argb(255,52,73,94)
-
+    // Contour
     protected val STROKE_SIZE = r.height()/10
     protected val STROKE_RADIUS = 10f
     protected var rStroke = r
@@ -28,7 +29,7 @@ abstract class Icon (_x: Float, _y: Float, _w: Float, _h: Float) {
         style = Paint.Style.STROKE
         strokeWidth = STROKE_SIZE
     }
-
+    // Texte
     protected val paintText = Paint().apply {
         textSize = r.width()
         isFakeBoldText = true

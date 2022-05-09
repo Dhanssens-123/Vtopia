@@ -17,11 +17,12 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
     private val backgroundPaint = Paint()
     private var random = Random()
 
-    // Prend les dimensions de la drawingView ( != dimensions de l'écran total)
+    // Récupère les dimensions de la drawingView ( != dimensions de l'écran total)
     private val displayMetrics = DisplayMetrics()
     private var w = context.resources.displayMetrics.widthPixels.toFloat()
     private var h = context.resources.displayMetrics.heightPixels.toFloat()
 
+    // Création des différents éléments de la SurfaceView
     private var airplane = AirPlane(w/2, h/2, w/5, w/5, context)
     private var clouds = ArrayList<Cloud>(5)
     private var snake = Snake(airplane)
@@ -67,6 +68,7 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
             canvas = holder.lockCanvas()
             canvas.drawRect(0F, 0F, w*1f, h*1f, backgroundPaint) // Fond d'écran
             for (cloud in clouds) {
+                // Si l'avion percute l'avion, le nuage est transféré dans la chaine Snake
                 if (RectF.intersects(airplane.getRect(), cloud.getRect())) {
                     snake.ellongate(cloud)
                     clouds.remove(cloud)

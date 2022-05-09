@@ -6,9 +6,10 @@ import android.graphics.Paint
 import android.graphics.RectF
 
 class Parois (x1: Float, y1: Float, x2: Float, y2: Float) {
-
+    /*
+    Borne l'écran et empêche l'objet AirPlane de passer à travers
+     */
     private val r = RectF(x1, y1, x2, y2)
-    private val paint = Paint()
 
     fun gereAirPlane(airplane: AirPlane) {
         if (RectF.intersects(r, airplane.getRect())) {

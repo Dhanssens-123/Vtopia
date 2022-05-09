@@ -15,6 +15,7 @@ class IconLevel(_x: Float, _y: Float, _w: Float, _h: Float, context: Context, _i
     )
 
     override fun draw(canvas: Canvas?) {
+
         // Dessine l'icône selon son type
         if (isFull) {
             canvas?.drawBitmap(spriteSet["star"]!!, null, r, paint)

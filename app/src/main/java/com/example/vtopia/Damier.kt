@@ -18,7 +18,6 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
         "industrie" to 0,
         "feu" to 0
     )
-
     private val spriteSet = mapOf<String, Bitmap>(
         "forêt" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_green),
         "désert" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_yellow),
@@ -29,11 +28,12 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
         "bord" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord)
     )
 
-    // Fixe le diamètre du damier et les positions de chaque case pour la création du tableau de cases
+    // Fixe le diamètre et les positions de chaque case pour la création du damier
     private val diamx = 0.85F * weigth/n
     private val diamy = 3*diamx/(2*Math.sqrt(3.0).toFloat())
     private val posx = Array<Array<Float>>(n, {i -> Array(n, {j -> (weigth/2 - n/2*diamx) + j*diamx + diamx/2*(i%2)})})
     private val posy = Array(n, {i -> (height/2 - n/2*diamy + i*diamy)})
+    // Composition : Les cases n'existent qu'au sein du damier. Elles sont reliées à la vie à la mort.
     private val cases = Array<Array<Case>>(n, {i -> Array(n, {j -> Case(posx[i][j],posy[i],diamx,"désert",1,context)})})
 
     private val random = Random()
@@ -57,7 +57,6 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
     }
 
     fun setDamier(n: Int) {
-
         // Dévoile un damier hexagonal circulaire
 
         var mid = n/2
@@ -76,7 +75,6 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
     }
 
     fun reset() {
-        // Réinitialise le damier
         resetDataSet()
         for (ligne in cases) {
             for (case in ligne) {
@@ -88,12 +86,15 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
     }
 
     fun createRandomCity(game: GameManager) {
+        // Impose un nombre déterminé de cases aléatoires selon le niveau choisi
+
         var intType = mapOf<Int, String>(
             0 to "forêt",
             1 to "habitat",
             2 to "industrie"
         )
         var num = 2*game.getLevel()
+
         while (num > 0) {
             var case = cases[random.nextInt(cases.size)][random.nextInt(cases.size)]
             if (case.isVisible() && case.getType() == "désert") {

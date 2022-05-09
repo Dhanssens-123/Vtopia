@@ -21,6 +21,7 @@ class WelcomeActivity() : AppCompatActivity(), Parcelable {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome_screen)
+        // Anime un avion au lancement de l'application
         var translate = AnimationUtils.loadAnimation(this, R.anim.translate)
         airplane.startAnimation(translate)
     }
@@ -66,6 +67,8 @@ class WelcomeActivity() : AppCompatActivity(), Parcelable {
 
 
     fun star(view: View) {
+        // Modifie le niveau de la partie et affiche ce dernier à l'écran
+        // grâce à des étoiles
         var stars = arrayOf(star1, star2, star3)
         for (star in stars) star.setImageResource(R.drawable.star_bord)
         when(view.id) {
