@@ -5,7 +5,7 @@ import android.graphics.*
 import androidx.core.graphics.toRect
 import java.util.*
 
-abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float) {
+abstract class Icon (_x: Float, _y: Float, _w: Float, _h: Float) {
     /*
     Contient les paramètres de base pour l'affichage via l'appel draw() du canvas de toutes les icônes de la GameView.
     Une classe abstraite ne peut pas être instanciée.
@@ -18,12 +18,13 @@ abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float) {
     protected var r = RectF(x - w/2, y - h/2, x + w/2, y + h/2)
     protected val paint = Paint()
     protected val random = Random()
+    protected val color_dark = Color.argb(255,52,73,94)
 
     protected val STROKE_SIZE = r.height()/10
     protected val STROKE_RADIUS = 10f
     protected var rStroke = r
     protected var paintStroke = Paint().apply {
-        color = Color.argb(255,52,73,94)
+        color = color_dark
         style = Paint.Style.STROKE
         strokeWidth = STROKE_SIZE
     }
@@ -31,7 +32,7 @@ abstract class Icone (_x: Float, _y: Float, _w: Float, _h: Float) {
     protected val paintText = Paint().apply {
         textSize = r.width()
         isFakeBoldText = true
-        color =  Color.argb(255,52,73,94)
+        color =  color_dark
     }
 
     abstract fun draw(canvas: Canvas?) // Une méthode abstraite possède une signature mais pas de corps

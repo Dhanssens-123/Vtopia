@@ -13,7 +13,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".Tips"
+            android:name=".RulesActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity

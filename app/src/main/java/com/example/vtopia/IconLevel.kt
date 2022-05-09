@@ -5,7 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 
-class IconLevel(_x: Float, _y: Float, _w: Float, _h: Float, context: Context, _isFull: Boolean) : Icone(_x,_y,_w,_h) {
+class IconLevel(_x: Float, _y: Float, _w: Float, _h: Float, context: Context, _isFull: Boolean) : Icon(_x,_y,_w,_h) {
 
     // Attribue une image en fonction du type de l'icône de niveau
     private var isFull = _isFull
