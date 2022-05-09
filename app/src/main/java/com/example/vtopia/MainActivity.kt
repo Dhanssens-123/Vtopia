@@ -8,7 +8,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     var mMediaPlayer: MediaPlayer? = null
-    lateinit var gameView : GameView
+    private var musictheme = false
+    lateinit var gameView: GameView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,9 +17,9 @@ class MainActivity : AppCompatActivity() {
         gameView = findViewById<GameView>(R.id.vMain)
 
         // Récupère le niveau défini dans le WelcomeScreen
-        val level = intent.getIntExtra("level",0)
+        val level = intent.getIntExtra("level", 0)
         var cityName = intent.getStringExtra("cityName")
-        if (cityName == "")  cityName = "VTOPIA"
+        if (cityName == "") cityName = "VTOPIA"
         gameView.setCityName(cityName!!)
         gameView.setLevel(level)
     }
@@ -28,32 +29,35 @@ class MainActivity : AppCompatActivity() {
         if (gameView.isDrawing()) {
             gameView.pause()
             play_pause.setImageResource(R.drawable.play)
-        }
-        else {
+        } else {
             gameView.resume()
             play_pause.setImageResource(R.drawable.pause)
         }
     }
-    fun soundOnOff(v: View) {
+
+    fun playMusic() {
         if (mMediaPlayer == null) {
             mMediaPlayer = MediaPlayer.create(this, R.raw.theme)
             mMediaPlayer!!.isLooping = true
             mMediaPlayer!!.start()
-            param.setImageResource(R.drawable.sound_on)
-        } else mMediaPlayer!!.stop()
+        } else mMediaPlayer!!.start()
     }
-
-/*    fun soundOnOff(v: View) {
-    // active ou désactive la musique
-        if (gameView.isDrawing()) {
-            gameView.pause()
+    fun pauseMusic() {
+        if (mMediaPlayer?.isPlaying == true) {
+            mMediaPlayer?.pause()
+        }
+    }
+    fun soundOnOff(v: View) {
+        if (musictheme == false) {
+            playMusic()
             param.setImageResource(R.drawable.sound_on)
-        }
+            musictheme = true}
         else {
-            gameView.resume()
+            pauseMusic()
             param.setImageResource(R.drawable.sound_off)
+            musictheme = false
         }
-    }*/
+    }
 
     override fun onPause() {
         super.onPause()
@@ -63,5 +67,13 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         gameView.resume()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (mMediaPlayer != null) {
+            mMediaPlayer!!.release()
+            mMediaPlayer = null
+        }
     }
 }
