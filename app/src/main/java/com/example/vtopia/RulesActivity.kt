@@ -3,14 +3,14 @@ package com.example.vtopia
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class Tips : AppCompatActivity() {
+class RulesActivity : AppCompatActivity() {
 
-    lateinit var tipsView : TipsView
+    lateinit private var tipsView : RulesView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tips)
-        tipsView = findViewById<TipsView>(R.id.vTips)
+        tipsView = findViewById<RulesView>(R.id.vTips)
     }
 
     override fun onPause() {

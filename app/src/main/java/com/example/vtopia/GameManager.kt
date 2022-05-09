@@ -9,12 +9,12 @@ class GameManager {
 
     // Contient les valeurs de base attribuées à chaque type de case
     private var dataValueSet = mutableMapOf<String, Int>(
-        "forêt" to 1,
+        "forêt" to 2,
         "désert" to 0,
         "habitat" to 2,
         "culture" to 1,
         "feu" to 0,
-        "industrie" to 5
+        "industrie" to 4
     )
 
     // Initialise la partie
@@ -27,24 +27,24 @@ class GameManager {
     private var gameOver = false // Partie en cours
     private val random = Random
 
-    fun updateDeltaScore(damier: Damier, icon_score : IconScore, delta : Delta) {
+    fun updateDeltaScore(damier: Damier, icon_score : IconScore, delta : IconDelta) {
         // Calcule le DeltaScore
 
         // Modification des valeurs pour chaque type selon les différentes combinaisons de types de case à l'écran
         deltaScore = 0
         if (damier.getDataSet()["industrie"]!! > damier.getDataSet()["forêt"]!!)
-            dataValueSet["industrie"] = -5
+            dataValueSet["industrie"] = -4
         else
-            dataValueSet["industrie"] = 5
+            dataValueSet["industrie"] = 4
             //bruleCase(damier, damier.cases[2][3])
 
-        if (damier.getDataSet()["habitat"]!! > damier.getDataSet()["industrie"]!! +1 )
+        if (damier.getDataSet()["habitat"]!! > damier.getDataSet()["industrie"]!!)
             dataValueSet["habitat"] = -2
         else dataValueSet["habitat"] = 2
 
-        if (damier.getDataSet()["culture"]!! > 6 )
+        if (damier.getDataSet()["culture"]!! > damier.getDataSet()["habitat"]!!)
             dataValueSet["culture"] = 1
-        else dataValueSet["culture"] = 5
+        else dataValueSet["culture"] = 4
 
         for ((key, value) in damier.getDataSet()) {
             deltaScore += value * dataValueSet[key]!!
@@ -57,18 +57,17 @@ class GameManager {
     fun updateTotalScore(icon_score: IconScore, damier: Damier) {
         TotalScore += deltaScore
         icon_score.changeScore(TotalScore)
-        if (deltaScore < 0 && random.nextInt(2) ==1) {
-            var case = damier.getCases()[random.nextInt(damier.getCases().size)][random.nextInt(damier.getCases().size)]
-            if (case.isVisible()) case.bruleCase()
-        }
-        if (TotalScore < 0) {
-            var case = damier.getCases()[random.nextInt(damier.getCases().size)][random.nextInt(damier.getCases().size)]
-            if (case.isVisible()) case.bruleCase()
+
+        var case = damier.getCases()[random.nextInt(damier.getCases().size)][random.nextInt(damier.getCases().size)]
+        if (TotalScore < 0 && random.nextInt(2) == 1 && case.isVisible()) {
+            case.bruleCase()
+        } else if (deltaScore < 0 && random.nextInt(4) == 1 && case.isVisible()) {
+            case.bruleCase()
         }
     }
 
 
-    fun updateTotalTime(elapsedTime : Double, icon_time : IconTime, money : Money, icon_score: IconScore, damier: Damier) {
+    fun updateTotalTime(elapsedTime : Double, icon_time : IconTime, money : IconMoney, icon_score: IconScore, damier: Damier) {
         // Calcule le temps restant et le met à jour sur l'icone timer tant que celui-ci est positif
         totalTime -= elapsedTime / 1000.0
         if (totalTime <= 0) {

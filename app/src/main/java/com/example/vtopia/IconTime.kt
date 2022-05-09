@@ -1,13 +1,11 @@
 package com.example.vtopia
 
-import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
-import android.util.TypedValue
 
-class IconTime(_x: Float, _y: Float, _w: Float, _h: Float) : Icone(_x,_y,_w,_h), Animable {
+class IconTime(_x: Float, _y: Float, _w: Float, _h: Float) : Icon(_x,_y,_w,_h), Animable {
 
     // Contient le timer à afficher sur l'écran contrôlé par le GameManager
     private var time = 0.0
@@ -37,7 +35,7 @@ class IconTime(_x: Float, _y: Float, _w: Float, _h: Float) : Icone(_x,_y,_w,_h),
     }
 
     fun reset() {
-        paintText.color = Color.argb(255,52,73,94)
+        paintText.color = color_dark
         paintText.textSize = r.width()
     }
 

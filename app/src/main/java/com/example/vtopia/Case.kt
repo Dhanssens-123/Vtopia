@@ -21,10 +21,10 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
         "feu" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_corail)
     )
 
-    private val spriteBord = mapOf<String, Bitmap>(
-        "bord" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord),
-        "bord_green" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord_green),
-        "bord_red" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord_red)
+    private val spriteBord = mapOf<Int, Bitmap>(
+        0 to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord),
+        1 to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord_green),
+        2 to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord_red)
     )
 
     // Définit les différents paramètres pour l'affichage via draw() du canvas.
@@ -35,13 +35,7 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
         // Dessine la case
         if (state) {
             canvas?.drawBitmap(spriteSet[type]!!, null, r, paint)
-            if (bord == 0) {
-                canvas?.drawBitmap(spriteBord["bord"]!!, null, r, paint)
-            } else if (bord == 1) {
-                canvas?.drawBitmap(spriteBord["bord_green"]!!, null, r, paint)
-            } else if (bord == 2) {
-                canvas?.drawBitmap(spriteBord["bord_red"]!!, null, r, paint)
-            }
+            canvas?.drawBitmap(spriteBord[bord]!!, null, r, paint)
         }
     }
 
@@ -53,8 +47,7 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
 
     fun changeType(newtype : String) {
         // Change le type de la case si celle-ci est affichée
-        if (state)
-            type = newtype
+        type = newtype
     }
 
     fun getType() : String {
@@ -77,8 +70,8 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
         return freeze
     }
 
-    fun freeze() {
-        freeze = true
+    fun setFreeze(bool: Boolean) {
+        freeze = bool
     }
 
     fun setBord(int : Int) {

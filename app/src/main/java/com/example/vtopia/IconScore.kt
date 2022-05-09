@@ -1,9 +1,8 @@
 package com.example.vtopia
 
-import android.content.Context
 import android.graphics.*
 
-class IconScore(x: Float, y: Float, w: Float, h: Float) : Icone(x,y,w,h), Animable {
+class IconScore(x: Float, y: Float, w: Float, h: Float) : Icon(x,y,w,h), Animable {
 
     // Contient le score à afficher sur l'écran, initialement nul et contrôlé par le GameManager
     private var score = 0

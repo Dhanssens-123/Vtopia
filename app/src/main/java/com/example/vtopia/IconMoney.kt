@@ -2,13 +2,10 @@ package com.example.vtopia
 
 import android.content.Context
 import android.graphics.*
-import android.widget.Toast
-import kotlin.coroutines.coroutineContext
 
-class Money(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h) {
+class IconMoney(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icon(_x,_y,_w,_h) {
 
-    private var sprite1 = BitmapFactory.decodeResource(context.resources, R.drawable.square_corail)
-    private var sprite2 = BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow)
+    private var sprite = BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow)
     private val NBRE_BLOC_TOTAL = 10
 
     private var nbreBloc = 5
@@ -24,7 +21,7 @@ class Money(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icon
 
         var bloc = RectF(x - w/2, y - h/2, x - w/2 + lgrBloc, y + h/2)
         for (i in 0 until nbreBloc) {
-            canvas?.drawBitmap(sprite2,null, bloc, paint)
+            canvas?.drawBitmap(sprite,null, bloc, paint)
             bloc.left += lgrBloc
             bloc.right += lgrBloc
         }

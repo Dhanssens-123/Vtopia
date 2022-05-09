@@ -82,6 +82,7 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
             for (case in ligne) {
                 case.setType("désert")
                 case.setBord(1)
+                case.setFreeze(false)
             }
         }
     }
@@ -97,7 +98,7 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
             var case = cases[random.nextInt(cases.size)][random.nextInt(cases.size)]
             if (case.isVisible() && case.getType() == "désert") {
                 case.changeType(intType[random.nextInt(3)]!!)
-                case.freeze()
+                case.setFreeze(true)
                 case.setBord(0)
                 num -= 1
             }

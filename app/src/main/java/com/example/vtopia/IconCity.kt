@@ -2,9 +2,8 @@ package com.example.vtopia
 
 import android.content.Context
 import android.graphics.*
-import java.util.*
 
-class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icone(_x,_y,_w,_h), Animable {
+class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icon(_x,_y,_w,_h), Animable {
 
     private var band_bmp = flipImageVertically(BitmapFactory.decodeResource(context.resources, R.drawable.band))
     private var airplane_bmp = BitmapFactory.decodeResource(context.resources, R.drawable.airplane)

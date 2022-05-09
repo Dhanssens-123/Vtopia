@@ -4,22 +4,15 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.res.Resources
 import android.graphics.*
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.DisplayMetrics
-import android.view.Display
 import android.view.MotionEvent
-import android.view.SurfaceHolder
 import android.view.SurfaceView
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
-import com.example.vtopia.R.integer
-import kotlinx.android.synthetic.main.activity_welcome_screen.view.*
 import java.util.*
-import kotlin.math.pow
 
 class GameView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), Runnable {
 
@@ -53,17 +46,17 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     private val damier = Damier(context, w, 0.9f*h, DIAM_DAMIER)
     private val clouds = ArrayList<Cloud>()
     private val squares = arrayOf(
-        BtnCase(w/6,0.9f*h,w/8,w/8,context,"désert",damier),
-        BtnCase(2*w/6,0.9f*h,w/8,w/8,context,"culture",damier),
-        BtnCase(3*w/6,0.9f*h,w/8,w/8,context,"habitat",damier),
-        BtnCase(4*w/6,0.9f*h,w/8,w/8, context,"industrie",damier),
-        BtnCase(5*w/6,0.9f*h,w/8,w/8, context, "forêt",damier)
+        CaseButton(w/6,0.9f*h,w/8,w/8,context,"désert",damier),
+        CaseButton(2*w/6,0.9f*h,w/8,w/8,context,"culture",damier),
+        CaseButton(3*w/6,0.9f*h,w/8,w/8,context,"habitat",damier),
+        CaseButton(4*w/6,0.9f*h,w/8,w/8, context,"industrie",damier),
+        CaseButton(5*w/6,0.9f*h,w/8,w/8, context, "forêt",damier)
     )
-    private val money = Money(w/2, 0.725f*h, 4*w/6, h/20, context)
-    private val delta = Delta(w/2, 0.8f*h,4*w/6, h/20, context)
+    private val money = IconMoney(w/2, 0.725f*h, 4*w/6, h/20, context)
+    private val delta = IconDelta(w/2, 0.8f*h,4*w/6, h/20, context)
     private val iconCity = IconCity(w/2,h/12,w/2,h/10, context)
-    private val therm_score = IconScore(7*w/8, h/5, w/10, h/10)
-    private val time_score = IconTime(w/8, h/5,w/10,h/10)
+    private val therm_score = IconScore(7*w/8, h/7, w/10, h/10)
+    private val time_score = IconTime(w/8, h/7,w/10,h/10)
 
     init {
         backgroundPaint.color = Color.argb(255,93,173,226)
@@ -72,7 +65,6 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     }
 
     override fun run() {
-        damier.createRandomCity(game)
         var previousFrameTime = System.currentTimeMillis() // t_0
         while(drawing) {
             // Temps écoulé
@@ -153,18 +145,18 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
                 // Récupère les coordonnées du click sur l'écran et vérifie la correspondance
                 val x = event.rawX
                 val y = event.rawY - hStatusBar
-                checkClick(squares, damier.getCases(), x, y)
+                if (drawing) checkClick(squares, damier.getCases(), x, y)
             }
         }
         return true
     }
 
-    fun checkClick(squares : Array<BtnCase>, cases : Array<Array<Case>>, x : Float, y : Float) {
+    fun checkClick(squares : Array<CaseButton>, cases : Array<Array<Case>>, x : Float, y : Float) {
         var flag = true
         // Si une case est clickée, changement de son état
         for (ligne in cases) {
             for (case in ligne) {
-                if (case.isVisible() && case.getRect().contains(x,y) && flag && case.getType() != type && !case.isFreeze() && money.getNbreBloc() >= 2) {
+                if (flag && case.isVisible() && case.getRect().contains(x,y) && case.getType() != type && !case.isFreeze() && money.getNbreBloc() >= 2) {
                     case.changeType(type)
                     money.updateBloc(-2)
                     flag = false
@@ -181,7 +173,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         }
     }
 
-    fun grow(square: BtnCase, squares: Array<BtnCase>) {
+    fun grow(square: CaseButton, squares: Array<CaseButton>) {
         for (s in squares) {
             s.reinitRectSize(s.getRect())
             s.changeRectSize(s.getRectStroke(),s.getStrokeSize(),s.getStrokeSize())
@@ -225,6 +217,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
 
     fun setLevel(lvl: Int) {
         game.setLevel(lvl)
+        damier.createRandomCity(game)
     }
 
     fun isDrawing() : Boolean {

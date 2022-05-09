@@ -1,18 +1,12 @@
 package com.example.vtopia
 
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_welcome_screen.*
 
 class WelcomeScreen() : AppCompatActivity(), Parcelable {
@@ -37,7 +31,7 @@ class WelcomeScreen() : AppCompatActivity(), Parcelable {
 
     fun toRule(view: View) {
         // Montre les règles du jeu
-        startActivity(Intent(this, Tips::class.java).apply {})
+        startActivity(Intent(this, RulesActivity::class.java).apply {})
     }
 
     fun easterEgg(view: View) {
