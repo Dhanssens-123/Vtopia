@@ -10,6 +10,7 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
     private var bord = _bord
     private var state = false // Etat d'affichage de la case
     private var freeze = false
+    private val STROKE_SIZE = diametre/10
 
     // Attribue une image et un bord à chaque type de case
     private val spriteSet = mapOf<String, Bitmap>(

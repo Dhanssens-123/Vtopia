@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Vtopia">
         <activity
-            android:name=".EasterEgg"
+            android:name=".EasterEggActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
@@ -17,7 +17,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".WelcomeScreen"
+            android:name=".WelcomeActivity"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>

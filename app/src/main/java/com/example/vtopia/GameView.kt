@@ -118,6 +118,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         type = "désert"
         game.reset()
         damier.reset()
+        damier.createRandomCity(game)
         for (s in squares) {
             s.reinitRectSize(s.getRect())
             s.changeRectSize(s.getRectStroke(),s.getStrokeSize(),s.getStrokeSize())

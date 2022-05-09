@@ -4,17 +4,17 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class RulesActivity : AppCompatActivity() {
+class EasterEggActivity : AppCompatActivity() {
 
     private var mMediaPlayer: MediaPlayer? = null
     private var musictheme = true
 
-    lateinit private var tipsView : RulesView
+    lateinit private var easterEggView : EasterEggView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tips)
-        tipsView = findViewById<RulesView>(R.id.vTips)
+        setContentView(R.layout.activity_easter_egg)
+        easterEggView = findViewById<EasterEggView>(R.id.vEasterEgg)
 
         playMusic()
     }
@@ -36,12 +36,12 @@ class RulesActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         pauseMusic()
-        tipsView.pause()
+        easterEggView.pause()
     }
 
     override fun onResume() {
         super.onResume()
         playMusic()
-        tipsView.resume()
+        easterEggView.resume()
     }
 }

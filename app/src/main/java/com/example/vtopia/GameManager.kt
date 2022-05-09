@@ -38,7 +38,7 @@ class GameManager {
             dataValueSet["industrie"] = 4
             //bruleCase(damier, damier.cases[2][3])
 
-        if (damier.getDataSet()["habitat"]!! > damier.getDataSet()["industrie"]!!)
+        if (damier.getDataSet()["habitat"]!! >= damier.getDataSet()["industrie"]!!)
             dataValueSet["habitat"] = -2
         else dataValueSet["habitat"] = 2
 

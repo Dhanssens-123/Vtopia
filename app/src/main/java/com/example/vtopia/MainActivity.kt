@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    var mMediaPlayer: MediaPlayer? = null
-    private var musictheme = false
+    private var mMediaPlayer: MediaPlayer? = null
+    private var musictheme = true
     lateinit var gameView: GameView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         if (cityName == "") cityName = "VTOPIA"
         gameView.setCityName(cityName!!)
         gameView.setLevel(level)
+
+        playMusic()
     }
 
     fun gameOnOff(v: View) {
@@ -42,11 +44,13 @@ class MainActivity : AppCompatActivity() {
             mMediaPlayer!!.start()
         } else mMediaPlayer!!.start()
     }
+
     fun pauseMusic() {
         if (mMediaPlayer?.isPlaying == true) {
             mMediaPlayer?.pause()
         }
     }
+
     fun soundOnOff(v: View) {
         if (musictheme == false) {
             playMusic()
@@ -61,11 +65,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        pauseMusic()
         gameView.pause()
     }
 
     override fun onResume() {
         super.onResume()
+        playMusic()
         gameView.resume()
     }
 

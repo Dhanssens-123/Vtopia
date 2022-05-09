@@ -1,6 +1,7 @@
 package com.example.vtopia
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
@@ -9,8 +10,11 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_welcome_screen.*
 
-class WelcomeScreen() : AppCompatActivity(), Parcelable {
+class WelcomeActivity() : AppCompatActivity(), Parcelable {
     constructor(parcel: Parcel) : this()
+
+    private var mMediaPlayer: MediaPlayer? = null
+    private var musictheme = true
 
     private var level = 1
 
@@ -23,19 +27,41 @@ class WelcomeScreen() : AppCompatActivity(), Parcelable {
 
     fun newGame(view: View) {
         // Commence une nouvelle partie quand le bouton est pressé
+        pauseMusic()
+
         val intent = Intent(this, MainActivity::class.java).apply {}
         intent.putExtra("level", level)
         intent.putExtra("cityName", cityName.text.toString())
         startActivity(intent)
     }
 
+    fun playMusic() {
+        if (mMediaPlayer == null) {
+            mMediaPlayer = MediaPlayer.create(this, R.raw.theme)
+            mMediaPlayer!!.isLooping = true
+            mMediaPlayer!!.start()
+        } else mMediaPlayer!!.start()
+    }
+
+    fun pauseMusic() {
+        if (mMediaPlayer?.isPlaying == true) {
+            mMediaPlayer?.pause()
+        }
+    }
+
+    fun restartMusic() {
+        mMediaPlayer = null
+    }
+
     fun toRule(view: View) {
         // Montre les règles du jeu
+        pauseMusic()
         startActivity(Intent(this, RulesActivity::class.java).apply {})
     }
 
     fun easterEgg(view: View) {
-        startActivity(Intent(this, EasterEgg::class.java).apply {})
+        pauseMusic()
+        startActivity(Intent(this, EasterEggActivity::class.java).apply {})
     }
 
 
@@ -61,6 +87,17 @@ class WelcomeScreen() : AppCompatActivity(), Parcelable {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        pauseMusic()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        restartMusic()
+        playMusic()
+    }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
 
     }
@@ -69,12 +106,12 @@ class WelcomeScreen() : AppCompatActivity(), Parcelable {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<WelcomeScreen> {
-        override fun createFromParcel(parcel: Parcel): WelcomeScreen {
-            return WelcomeScreen(parcel)
+    companion object CREATOR : Parcelable.Creator<WelcomeActivity> {
+        override fun createFromParcel(parcel: Parcel): WelcomeActivity {
+            return WelcomeActivity(parcel)
         }
 
-        override fun newArray(size: Int): Array<WelcomeScreen?> {
+        override fun newArray(size: Int): Array<WelcomeActivity?> {
             return arrayOfNulls(size)
         }
     }
