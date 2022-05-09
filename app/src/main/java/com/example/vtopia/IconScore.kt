@@ -6,7 +6,7 @@ class IconScore(x: Float, y: Float, w: Float, h: Float) : Icon(x,y,w,h), Animabl
 
     private var score = 0
     private var counter = 0
-    private val BLINK_PERIOD = 10 // Divisible par 2 !
+    private val BLINK_PERIOD = 20 // Divisible par 2 !
 
     fun changeScore(newscore : Int) {
         score = newscore

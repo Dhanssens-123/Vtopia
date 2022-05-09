@@ -10,8 +10,8 @@ class IconTime(_x: Float, _y: Float, _w: Float, _h: Float) : Icon(_x,_y,_w,_h), 
     // Contient le timer à afficher sur l'écran contrôlé par le GameManager
     private var time = 0.0
     private var counter = 0
-    private var BLINK_PERIOD = 20 // Divisible par 2
-    private var MULTICOLOR_PERIOD = 4 // Divisible par 2
+    private var BLINK_PERIOD = 10 // Divisible par 2
+    private var MULTICOLOR_PERIOD = 10 // Divisible par 2
 
     fun changeTime(newTime: Double) {
         time = newTime
@@ -22,13 +22,13 @@ class IconTime(_x: Float, _y: Float, _w: Float, _h: Float) : Icon(_x,_y,_w,_h), 
 
         // Si le timer se trouve à une certaine valeur,
         // met à jour le compteur et clignote en fonction de ce dernier
-        if (time.toInt() % 10 == 0 || time.toInt() < 10) {
+        if (time.toInt() % 10 == 0 || time.toInt() < 5) {
             formatted_time = blink(formatted_time, "", counter, BLINK_PERIOD)
             counter += 1
         } else counter = 0
-        // S'il reste moins de 5sec,
+        // S'il reste moins de 3sec,
         // change régulièrement la couleur selon le compteur
-        if (time.toInt() <= 5) {
+        if (time.toInt() <= 3) {
             paintText.textSize = 1.5f*w
             if (counter%MULTICOLOR_PERIOD == MULTICOLOR_PERIOD/2) changeColor(paintText)
         }

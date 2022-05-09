@@ -186,7 +186,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
 
     fun showGameOverDialog(messageId: Int) {
         /*
-        Fonction directement copiée du jeu CanonView. A comprendre en détail.
+        Fonction directement récupérée du jeu CanonView.
         Permet l'affichage du fragment en fin de jeu.
          */
         class GameResult: DialogFragment() {

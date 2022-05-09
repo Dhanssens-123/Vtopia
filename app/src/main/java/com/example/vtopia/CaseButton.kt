@@ -9,7 +9,7 @@ class CaseButton(x: Float, y: Float, w: Float, h: Float, context: Context, _type
     private val damier = _damier
     private var isClicked = false
 
-    val spriteSet = mapOf<String, Bitmap>(
+    private val spriteSet = mapOf<String, Bitmap>(
         "forêt" to BitmapFactory.decodeResource(context.resources, R.drawable.square_green),
         "désert" to BitmapFactory.decodeResource(context.resources, R.drawable.square_yellow),
         "habitat" to BitmapFactory.decodeResource(context.resources, R.drawable.square_brown),

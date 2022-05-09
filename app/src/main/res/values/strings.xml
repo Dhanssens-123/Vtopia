@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Vtopia</string>
     <string name="results_format">Score = %1$d</string>
-    <string name="reset_game">Redémarre le jeu</string>
+    <string name="reset_game">Redémarrer le jeu</string>
     <string name="gameOver">Temps écoulé !</string>
     <string name="title_activity_starting_screen">StartingScreen</string>
     <string name="dummy_button">Dummy Button</string>

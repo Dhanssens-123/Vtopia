@@ -30,9 +30,11 @@ class MainActivity : AppCompatActivity() {
         // Gère l'état de l'activité gameView
         if (gameView.isDrawing()) {
             gameView.pause()
+            pauseMusic()
             play_pause.setImageResource(R.drawable.play)
         } else {
-            onPause()
+            gameView.resume()
+            playMusic()
             play_pause.setImageResource(R.drawable.pause)
         }
     }
