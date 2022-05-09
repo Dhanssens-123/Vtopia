@@ -1,18 +1,13 @@
 package com.example.vtopia
 
-import androidx.appcompat.app.AppCompatActivity
+import android.media.MediaPlayer
 import android.os.Bundle
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.view.ScaleGestureDetector
 import android.view.View
-import android.widget.Toast
-import android.widget.ZoomControls
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_welcome_screen.view.*
 
 class MainActivity : AppCompatActivity() {
-
+    var mMediaPlayer: MediaPlayer? = null
     lateinit var gameView : GameView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +34,17 @@ class MainActivity : AppCompatActivity() {
             play_pause.setImageResource(R.drawable.pause)
         }
     }
-
     fun soundOnOff(v: View) {
-        // Met également l'activité gameView en pause
+        if (mMediaPlayer == null) {
+            mMediaPlayer = MediaPlayer.create(this, R.raw.theme)
+            mMediaPlayer!!.isLooping = true
+            mMediaPlayer!!.start()
+            param.setImageResource(R.drawable.sound_on)
+        } else mMediaPlayer!!.stop()
+    }
+
+/*    fun soundOnOff(v: View) {
+    // active ou désactive la musique
         if (gameView.isDrawing()) {
             gameView.pause()
             param.setImageResource(R.drawable.sound_on)
@@ -50,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             gameView.resume()
             param.setImageResource(R.drawable.sound_off)
         }
-    }
+    }*/
 
     override fun onPause() {
         super.onPause()
