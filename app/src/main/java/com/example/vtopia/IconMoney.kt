@@ -17,11 +17,13 @@ class IconMoney(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : 
 
     override fun draw(canvas: Canvas?) {
 
-        canvas?.drawRoundRect(rStroke,10f,10f,paintStroke)
+        canvas?.drawRoundRect(rStroke,STROKE_RADIUS,STROKE_RADIUS,paintStroke)
 
         var bloc = RectF(x - w/2, y - h/2, x - w/2 + lgrBloc, y + h/2)
+        var blocStroke = bloc
         for (i in 0 until nbreBloc) {
             canvas?.drawBitmap(sprite,null, bloc, paint)
+            canvas?.drawRoundRect(blocStroke,STROKE_RADIUS,STROKE_RADIUS,paintStroke)
             bloc.left += lgrBloc
             bloc.right += lgrBloc
         }
@@ -29,7 +31,7 @@ class IconMoney(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : 
 
     fun updateBloc(a: Int) {
         nbreBloc += a
-        if (nbreBloc >= NBRE_BLOC_TOTAL) nbreBloc = 10
+        if (nbreBloc >= NBRE_BLOC_TOTAL) nbreBloc = NBRE_BLOC_TOTAL
     }
 
     fun getNbreBloc() : Int {

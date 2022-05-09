@@ -10,20 +10,20 @@ class IconDelta(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : 
     private var nbreBloc = 5
     private var lgrBloc = w / NBRE_BLOC_TOTAL
 
+    private var bloc = RectF(x - w/2, y - h/2, x - w/2, y + h/2)
+
     init {
         changeRectSize(rStroke,STROKE_SIZE,STROKE_SIZE)
     }
 
     override fun draw(canvas: Canvas?) {
 
-        canvas?.drawRoundRect(rStroke,10f,10f,paintStroke)
+        canvas?.drawRoundRect(rStroke,STROKE_RADIUS,STROKE_RADIUS,paintStroke)
 
-        var bloc = RectF(x - w/2, y - h/2, x - w/2 + lgrBloc, y + h/2)
-        for (i in 0 until nbreBloc) {
-            drawBloc(bloc, paint, canvas)
-            bloc.left += lgrBloc
-            bloc.right += lgrBloc
-        }
+        var blocStroke = bloc
+        bloc.right = r.left + lgrBloc*nbreBloc
+        drawBloc(bloc, paint, canvas)
+        canvas?.drawRect(blocStroke, paintStroke)
     }
 
     fun updateBloc(delta: Int) {

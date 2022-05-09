@@ -9,7 +9,7 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
     private var airplane_bmp = BitmapFactory.decodeResource(context.resources, R.drawable.airplane)
     private var tempo_band = 20
     private var tempo_airplane = 100
-    private var vy = 1f
+    private var vy = 0.5f
     private var switch_band = 0
     private var switch_airplane = 0
 
