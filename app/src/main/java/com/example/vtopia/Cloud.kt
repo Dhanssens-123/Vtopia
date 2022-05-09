@@ -13,8 +13,13 @@ class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aeria
     private var vy = random.nextFloat()*1.5f
     private var counterx = 0
     private var countery = 0
+    private var COLOR_PERIOD = 100
 
     private var sprite = BitmapFactory.decodeResource(context.resources, R.drawable.cloud).extractAlpha()
+
+    init{
+        paint.color = color
+    }
 
     override fun draw(canvas: Canvas?) {
         counterx = (counterx + 1)%tempox
@@ -23,7 +28,8 @@ class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aeria
         if (countery == tempoy/2) vy = -vy
         vibrate(r,vx,vy)
 
-        paint.color = color
+        if (counterx%COLOR_PERIOD == COLOR_PERIOD/2) changeColor(paint)
+
         canvas?.drawBitmap(sprite, null, r, paint)
     }
 
@@ -36,6 +42,6 @@ class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aeria
     }
 
     override fun changeColor(paint: Paint) {
-        TODO("Not yet implemented")
+        paint.color = Color.argb(255,100+random.nextInt(155),255,255)
     }
 }

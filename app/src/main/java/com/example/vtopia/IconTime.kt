@@ -50,6 +50,6 @@ class IconTime(_x: Float, _y: Float, _w: Float, _h: Float) : Icone(_x,_y,_w,_h),
     }
 
     override fun changeColor(paint: Paint) {
-        paintText.color = Color.argb(255,255,random.nextInt(255), random.nextInt(255))
+        paint.color = Color.argb(255,255,random.nextInt(255), random.nextInt(255))
     }
 }
