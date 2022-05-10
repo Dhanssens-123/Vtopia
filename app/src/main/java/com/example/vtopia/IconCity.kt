@@ -33,9 +33,9 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
         canvas?.drawBitmap(band_bmp, null, r1, paint)
         canvas?.drawBitmap(airplane_bmp, null, r2, paint)
         // Affiche le nom de la ville sur la bande
-        var text = "$cityName".toUpperCase()
+        val text = cityName.uppercase()
         paintText.textSize = r1.width()/MAX_LENGTH * (1 + 0.1f*(MAX_LENGTH - text.length))
-        var offSet = paintText.measureText(text)
+        val offSet = paintText.measureText(text)
         canvas?.drawText(text,r1.left + w/2 - offSet/2 - STEP/2*w - r1.width()/20, r1.top + h/2 + paintText.textSize/3, paintText)
     }
 
@@ -45,15 +45,15 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
 
     fun flipImageVertically(bmp : Bitmap) : Bitmap {
         // Retourne verticalement l'image
-        var matrix = Matrix().apply { postScale(-1f, 1f, bmp.width / 2f, bmp.height / 2f) }
-        var newbmp = Bitmap.createBitmap(bmp, 0, 0, bmp.width, bmp.height, matrix, true)
+        val matrix = Matrix().apply { postScale(-1f, 1f, bmp.width / 2f, bmp.height / 2f) }
+        val newbmp = Bitmap.createBitmap(bmp, 0, 0, bmp.width, bmp.height, matrix, true)
         return newbmp
     }
 
     fun flipImageHorizontally(bmp : Bitmap) : Bitmap {
         // Retourne horizontalement l'image
-        var matrix = Matrix().apply { postScale(1f, -1f, bmp.width / 2f, bmp.height / 2f) }
-        var newbmp = Bitmap.createBitmap(bmp, 0, 0, bmp.width, bmp.height, matrix, true)
+        val matrix = Matrix().apply { postScale(1f, -1f, bmp.width / 2f, bmp.height / 2f) }
+        val newbmp = Bitmap.createBitmap(bmp, 0, 0, bmp.width, bmp.height, matrix, true)
         return newbmp
     }
 

@@ -1,8 +1,6 @@
 package com.example.vtopia
 
-import android.content.Context
 import android.graphics.*
-import androidx.core.graphics.toRect
 import java.util.*
 
 abstract class Icon (_x: Float, _y: Float, _w: Float, _h: Float) {

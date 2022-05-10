@@ -2,7 +2,6 @@ package com.example.vtopia
 
 import android.content.Context
 import android.graphics.*
-import java.util.*
 
 class Cloud (x: Float, y: Float, w : Float, h : Float, context: Context) : Aerial(x,y, w, h), Animable {
 

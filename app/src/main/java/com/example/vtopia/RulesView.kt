@@ -6,15 +6,12 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.DisplayMetrics
-import android.view.MotionEvent
-import android.view.SurfaceHolder
 import android.view.SurfaceView
 import java.util.*
 
 class RulesView  @JvmOverloads constructor (context: Context, attributes: AttributeSet? = null, defStyleAttr: Int = 0): SurfaceView(context, attributes, defStyleAttr), Runnable {
 
     private val backgroundPaint = Paint()
-    private val textPaint = Paint()
     private var random = Random()
 
     private var drawing: Boolean = true
@@ -22,7 +19,6 @@ class RulesView  @JvmOverloads constructor (context: Context, attributes: Attrib
     lateinit private var thread: Thread
 
     // Récupère les dimensions de la drawingView ( != dimensions de l'écran total)
-    private val displayMetrics = DisplayMetrics()
     private var w = context.resources.displayMetrics.widthPixels.toFloat()
     private var h = context.resources.displayMetrics.heightPixels.toFloat()
 

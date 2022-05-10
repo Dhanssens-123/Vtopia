@@ -6,9 +6,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
-import android.util.DisplayMetrics
-import android.view.MotionEvent
-import android.view.SurfaceHolder
 import android.view.SurfaceView
 import java.util.*
 
@@ -18,7 +15,6 @@ class EasterEggView @JvmOverloads constructor (context: Context, attributes: Att
     private var random = Random()
 
     // Récupère les dimensions de la drawingView ( != dimensions de l'écran total)
-    private val displayMetrics = DisplayMetrics()
     private var w = context.resources.displayMetrics.widthPixels.toFloat()
     private var h = context.resources.displayMetrics.heightPixels.toFloat()
 

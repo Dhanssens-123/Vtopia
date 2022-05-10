@@ -1,10 +1,6 @@
 package com.example.vtopia
 
 import android.content.Context
-import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
 import java.util.*
 
 class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
@@ -17,15 +13,6 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
         "culture" to 0,
         "industrie" to 0,
         "feu" to 0
-    )
-    private val spriteSet = mapOf<String, Bitmap>(
-        "forêt" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_green),
-        "désert" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_yellow),
-        "habitat" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_brown),
-        "culture" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_pink),
-        "industrie" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_grey),
-        "feu" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_corail),
-        "bord" to BitmapFactory.decodeResource(context.resources, R.drawable.hex_bord)
     )
 
     // Fixe le diamètre et les positions de chaque case pour la création du damier
@@ -59,7 +46,7 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
     fun setDamier(n: Int) {
         // Dévoile un damier hexagonal circulaire
 
-        var mid = n/2
+        val mid = n/2
         // Partie supérieure du damier
         for (i in -mid..0) {
             for (j in (-mid + Math.round((-i-1 + mid%2) / 2.0)).toInt()..(mid - Math.round((-i + mid%2)/ 2.0)).toInt()) {
@@ -88,7 +75,7 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
     fun createRandomCity(game: GameManager) {
         // Impose un nombre déterminé de cases aléatoires selon le niveau choisi
 
-        var intType = mapOf<Int, String>(
+        val intType = mapOf<Int, String>(
             0 to "forêt",
             1 to "habitat",
             2 to "industrie"
@@ -96,7 +83,7 @@ class Damier (context: Context, weigth: Float, height: Float, n: Int)  {
         var num = 2*game.getLevel()
 
         while (num > 0) {
-            var case = cases[random.nextInt(cases.size)][random.nextInt(cases.size)]
+            val case = cases[random.nextInt(cases.size)][random.nextInt(cases.size)]
             if (case.isVisible() && case.getType() == "désert") {
                 case.changeType(intType[random.nextInt(3)]!!)
                 case.setFreeze(true)

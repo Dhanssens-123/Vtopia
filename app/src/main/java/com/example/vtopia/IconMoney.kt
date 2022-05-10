@@ -20,8 +20,8 @@ class IconMoney(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : 
         // Trace le cadre global
         canvas?.drawRoundRect(rStroke,STROKE_RADIUS,STROKE_RADIUS,paintStroke)
         // Trace chaque bloc et son contour
-        var bloc = RectF(x - w/2, y - h/2, x - w/2 + lgrBloc, y + h/2)
-        var blocStroke = bloc
+        val bloc = RectF(x - w/2, y - h/2, x - w/2 + lgrBloc, y + h/2)
+        val blocStroke = bloc
         for (i in 0 until nbreBloc) {
             canvas?.drawBitmap(sprite,null, bloc, paint)
             canvas?.drawRoundRect(blocStroke,STROKE_RADIUS,STROKE_RADIUS,paintStroke)

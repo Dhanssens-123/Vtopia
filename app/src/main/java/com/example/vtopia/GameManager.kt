@@ -58,7 +58,7 @@ class GameManager(_damier: Damier) {
         icon_score.changeScore(totalScore)
 
         // Gère la suppression des cases muables
-        var case = damier.getCases()[random.nextInt(damier.getCases().size)][random.nextInt(damier.getCases().size)]
+        val case = damier.getCases()[random.nextInt(damier.getCases().size)][random.nextInt(damier.getCases().size)]
         if (totalScore < 0 && random.nextInt(2) == 1 && case.isVisible()) {
             case.bruleCase()
         } else if (deltaScore < 0 && random.nextInt(4) == 1 && case.isVisible()) {

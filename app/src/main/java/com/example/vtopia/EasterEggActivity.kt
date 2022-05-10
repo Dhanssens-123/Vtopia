@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 class EasterEggActivity : AppCompatActivity() {
 
     private var mMediaPlayer: MediaPlayer? = null
-    private var musicTheme = true
 
     lateinit private var easterEggView : EasterEggView
 

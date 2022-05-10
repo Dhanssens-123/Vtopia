@@ -2,7 +2,6 @@ package com.example.vtopia
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         playMusic()
     }
 
-    fun gameOnOff(v: View) {
+    fun gameOnOff() {
         // Gère l'état de l'activité gameView
         if (gameView.isDrawing()) {
             gameView.pause()
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun soundOnOff(v: View) {
+    fun soundOnOff() {
         // Gère le contrôle du son
         if (musicTheme == false) {
             playMusic()

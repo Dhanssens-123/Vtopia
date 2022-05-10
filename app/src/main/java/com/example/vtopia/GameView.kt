@@ -7,7 +7,6 @@ import android.content.DialogInterface
 import android.graphics.*
 import android.os.Bundle
 import android.util.AttributeSet
-import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.SurfaceView
 import androidx.fragment.app.DialogFragment
@@ -32,7 +31,6 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
     private var drawing: Boolean = true // Gère ou non la màj de l'affichage
 
     // Récupère les dimensions de la drawingView ( != dimensions de l'écran total)
-    private val displayMetrics = DisplayMetrics()
     private val w = context.resources.displayMetrics.widthPixels.toFloat()
     private val h = context.resources.displayMetrics.heightPixels.toFloat()
     // Récupère la hauteur de la barre de statut
@@ -55,7 +53,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         ButtonCase(5*w/6,0.9f*h,w/8,w/8, context, "forêt",damier)
     )
     private val money = IconMoney(w/2, 0.725f*h, 4*w/6, h/20, context)
-    private val delta = IconDelta(w/2, 0.8f*h,4*w/6, h/20, context)
+    private val delta = IconDelta(w/2, 0.8f*h,4*w/6, h/20)
     private val iconCity = IconCity(w/2,h/12,w/2,h/10, context)
     private val therm_score = IconScore(7*w/8, h/7, w/10, h/10)
     private val time_score = IconTime(w/8, h/7,w/10,h/10)
@@ -71,7 +69,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         while(drawing) {
             // Temps écoulé
             val currentTime = System.currentTimeMillis()
-            var elapsedTimeMS = (currentTime - previousFrameTime).toDouble()
+            val elapsedTimeMS = (currentTime - previousFrameTime).toDouble()
             // Màj du jeu et de l'affichage
             game.updateTotalTime(elapsedTimeMS, time_score, money, therm_score)
             damier.updateDataSet()

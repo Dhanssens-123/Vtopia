@@ -22,9 +22,9 @@ class IconScore(x: Float, y: Float, w: Float, h: Float) : Icon(x,y,w,h), Animabl
         } else counter = 0
 
         // Affiche le score
-        var length = paintText.measureText(text)
+        val length = paintText.measureText(text)
         // Décalage de l'emplacement pour une meilleure esthétique
-        var offSet = if (text.length > 2) (2*text.length-2)/(2*text.length).toFloat() else 0.5F
+        val offSet = if (text.length > 2) (2*text.length-2)/(2*text.length).toFloat() else 0.5F
         canvas?.drawText(text,x - offSet*length, y + paintText.textSize/3, paintText)
     }
 
@@ -32,7 +32,7 @@ class IconScore(x: Float, y: Float, w: Float, h: Float) : Icon(x,y,w,h), Animabl
         return if ((counter % period) < period/2) newtxt else txt
     }
 
-    override fun vibrate(r: RectF, vx: Float, vy: Float) {
+    override fun vibrate(rect: RectF, vx: Float, vy: Float) {
         TODO("Not yet implemented")
     }
 

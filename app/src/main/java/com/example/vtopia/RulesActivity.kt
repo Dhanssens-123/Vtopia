@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 class RulesActivity : AppCompatActivity() {
 
     private var mMediaPlayer: MediaPlayer? = null
-    private var musicTheme = true
 
     lateinit private var tipsView : RulesView
 

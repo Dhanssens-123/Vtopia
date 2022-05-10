@@ -34,7 +34,7 @@ class IconTime(_x: Float, _y: Float, _w: Float, _h: Float) : Icon(_x,_y,_w,_h), 
         }
 
         // Affiche le temps restant
-        var offSet = paintText.measureText(formatted_time)
+        val offSet = paintText.measureText(formatted_time)
         canvas?.drawText(formatted_time, x - offSet/2, y + paintText.textSize/3, paintText)
     }
 
@@ -47,7 +47,7 @@ class IconTime(_x: Float, _y: Float, _w: Float, _h: Float) : Icon(_x,_y,_w,_h), 
         return if ((counter % period) < period/2) newtxt else txt
     }
 
-    override fun vibrate(r: RectF, vx: Float, vy: Float) {
+    override fun vibrate(rect: RectF, vx: Float, vy: Float) {
         TODO("Not yet implemented")
     }
 

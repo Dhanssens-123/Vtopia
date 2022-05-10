@@ -1,11 +1,9 @@
 package com.example.vtopia
 
-import android.content.Context
 import android.graphics.*
 
-class IconDelta(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : Icon(_x,_y,_w,_h) {
+class IconDelta(_x: Float, _y: Float, _w: Float, _h: Float) : Icon(_x,_y,_w,_h) {
 
-    private var sprite = BitmapFactory.decodeResource(context.resources, R.drawable.square_bord)
     private val NBRE_BLOC_TOTAL = 10
 
     private var nbreBloc = 5
@@ -22,7 +20,7 @@ class IconDelta(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : 
         // Trace le cadre général
         canvas?.drawRoundRect(rStroke,STROKE_RADIUS,STROKE_RADIUS,paintStroke)
         // Trace le bloc de longueur variable et son contour
-        var blocStroke = bloc
+        val blocStroke = bloc
         bloc.right = r.left + lgrBloc*nbreBloc
         drawBloc(bloc, paint, canvas)
         canvas?.drawRect(blocStroke, paintStroke)

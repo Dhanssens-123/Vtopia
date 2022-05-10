@@ -14,7 +14,6 @@ class WelcomeActivity() : AppCompatActivity(), Parcelable {
     constructor(parcel: Parcel) : this()
 
     private var mMediaPlayer: MediaPlayer? = null
-    private var musicTheme = true
 
     private var level = 1
 
@@ -22,11 +21,11 @@ class WelcomeActivity() : AppCompatActivity(), Parcelable {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome_screen)
         // Anime un avion au lancement de l'application
-        var translate = AnimationUtils.loadAnimation(this, R.anim.translate)
+        val translate = AnimationUtils.loadAnimation(this, R.anim.translate)
         airplane.startAnimation(translate)
     }
 
-    fun newGame(view: View) {
+    fun newGame(v: View) {
         // Commence une nouvelle partie quand le bouton est pressé
         pauseMusic()
 
@@ -54,13 +53,13 @@ class WelcomeActivity() : AppCompatActivity(), Parcelable {
         mMediaPlayer = null
     }
 
-    fun toRule(view: View) {
+    fun toRule(v: View) {
         // Montre les règles du jeu
         pauseMusic()
         startActivity(Intent(this, RulesActivity::class.java).apply {})
     }
 
-    fun easterEgg(view: View) {
+    fun easterEgg(v: View) {
         pauseMusic()
         startActivity(Intent(this, EasterEggActivity::class.java).apply {})
     }
@@ -69,7 +68,7 @@ class WelcomeActivity() : AppCompatActivity(), Parcelable {
     fun star(view: View) {
         // Modifie le niveau de la partie et affiche ce dernier à l'écran
         // grâce à des étoiles
-        var stars = arrayOf(star1, star2, star3)
+        val stars = arrayOf(star1, star2, star3)
         for (star in stars) star.setImageResource(R.drawable.star_bord)
         when(view.id) {
             R.id.star1 -> {

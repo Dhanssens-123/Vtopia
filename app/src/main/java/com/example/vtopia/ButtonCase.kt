@@ -7,7 +7,6 @@ class ButtonCase(x: Float, y: Float, w: Float, h: Float, context: Context, _type
 
     private val type = _type
     private val damier = _damier
-    private var isClicked = false
 
     private val spriteSet = mapOf<String, Bitmap>(
         "forêt" to BitmapFactory.decodeResource(context.resources, R.drawable.square_green),

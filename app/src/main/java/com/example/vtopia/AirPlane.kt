@@ -2,7 +2,6 @@ package com.example.vtopia
 
 import android.content.Context
 import android.graphics.*
-import java.util.*
 
 class AirPlane (x: Float, y: Float,  w: Float, h: Float, context: Context) : Aerial(x,y,w,h) {
 
@@ -43,8 +42,8 @@ class AirPlane (x: Float, y: Float,  w: Float, h: Float, context: Context) : Aer
 
     fun flipImageVertically(bmp: Bitmap) : Bitmap {
         // Retourne verticalement l'image
-        var matrix = Matrix().apply { postScale(-1f, 1f, bmp.width / 2f, bmp.height / 2f) }
-        var newbmp = Bitmap.createBitmap(bmp, 0, 0, bmp.width, bmp.height, matrix, true)
+        val matrix = Matrix().apply { postScale(-1f, 1f, bmp.width / 2f, bmp.height / 2f) }
+        val newbmp = Bitmap.createBitmap(bmp, 0, 0, bmp.width, bmp.height, matrix, true)
         return newbmp
     }
 }

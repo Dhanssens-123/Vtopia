@@ -1,7 +1,6 @@
 package com.example.vtopia
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.*
 
 class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, context: Context) {

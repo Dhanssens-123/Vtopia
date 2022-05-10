@@ -1,8 +1,5 @@
 package com.example.vtopia
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.RectF
 
 class Parois (x1: Float, y1: Float, x2: Float, y2: Float) {
