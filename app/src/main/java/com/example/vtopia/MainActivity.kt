@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private var mMediaPlayer: MediaPlayer? = null
-    private var musictheme = true
+    private var musicTheme = true
     lateinit private var gameView: GameView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,14 +55,14 @@ class MainActivity : AppCompatActivity() {
 
     fun soundOnOff(v: View) {
         // Gère le contrôle du son
-        if (musictheme == false) {
+        if (musicTheme == false) {
             playMusic()
             param.setImageResource(R.drawable.sound_on)
-            musictheme = true}
+            musicTheme = true}
         else {
             pauseMusic()
             param.setImageResource(R.drawable.sound_off)
-            musictheme = false
+            musicTheme = false
         }
     }
 

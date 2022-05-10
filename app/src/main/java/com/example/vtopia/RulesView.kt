@@ -27,7 +27,7 @@ class RulesView  @JvmOverloads constructor (context: Context, attributes: Attrib
     private var h = context.resources.displayMetrics.heightPixels.toFloat()
 
     // Création des différents éléments de la SurfaceView
-    private var clouds = ArrayList<Cloud>(5)
+    private var clouds = ArrayList<Cloud>()
     private var iconCity = IconCity(w/2,h/10,w/2,h/10, context)
     private var NBRE_CLOUDS = 20
 

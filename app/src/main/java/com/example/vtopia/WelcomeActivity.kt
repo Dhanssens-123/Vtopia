@@ -14,7 +14,7 @@ class WelcomeActivity() : AppCompatActivity(), Parcelable {
     constructor(parcel: Parcel) : this()
 
     private var mMediaPlayer: MediaPlayer? = null
-    private var musictheme = true
+    private var musicTheme = true
 
     private var level = 1
 

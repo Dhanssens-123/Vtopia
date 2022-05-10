@@ -44,8 +44,8 @@ class Case (x: Float, y: Float, diametre: Float, _type: String, _bord: Int, cont
         bord = 2
     }
 
-    fun changeType(newtype : String) {
-        type = newtype
+    fun changeType(newType : String) {
+        type = newType
     }
 
     fun getType() : String {

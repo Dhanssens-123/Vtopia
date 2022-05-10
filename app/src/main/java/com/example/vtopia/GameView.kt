@@ -75,7 +75,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
             // Màj du jeu et de l'affichage
             game.updateTotalTime(elapsedTimeMS, time_score, money, therm_score)
             damier.updateDataSet()
-            game.updateDeltaScore(therm_score, delta)
+            game.updateDeltaScore(delta)
             //game.bruleCase(damier, damier.cases)
             draw()
             previousFrameTime = currentTime
@@ -148,16 +148,16 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
                 // Récupère les coordonnées du click sur l'écran et vérifie la correspondance
                 val x = event.rawX
                 val y = event.rawY - hStatusBar
-                if (drawing) checkClick(squares, damier.getCases(), x, y)
+                if (drawing) checkClick(x, y)
             }
         }
         return true
     }
 
-    fun checkClick(squares : Array<ButtonCase>, cases : Array<Array<Case>>, x : Float, y : Float) {
+    fun checkClick(x : Float, y : Float) {
         var flag = true
         // Si une case est clickée, changement de son état
-        for (ligne in cases) {
+        for (ligne in damier.getCases()) {
             for (case in ligne) {
                 if (flag && case.isVisible() && case.getRect().contains(x,y) && case.getType() != type && !case.isFreeze() && money.getNbreBloc() >= 2) {
                     case.changeType(type)
@@ -169,14 +169,14 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         for (square in squares) {
             if (square.getRect().contains(x,y) && flag) {
                 // Si un des carré est clické, le met en avant et change le type actuel
-                grow(square, squares)
+                grow(square)
                 type = square.getType() // changeIconeType()
                 flag = false
             }
         }
     }
 
-    fun grow(square: ButtonCase, squares: Array<ButtonCase>) {
+    fun grow(square: ButtonCase) {
         for (s in squares) {
             s.reinitRectSize(s.getRect())
             s.changeRectSize(s.getRectStroke(),s.getStrokeSize(),s.getStrokeSize())
@@ -218,7 +218,7 @@ class GameView  @JvmOverloads constructor (context: Context, attributes: Attribu
         iconCity.setCityName(name)
     }
 
-    fun setLevel(lvl: Int) {
+    fun setLevel(lvl : Int) {
         game.setLevel(lvl)
         damier.createRandomCity(game)
     }

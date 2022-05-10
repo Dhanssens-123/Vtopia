@@ -32,7 +32,7 @@ class IconDelta(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : 
         // Transpose un nombre x d'une plage [a,b] à une autre [c,d]
         val map = {x : Int, a: Int, b: Int, c: Int, d: Int -> (x-a)*(d-c)/(b-a) + c}
         // Màj nbreBloc
-        nbreBloc = 5 + map(delta, -50, 50, -5, 5)
+        nbreBloc = 5 + map(delta, -40, 40, -5, 5)
     }
 
     fun drawBloc(bloc: RectF, paint: Paint, canvas: Canvas?) {

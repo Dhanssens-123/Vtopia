@@ -26,7 +26,7 @@ class GameManager(_damier: Damier) {
     private var gameOver = false // Partie en cours ?
     private val random = Random
 
-    fun updateDeltaScore(icon_score : IconScore, delta : IconDelta) {
+    fun updateDeltaScore(delta : IconDelta) {
 
         // Modification des valeurs pour chaque type selon les différentes combinaisons de types de case à l'écran
         deltaScore = 0
@@ -36,7 +36,7 @@ class GameManager(_damier: Damier) {
         else
             dataValueSet["industrie"] = 4
 
-        if (damier.getDataSet()["habitat"]!! >= damier.getDataSet()["industrie"]!!)
+        if (damier.getDataSet()["habitat"]!! > damier.getDataSet()["industrie"]!!)
             dataValueSet["habitat"] = -2
         else dataValueSet["habitat"] = 2
 
