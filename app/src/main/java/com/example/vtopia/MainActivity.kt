@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private var mMediaPlayer: MediaPlayer? = null
     private var musictheme = true
-    lateinit var gameView: GameView
+    lateinit private var gameView: GameView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

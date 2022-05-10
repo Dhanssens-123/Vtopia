@@ -19,9 +19,9 @@ class GameManager(_damier: Damier) {
     // Initialise la partie
     private var totalTime = 60.0
     private var oneSec = 1.0
-    private var ScoreTime = 1.0
+    private var scoreTime = 1.0
     private var level = 1
-    private var TotalScore = 0
+    private var totalScore = 0
     private var deltaScore = 0
     private var gameOver = false // Partie en cours ?
     private val random = Random
@@ -54,12 +54,12 @@ class GameManager(_damier: Damier) {
 
     fun updateTotalScore(icon_score: IconScore) {
         // Màj du score
-        TotalScore += deltaScore
-        icon_score.changeScore(TotalScore)
+        totalScore += deltaScore
+        icon_score.changeScore(totalScore)
 
         // Gère la suppression des cases muables
         var case = damier.getCases()[random.nextInt(damier.getCases().size)][random.nextInt(damier.getCases().size)]
-        if (TotalScore < 0 && random.nextInt(2) == 1 && case.isVisible()) {
+        if (totalScore < 0 && random.nextInt(2) == 1 && case.isVisible()) {
             case.bruleCase()
         } else if (deltaScore < 0 && random.nextInt(4) == 1 && case.isVisible()) {
             case.bruleCase()
@@ -78,23 +78,23 @@ class GameManager(_damier: Damier) {
 
         // Met à jour chaque seconde les ressources et le score
         oneSec -= elapsedTime / 1000.0
-        ScoreTime -= elapsedTime / 1000.0
+        scoreTime -= elapsedTime / 1000.0
         if (oneSec < 0) {
             money.updateBloc(1)
             oneSec = 1.0
         }
-        if (ScoreTime < 0) {
+        if (scoreTime < 0) {
             updateTotalScore(icon_score)
-            ScoreTime = 1.0
+            scoreTime = 1.0
         }
     }
 
     fun reset() {
         // Réinitialise la partie
-        TotalScore = 0
+        totalScore = 0
         totalTime = 60.0
         oneSec = 1.0
-        ScoreTime = 1.0
+        scoreTime = 1.0
         gameOver = false
         deltaScore = 0
     }
@@ -104,7 +104,7 @@ class GameManager(_damier: Damier) {
     }
 
     fun getTotalScore() : Int {
-        return TotalScore
+        return totalScore
     }
 
     fun setLevel(lvl: Int) {

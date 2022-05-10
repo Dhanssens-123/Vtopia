@@ -7,36 +7,36 @@ class IconCity(_x: Float, _y: Float, _w: Float, _h: Float, context: Context) : I
 
     private var band_bmp = flipImageVertically(BitmapFactory.decodeResource(context.resources, R.drawable.band))
     private val airplane_bmp = BitmapFactory.decodeResource(context.resources, R.drawable.airplane)
-    private val tempo_band = 20
-    private val tempo_airplane = 100
+    private val TEMPO_BAND = 20
+    private val TEMPO_AIRPLANE = 100
     private var vy = 0.5f
     private var switch_band = 0
     private var switch_airplane = 0
 
     // Contient le score à afficher sur l'écran, initialement nul et contrôlé par le GameManager
-    private val step = 0.4f
+    private val STEP = 0.4f
     private var cityName = ""
     private val MAX_LENGTH = 10
 
     override fun draw(canvas: Canvas?) {
 
         // Itère le compteur et vérifie si un changement de sens est à effectuer
-        switch_airplane = (switch_airplane + 1)%tempo_airplane
-        if (switch_airplane == tempo_airplane/2) vy = -vy
+        switch_airplane = (switch_airplane + 1)%TEMPO_AIRPLANE
+        if (switch_airplane == TEMPO_AIRPLANE/2) vy = -vy
         vibrate(r, 0f,vy) // Vibre légèrement vers la direction et le sens donné.e
         // Change régulièrement l'orientation de la bande selon son compteur
-        switch_band = (switch_band + 1)%tempo_band
-        if (switch_band == tempo_band/2) band_bmp = flipImageHorizontally(band_bmp)
+        switch_band = (switch_band + 1)%TEMPO_BAND
+        if (switch_band == TEMPO_BAND/2) band_bmp = flipImageHorizontally(band_bmp)
         // Dessine l'avion et la bande
-        val r1 = RectF(r.left, r.top, r.right - step*w, r.bottom)
-        val r2 = RectF((1f-step)*w + r.left, r.top, r.right, r.bottom)
+        val r1 = RectF(r.left, r.top, r.right - STEP*w, r.bottom)
+        val r2 = RectF((1f-STEP)*w + r.left, r.top, r.right, r.bottom)
         canvas?.drawBitmap(band_bmp, null, r1, paint)
         canvas?.drawBitmap(airplane_bmp, null, r2, paint)
         // Affiche le nom de la ville sur la bande
         var text = "$cityName".toUpperCase()
         paintText.textSize = r1.width()/MAX_LENGTH * (1 + 0.1f*(MAX_LENGTH - text.length))
         var offSet = paintText.measureText(text)
-        canvas?.drawText(text,r1.left + w/2 - offSet/2 - step/2*w - r1.width()/20, r1.top + h/2 + paintText.textSize/3, paintText)
+        canvas?.drawText(text,r1.left + w/2 - offSet/2 - STEP/2*w - r1.width()/20, r1.top + h/2 + paintText.textSize/3, paintText)
     }
 
     fun setCityName(name : String) {

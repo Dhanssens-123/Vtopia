@@ -7,7 +7,7 @@ import android.graphics.Paint
 import android.graphics.RectF
 import java.util.*
 
-open class Aerial (_x: Float, _y: Float, _w: Float, _h: Float) {
+open class Aerial (_x: Float, _y: Float, _w: Float, _h: Float) { 
 
     protected var x = _x
     protected var y = _y
